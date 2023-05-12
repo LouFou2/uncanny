@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21af960bbc1e40479bb2817813fae03, type: 3}
+  m_Name: ExpressionControl
+  m_EditorClassIdentifier: 
+  updated:
+    m_PersistentCalls:
+      m_Calls: []
+  moodOrEmote: 0
+  headTurn: -0.47656724
+  headNod: 0.13512473
+  headTilt: 0
+  headLateralX: 0
+  headLateralY: 0
+  lookLR: 0.5500427
+  lookUD: 0.17327453
+  headTurnMax: 0.51
+  headTurnMin: -0.53
+  headTurnSpeed: 0.7
+  headTurnTime: 10.538267
+  headNodMax: 0.36
+  headNodMin: 0.06
+  headNodSpeed: 0.8
+  headNodTime: 12.043732
+  lookUDMax: 0.48
+  lookUDMin: 0.13
+  lookUDSpeed: 1.1
+  lookUDTime: 16.560143
+  lookLRMax: 0.55
+  lookLRMin: 0.59
+  lookLRSpeed: 0.1
+  lookLRTime: 1.5054665
+  shoulderSpeed: 3.6
+  shoulder_L_Max: 0.503
+  shoulder_L_Min: 0
+  shoulder_L_Time: 54.19678
+  shoulder_R_Max: 0.498
+  shoulder_R_Min: 0
+  shoulder_R_Time: 54.19678
+  topLid_L_Min: 0.522
+  topLid_R_Min: 0.527
+  topLid_L_Time: 4.626305
+  topLid_R_Time: 4.626305
+  topLidSpeed: 0.001
+  blinkPauseDuration: 2.73
+  lidsMeet_L: 0.625
+  lidsMeet_R: 0.625
+  botLid_L_Max: 0.733
+  botLid_R_Max: 0.732
+  botLid_L_Time: 18.06558
+  botLid_R_Time: 18.06558
+  botLidSpeed: 1.2
+  eyeLidTop_L: 0.52221894
+  eyeLidTop_R: 0.5272094
+  eyeLidBot_L: 0.6408706
+  eyeLidBot_R: 0.64072365
+  shoulder_L: 0.072898194
+  shoulder_R: 0.07217355
+  jawOpen: 0.056
+  squint: 0
+  whaleEye: 0
+  browLift: 0
+  frown: 0
+  smile: 0
+  lipStretch: 0
+  lipTight: 0
+  pout: 0
+  speak: 0
+  lipCnrs: 0
+  sneer: 0
+  tongueStretch: 0
+  tongueUpDown: 0
+  pleasure: 0.45
+  arousal: 1
+  subDom: -1
+  blinkRate: 1

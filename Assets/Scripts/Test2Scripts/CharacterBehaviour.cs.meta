@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2e5b3b9cc79d54e429b70417798888cb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - express: {instanceID: 0}
+  - mood: {instanceID: 0}
+  - currentEmote: {instanceID: 0}
+  - animator: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

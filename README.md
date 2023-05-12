@@ -1,2 +1,2 @@
 # uncanny
-repository for my project titles "the uncanny"
+repository for my project titled "the uncanny"

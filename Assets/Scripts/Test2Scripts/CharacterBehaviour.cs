@@ -28,6 +28,7 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _headNodMin;
     [HideInInspector] public float _headNodSpeed;
     private float _headNodTime;
+    [HideInInspector] public bool _headNodPlusTurn;
 
     [HideInInspector] public float _lookUDMax;
     [HideInInspector] public float _lookUDMin;
@@ -197,6 +198,7 @@ public class CharacterBehaviour : MonoBehaviour
         _headNodMin = express.headNodMin;
         _headNodSpeed = express.headNodSpeed;
         _headNodTime = express.headNodTime;
+        _headNodPlusTurn = express.headNodPlusTurn;
 
         _lookUDMax = express.lookUDMax;
         _lookUDMin = express.lookUDMin;
@@ -218,7 +220,7 @@ public class CharacterBehaviour : MonoBehaviour
         _shoulder_R_Min = express.shoulder_R_Min;
         _shoulder_R_Time = express.shoulder_R_Time;
 
-        _topLidSpeed = 15f;
+        _topLidSpeed = express.topLidSpeed;
 
         _lidsMeet_L = express.lidsMeet_L;
         _topLid_L_Min = express.topLid_L_Min;
@@ -291,6 +293,11 @@ public class CharacterBehaviour : MonoBehaviour
 
         if (_headNodSpeed != 0f)
         {
+            if(_headNodPlusTurn == true) // *** this bit of code is meant to make head swoop - needs work *TODO
+            {
+                _headNodTime = _headTurnTime *2;
+                _headNodSpeed = _headTurnSpeed;
+            }
             _headNodTime += Time.deltaTime * _headNodSpeed;
             float headNodValue = Mathf.Sin(_headNodTime);// * _headNodAmplitude;
             float headNodRange = _headNodMax - _headNodMin;
@@ -350,7 +357,7 @@ public class CharacterBehaviour : MonoBehaviour
             float topLid_R_FinalValue = (topLid_R_Value + 1f) / 2f * topLid_R_Range + _topLid_R_Min;
             _eyeLidTop_R = topLid_R_FinalValue;
 
-            if (_eyeLidTop_L <= _topLid_L_Min + 0.001 && !_pauseBlinking && _topLid_L_Time > 0.5)
+            if (_eyeLidTop_L <= _topLid_L_Min + 0.001f && !_pauseBlinking && _topLid_L_Time > 0.5f)
             {
                 StartCoroutine(BlinkPause(_blinkPauseDuration));
             }

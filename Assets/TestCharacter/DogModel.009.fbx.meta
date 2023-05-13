@@ -12,6 +12,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: DeepShadow
+    second: {fileID: 2100000, guid: 2db9868543ee57345b11413595316324, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Eye
     second: {fileID: 2100000, guid: 390697ba96347f64384454c66255f849, type: 2}
   - first:
@@ -39,6 +44,21 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Iris
     second: {fileID: 2100000, guid: 7155cea008a1d8040b5830f5c545234e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightNoseShadow
+    second: {fileID: 2100000, guid: f619d6d4ffa117e4f8bccb9caa5358e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LighterNoseShadow
+    second: {fileID: 2100000, guid: bb0834c00c319bd41aea96fba9563d32, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightestNoseShadow
+    second: {fileID: 2100000, guid: eb91b7c7462fa5a45a8b0d1dc21ad5d8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

@@ -20,7 +20,7 @@ public class ExpressionControl : ScriptableObject
 
     [Range(-1.0f, 1.0f)] public float headTilt;
     [Range(-1.0f, 1.0f)] public float headLateralX;
-    [Range(-1.0f, 1.0f)] public float headLateralY;
+    [Range(-1.0f, 1.0f)] public float headLateralY;    
     
     // *** MOVEMENT WAVES ***
     [Range(-1.0f, 1.0f)] public float headTurn;
@@ -34,6 +34,7 @@ public class ExpressionControl : ScriptableObject
     [Range(-1.0f, 1.0f)] public float headNodMin;
     [Range(0.0f, 20.0f)] public float headNodSpeed;
     [HideInInspector] public float headNodTime = 0f;
+    public bool headNodPlusTurn = false;
 
 
     [Range(-1.0f, 1.0f)] public float lookUD; 

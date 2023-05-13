@@ -10,6 +10,7 @@ Material:
   m_Name: Eye
   m_Shader: {fileID: 4800000, guid: 034460dc851505a42baca2ba6514f9f0, type: 3}
   m_ValidKeywords:
+  - POI_CLEARCOAT
   - VIGNETTE_MASKED
   - _LIGHTINGMODE_TEXTURERAMP
   - _RIM2STYLE_POIYOMI
@@ -780,7 +781,7 @@ Material:
     - _CenterOutDissolveMode: 1
     - _CenterOutDissolveNormals: 0
     - _CenterOutDissolvePower: 1
-    - _ClearCoatBRDF: 0
+    - _ClearCoatBRDF: 1
     - _ClearCoatForceFallback: 0
     - _ClearCoatGSAAEnabled: 1
     - _ClearCoatGSAAThreshold: 0.1
@@ -801,7 +802,7 @@ Material:
     - _ClearCoatReflectionStrengthGlobalMask: 0
     - _ClearCoatReflectionStrengthGlobalMaskBlendType: 2
     - _ClearCoatReflectionTintThemeIndex: 0
-    - _ClearCoatSmoothness: 1
+    - _ClearCoatSmoothness: 0.443
     - _ClearCoatSmoothnessGlobalMask: 0
     - _ClearCoatSmoothnessGlobalMaskBlendType: 2
     - _ClearCoatSmoothnessMapInvert: 0
@@ -2567,7 +2568,7 @@ Material:
     - m_end_vertexGlitching: 0
     - m_end_vertexManipulation: 0
     - m_end_videoEffects: 0
-    - m_lightingCategory: 0
+    - m_lightingCategory: 1
     - m_mainCategory: 0
     - m_modifierCategory: 0
     - m_postprocessing: 0
@@ -2642,7 +2643,7 @@ Material:
     - m_start_OutlineStencilPassFrontOptions: 0
     - m_start_PathAudioLink: 0
     - m_start_PoiLightData: 0
-    - m_start_PoiShading: 0
+    - m_start_PoiShading: 1
     - m_start_RGBAColors: 0
     - m_start_RGBMask: 0
     - m_start_Rim2AudioLink: 0
@@ -2671,7 +2672,7 @@ Material:
     - m_start_brdf: 0
     - m_start_brdfadvanced: 0
     - m_start_brdfglobalmask: 0
-    - m_start_clearCoat: 0
+    - m_start_clearCoat: 1
     - m_start_clearcoatadvanced: 0
     - m_start_clearcoatglobalmask: 0
     - m_start_depthFX: 0
@@ -2710,7 +2711,7 @@ Material:
     - m_start_vertexManipulation: 0
     - m_start_videoEffects: 0
     - m_thirdpartyCategory: 0
-    - shader_is_using_thry_editor: 0
+    - shader_is_using_thry_editor: 69
     - shader_locale: 0
     - shader_master_label: 0
     m_Colors:

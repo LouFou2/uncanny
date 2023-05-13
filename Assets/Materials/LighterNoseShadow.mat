@@ -7,12 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Iris
+  m_Name: LighterNoseShadow
   m_Shader: {fileID: 4800000, guid: 034460dc851505a42baca2ba6514f9f0, type: 3}
   m_ValidKeywords:
-  - POI_CLEARCOAT
   - VIGNETTE_MASKED
-  - _LIGHTINGMODE_TEXTURERAMP
+  - _LIGHTINGMODE_FLAT
   - _RIM2STYLE_POIYOMI
   - _RIMSTYLE_POIYOMI
   - _STOCHASTICMODE_DELIOT_HEITZ
@@ -20,7 +19,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -507,7 +506,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ToonRamp:
-        m_Texture: {fileID: 2800000, guid: 3195ea76b51275943a8c1ef0f0a2a368, type: 3}
+        m_Texture: {fileID: 2800000, guid: 61bd594533da4fc42bd46ef93ba5a4f6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VertexGlitchMap:
@@ -584,7 +583,7 @@ Material:
     - _AddDstBlend: 1
     - _AddDstBlendAlpha: 1
     - _AddSrcBlend: 1
-    - _AddSrcBlendAlpha: 0
+    - _AddSrcBlendAlpha: 1
     - _Add_Antipodean_Rim2Light: 0
     - _Add_Antipodean_RimLight: 0
     - _AlphaAlphaAdd: 0
@@ -781,7 +780,7 @@ Material:
     - _CenterOutDissolveMode: 1
     - _CenterOutDissolveNormals: 0
     - _CenterOutDissolvePower: 1
-    - _ClearCoatBRDF: 1
+    - _ClearCoatBRDF: 0
     - _ClearCoatForceFallback: 0
     - _ClearCoatGSAAEnabled: 1
     - _ClearCoatGSAAThreshold: 0.1
@@ -802,7 +801,7 @@ Material:
     - _ClearCoatReflectionStrengthGlobalMask: 0
     - _ClearCoatReflectionStrengthGlobalMaskBlendType: 2
     - _ClearCoatReflectionTintThemeIndex: 0
-    - _ClearCoatSmoothness: 0.443
+    - _ClearCoatSmoothness: 1
     - _ClearCoatSmoothnessGlobalMask: 0
     - _ClearCoatSmoothnessGlobalMaskBlendType: 2
     - _ClearCoatSmoothnessMapInvert: 0
@@ -1211,7 +1210,7 @@ Material:
     - _EnableGITDEmission3: 0
     - _EnableIridescence: 0
     - _EnableMirrorOptions: 0
-    - _EnableOutlines: 1
+    - _EnableOutlines: 0
     - _EnablePathing: 0
     - _EnableRim2Lighting: 0
     - _EnableRimLighting: 0
@@ -1555,7 +1554,7 @@ Material:
     - _GlobalThemeValue2: 0
     - _GlobalThemeValue3: 0
     - _GlossMapScale: 1
-    - _Glossiness: 1
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _GreenAlphaAdd: 0
     - _GreenColorThemeIndex: 0
@@ -1651,7 +1650,7 @@ Material:
     - _LightingIndirectUsesNormals: 0
     - _LightingMapMode: 0
     - _LightingMinLightBrightness: 0
-    - _LightingMode: 0
+    - _LightingMode: 5
     - _LightingMonochromatic: 0
     - _LightingMulitlayerNonLinear: 1
     - _LightingShadowMaskStrengthA: 0
@@ -1863,7 +1862,7 @@ Material:
     - _MochieSpecularStrengthGlobalMask: 0
     - _MochieSpecularStrengthGlobalMaskBlendType: 2
     - _MochieSpecularTintThemeIndex: 0
-    - _Mode: 1
+    - _Mode: 0
     - _ModelAngleMax: 90
     - _ModelAngleMin: 45
     - _MultilayerMathBlurMapUV: 0
@@ -1884,7 +1883,7 @@ Material:
     - _OutlineClipAtZeroWidth: 0
     - _OutlineCull: 1
     - _OutlineDstBlend: 0
-    - _OutlineDstBlendAlpha: 1
+    - _OutlineDstBlendAlpha: 0
     - _OutlineEmission: 0
     - _OutlineExpansionMode: 1
     - _OutlineFixWidth: 0.5
@@ -2205,7 +2204,7 @@ Material:
     - _ShadowBorderRange: 0
     - _ShadowColorTexUV: 0
     - _ShadowMainStrength: 0
-    - _ShadowOffset: -0.193
+    - _ShadowOffset: 0
     - _ShadowReceive: 0
     - _ShadowStrength: 1
     - _SkinThicknessMapInvert: 0
@@ -2431,7 +2430,7 @@ Material:
     - g_start_deliot: 0
     - g_start_hextile: 0
     - m_AudioLinkCategory: 0
-    - m_OutlineCategory: 1
+    - m_OutlineCategory: 0
     - m_end_ALDecalSpectrum: 0
     - m_end_ALVolumeColor: 0
     - m_end_Alpha: 0
@@ -2568,7 +2567,7 @@ Material:
     - m_end_vertexGlitching: 0
     - m_end_vertexManipulation: 0
     - m_end_videoEffects: 0
-    - m_lightingCategory: 1
+    - m_lightingCategory: 0
     - m_mainCategory: 0
     - m_modifierCategory: 0
     - m_postprocessing: 0
@@ -2643,7 +2642,7 @@ Material:
     - m_start_OutlineStencilPassFrontOptions: 0
     - m_start_PathAudioLink: 0
     - m_start_PoiLightData: 0
-    - m_start_PoiShading: 1
+    - m_start_PoiShading: 0
     - m_start_RGBAColors: 0
     - m_start_RGBMask: 0
     - m_start_Rim2AudioLink: 0
@@ -2672,7 +2671,7 @@ Material:
     - m_start_brdf: 0
     - m_start_brdfadvanced: 0
     - m_start_brdfglobalmask: 0
-    - m_start_clearCoat: 1
+    - m_start_clearCoat: 0
     - m_start_clearcoatadvanced: 0
     - m_start_clearcoatglobalmask: 0
     - m_start_depthFX: 0
@@ -2814,7 +2813,7 @@ Material:
     - _ClearCoatSpecularTint: {r: 1, g: 1, b: 1, a: 1}
     - _ClippingMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _ClothMetallicSmoothnessMapPan: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.07058779, g: 0.46274507, b: 0.6509804, a: 1}
+    - _Color: {r: 0.31996953, g: 0.005614322, b: 0.005614629, a: 1}
     - _CubeMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _CubeMapMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _CubeMapRotation: {r: 0, g: 0, b: 0, a: 0}
@@ -2967,7 +2966,7 @@ Material:
     - _LightingShadowColor: {r: 1, g: 1, b: 1, a: 1}
     - _LightingShadowMasksPan: {r: 0, g: 0, b: 0, a: 0}
     - _LightngForcedDirection: {r: 0, g: 0, b: 0, a: 1}
-    - _LineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LineColor: {r: 1, g: 1, b: 1, a: 1}
     - _MainColorAdjustTexturePan: {r: 0, g: 0, b: 0, a: 0}
     - _MainTexPan: {r: 0, g: 0, b: 0, a: 0}
     - _MatCap2ndBlendUV1: {r: 0, g: 0, b: 0, a: 0}

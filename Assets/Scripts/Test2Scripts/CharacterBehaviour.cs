@@ -154,13 +154,13 @@ public class CharacterBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
-        express.updated.AddListener(OnExpressionVariablesChanged);// CheckParams);
-        mood.updated.AddListener(OnExpressionVariablesChanged);//CheckParams);
+        express.updated.AddListener(CheckParams);
+        mood.updated.AddListener(CheckParams);
     }
     private void OnDisable()
     {
-        express.updated.RemoveListener(OnExpressionVariablesChanged);//CheckParams);
-        mood.updated.RemoveListener(OnExpressionVariablesChanged);//CheckParams);
+        express.updated.RemoveListener(CheckParams);
+        mood.updated.RemoveListener(CheckParams);
     }
     
     void Start()
@@ -171,7 +171,7 @@ public class CharacterBehaviour : MonoBehaviour
     void Update()
     {
         //ControlMood();
-        SineWaveMovements(); //Experimenting with sine wave *(-v-)*
+        SineWaveMovements();
         UpdateParams(); //updates ExpressionControl + MoodControl parameters (main data container for all expressions)
         Animate();
     }
@@ -191,50 +191,50 @@ public class CharacterBehaviour : MonoBehaviour
         _headTurnMax = express.headTurnMax;
         _headTurnMin = express.headTurnMin;
         _headTurnSpeed = express.headTurnSpeed;
-        _headTurnTime = 0;
+        _headTurnTime = express.headTurnTime;
 
         _headNodMax = express.headNodMax;
         _headNodMin = express.headNodMin;
         _headNodSpeed = express.headNodSpeed;
-        _headNodTime = 0;
+        _headNodTime = express.headNodTime;
 
         _lookUDMax = express.lookUDMax;
         _lookUDMin = express.lookUDMin;
         _lookUDSpeed = express.lookUDSpeed;
-        _lookUDTime = 0;
+        _lookUDTime = express.lookUDTime;
 
         _lookLRMax = express.lookLRMax;
         _lookLRMin = express.lookLRMin;
         _lookLRSpeed = express.lookLRSpeed;
-        _lookLRTime = 0;
+        _lookLRTime = express.lookLRTime;
 
         _shoulderSpeed = express.shoulderSpeed;
 
         _shoulder_L_Max = express.shoulder_L_Max;
         _shoulder_L_Min = express.shoulder_L_Min;
-        _shoulder_L_Time = 0;
+        _shoulder_L_Time = express.shoulder_L_Time;
 
         _shoulder_R_Max = express.shoulder_R_Max;
         _shoulder_R_Min = express.shoulder_R_Min;
-        _shoulder_R_Time = 0;
+        _shoulder_R_Time = express.shoulder_R_Time;
 
         _topLidSpeed = 15f;
 
         _lidsMeet_L = express.lidsMeet_L;
         _topLid_L_Min = express.topLid_L_Min;
-        _topLid_L_Time = 0;
+        _topLid_L_Time = express.topLid_L_Time;
 
         _lidsMeet_R = express.lidsMeet_R;
         _topLid_R_Min = express.topLid_R_Min;
-        _topLid_R_Time = 0;
+        _topLid_R_Time = express.topLid_R_Time;
 
         _botLidSpeed = express.botLidSpeed;
 
         _botLid_L_Max = express.botLid_L_Max;
-        _botLid_L_Time = 0;
+        _botLid_L_Time = express.botLid_L_Time;
 
         _botLid_R_Max = express.botLid_R_Max;
-        _botLid_R_Time = 0;
+        _botLid_R_Time = express.botLid_R_Time;
 
         _blinkPauseDuration = express.blinkPauseDuration;
 
@@ -277,175 +277,99 @@ public class CharacterBehaviour : MonoBehaviour
         _moodHeadMoves = mood.moodHeadMoves;
         _moodEqualiseSpeed = mood.moodEqualiseSpeed;
     }
-    void OnExpressionVariablesChanged() //this is just a copy of CheckParams, to be called outside start funcion when express variables change
+    
+    void SineWaveMovements() //***TODO - Add a way to reset time to zero for each sine wave (figure out best way to do this)
     {
-        //Head Movements (Expression Control)
-        _headTurn = express.headTurn;
-        _headNod = express.headNod;
-        _headTilt = express.headTilt;
-        _headLateralX = express.headLateralX;
-        _headLateralY = express.headLateralY;
-
-        //Mood (Idle) or Emote (Emotional expression or Reaction)
-        _moodOrEmote = express.moodOrEmote;
-
-        //Sine Wave variables (Expression Control)
-        _headTurnMax = express.headTurnMax;
-        _headTurnMin = express.headTurnMin;
-        _headTurnSpeed = express.headTurnSpeed;
-        _headTurnTime = 0;
-
-        _headNodMax = express.headNodMax;
-        _headNodMin = express.headNodMin;
-        _headNodSpeed = express.headNodSpeed;
-        _headNodTime = 0;
-
-        _lookUDMax = express.lookUDMax;
-        _lookUDMin = express.lookUDMin;
-        _lookUDSpeed = express.lookUDSpeed;
-        _lookUDTime = 0;
-
-        _lookLRMax = express.lookLRMax;
-        _lookLRMin = express.lookLRMin;
-        _lookLRSpeed = express.lookLRSpeed;
-        _lookLRTime = 0;
-
-        _shoulderSpeed = express.shoulderSpeed;
-
-        _shoulder_L_Max = express.shoulder_L_Max;
-        _shoulder_L_Min = express.shoulder_L_Min;
-        _shoulder_L_Time = 0;
-
-        _shoulder_R_Max = express.shoulder_R_Max;
-        _shoulder_R_Min = express.shoulder_R_Min;
-        _shoulder_R_Time = 0;
-
-        _topLidSpeed = express.topLidSpeed;
-
-        _lidsMeet_L = express.lidsMeet_L;
-        _topLid_L_Min = express.topLid_L_Min;
-        _topLid_L_Time = 0;
-
-        _lidsMeet_R = express.lidsMeet_R;
-        _topLid_R_Min = express.topLid_R_Min;
-        _topLid_R_Time = 0;        
-
-        _botLidSpeed = express.botLidSpeed;
-
-        _botLid_L_Max = express.botLid_L_Max;
-        _botLid_L_Time = 0;
-
-        _botLid_R_Max = express.botLid_R_Max;
-        _botLid_R_Time = 0;
-
-        _blinkPauseDuration = express.blinkPauseDuration;
-
-        // Expression parameters used to form all expressions (Expression Control)
-        _shoulder_L = express.shoulder_L;
-        _shoulder_R = express.shoulder_R;
-        _lookLR = express.lookLR;
-        _lookUD = express.lookUD;
-        _jawOpen = express.jawOpen;
-        _squint = express.squint;
-        _whaleEye = express.whaleEye;
-        _browLift = express.browLift;
-        _frown = express.frown;
-        _eyeLidTop_L = express.eyeLidTop_L;
-        _eyeLidTop_R = express.eyeLidTop_R;
-        _eyeLidBot_L = express.eyeLidBot_L;
-        _eyeLidBot_R = express.eyeLidBot_R;
-        _smile = express.smile;
-        _lipStretch = express.lipStretch;
-        _lipTight = express.lipTight;
-        _pout = express.pout;
-        _speak = express.speak;
-        _lipCnrs = express.lipCnrs;
-        _sneer = express.sneer;
-        _tongueStretch = express.tongueStretch;
-        _tongueUpDown = express.tongueUpDown;
-
-        //Mood Control parameters (Expression Control)
-        _pleasure = express.pleasure;
-        _arousal = express.arousal;
-        _subDom = express.subDom;
-        _blinkRate = express.blinkRate;
-
-        //MoodControl
-        _pleasureDefault = mood.pleasureDefault;
-        _arousalDefault = mood.arousalDefault;
-        _dominanceDefault = mood.dominanceDefault;
-        _moodBlinkRate = mood.moodBlinkRate;
-        _moodMouthMoves = mood.moodMouthMoves;
-        _moodHeadMoves = mood.moodHeadMoves;
-        _moodEqualiseSpeed = mood.moodEqualiseSpeed;
-    }
-    void SineWaveMovements() //Experimenting with sine waves *(-v-)*
-    {
-        _headTurnTime += Time.deltaTime * _headTurnSpeed;
-        float headTurnValue = Mathf.Sin(_headTurnTime);// * _headTurnAmplitude;
-        float headTurnRange = _headTurnMax - _headTurnMin;        
-        float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin; 
-        _headTurn = headTurnFinalValue;
-
-        _headNodTime += Time.deltaTime * _headNodSpeed;
-        float headNodValue = Mathf.Sin(_headNodTime);// * _headNodAmplitude;
-        float headNodRange = _headNodMax - _headNodMin;
-        float headNodFinalValue = (headNodValue + 1f) / 2f * headNodRange + _headNodMin;
-        _headNod = headNodFinalValue;
-
-        _lookUDTime += Time.deltaTime * _lookUDSpeed;
-        float lookUDValue = Mathf.Sin(_lookUDTime);// * _lookUDAmplitude;
-        float lookUDRange = _lookUDMax - _lookUDMin;
-        float lookUDFinalValue = (lookUDValue + 1f) / 2f * lookUDRange + _lookUDMin;
-        _lookUD = lookUDFinalValue;
-
-        _lookLRTime += Time.deltaTime * _lookLRSpeed;
-        float lookLRValue = Mathf.Sin(_lookLRTime);// * _lookLRAmplitude;
-        float lookLRRange = _lookLRMax - _lookLRMin;
-        float lookLRFinalValue = (lookLRValue + 1f) / 2f * lookLRRange + _lookLRMin;
-        _lookLR = lookLRFinalValue;
-
-        _shoulder_L_Time += Time.deltaTime * _shoulderSpeed;
-        float shoulder_L_Value = Mathf.Sin(_shoulder_L_Time);// * _lookLRAmplitude;
-        float shoulder_L_Range = _shoulder_L_Max - _shoulder_L_Min;
-        float shoulder_L_FinalValue = (shoulder_L_Value + 1f) / 2f * shoulder_L_Range + _shoulder_L_Min;
-        _shoulder_L = shoulder_L_FinalValue;
-
-        _shoulder_R_Time += Time.deltaTime * _shoulderSpeed;
-        float shoulder_R_Value = Mathf.Sin(_shoulder_R_Time);// * _lookLRAmplitude;
-        float shoulder_R_Range = _shoulder_R_Max - _shoulder_R_Min;
-        float shoulder_R_FinalValue = (shoulder_R_Value + 1f) / 2f * shoulder_R_Range + _shoulder_R_Min;
-        _shoulder_R = shoulder_R_FinalValue;
-
-        // *** note that eyelids are different from other sine wave movements
-        _topLid_L_Time += Time.deltaTime * _topLidSpeed;
-        float topLid_L_Value = Mathf.Sin(_topLid_L_Time);        
-        float topLid_L_Range = _eyeLidBot_L - _topLid_L_Min;
-        float topLid_L_FinalValue = (topLid_L_Value + 1f) / 2f * topLid_L_Range + _topLid_L_Min;
-        _eyeLidTop_L = topLid_L_FinalValue;
-        
-        _topLid_R_Time += Time.deltaTime * _topLidSpeed;
-        float topLid_R_Value = Mathf.Sin(_topLid_R_Time);
-        float topLid_R_Range = _eyeLidBot_R - _topLid_R_Min;
-        float topLid_R_FinalValue = (topLid_R_Value + 1f) / 2f * topLid_R_Range + _topLid_R_Min;
-        _eyeLidTop_R = topLid_R_FinalValue;
-
-        if (_eyeLidTop_L <= _topLid_L_Min + 0.001 && !_pauseBlinking && _topLid_L_Time > 0.5)
+        if (_headTurnSpeed != 0f)
         {
-            StartCoroutine(BlinkPause(_blinkPauseDuration));
+            _headTurnTime += Time.deltaTime * _headTurnSpeed;
+            float headTurnValue = Mathf.Sin(_headTurnTime);// * _headTurnAmplitude;
+            float headTurnRange = _headTurnMax - _headTurnMin;
+            float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
+            _headTurn = headTurnFinalValue;
         }
 
-        _botLid_L_Time += Time.deltaTime * _botLidSpeed;
-        float botLid_L_Value = Mathf.Sin(_botLid_L_Time);
-        float botLid_L_Range = _botLid_L_Max - _lidsMeet_L;
-        float botLid_L_FinalValue = (botLid_L_Value + 1f) / 2f * botLid_L_Range + _lidsMeet_L;
-        _eyeLidBot_L = botLid_L_FinalValue;
+        if (_headNodSpeed != 0f)
+        {
+            _headNodTime += Time.deltaTime * _headNodSpeed;
+            float headNodValue = Mathf.Sin(_headNodTime);// * _headNodAmplitude;
+            float headNodRange = _headNodMax - _headNodMin;
+            float headNodFinalValue = (headNodValue + 1f) / 2f * headNodRange + _headNodMin;
+            _headNod = headNodFinalValue;
+        }
 
-        _botLid_R_Time += Time.deltaTime * _botLidSpeed;
-        float botLid_R_Value = Mathf.Sin(_botLid_R_Time);
-        float botLid_R_Range = _botLid_R_Max - _lidsMeet_R;
-        float botLid_R_FinalValue = (botLid_R_Value + 1f) / 2f * botLid_R_Range + _lidsMeet_R;
-        _eyeLidBot_R = botLid_R_FinalValue;
+        if ( _headTurnSpeed != 0f) 
+        {
+            _lookUDTime += Time.deltaTime * _lookUDSpeed;
+            float lookUDValue = Mathf.Sin(_lookUDTime);// * _lookUDAmplitude;
+            float lookUDRange = _lookUDMax - _lookUDMin;
+            float lookUDFinalValue = (lookUDValue + 1f) / 2f * lookUDRange + _lookUDMin;
+            _lookUD = lookUDFinalValue;
+
+        }
+        
+        if (_lookLRSpeed != 0f) 
+        {
+            _lookLRTime += Time.deltaTime * _lookLRSpeed;
+            float lookLRValue = Mathf.Sin(_lookLRTime);// * _lookLRAmplitude;
+            float lookLRRange = _lookLRMax - _lookLRMin;
+            float lookLRFinalValue = (lookLRValue + 1f) / 2f * lookLRRange + _lookLRMin;
+            _lookLR = lookLRFinalValue;
+        }
+
+        if (_shoulderSpeed != 0f)
+        {
+            _shoulder_L_Time += Time.deltaTime * _shoulderSpeed;
+            float shoulder_L_Value = Mathf.Sin(_shoulder_L_Time);// * _lookLRAmplitude;
+            float shoulder_L_Range = _shoulder_L_Max - _shoulder_L_Min;
+            float shoulder_L_FinalValue = (shoulder_L_Value + 1f) / 2f * shoulder_L_Range + _shoulder_L_Min;
+            _shoulder_L = shoulder_L_FinalValue;
+
+            _shoulder_R_Time += Time.deltaTime * _shoulderSpeed;
+            float shoulder_R_Value = Mathf.Sin(_shoulder_R_Time);// * _lookLRAmplitude;
+            float shoulder_R_Range = _shoulder_R_Max - _shoulder_R_Min;
+            float shoulder_R_FinalValue = (shoulder_R_Value + 1f) / 2f * shoulder_R_Range + _shoulder_R_Min;
+            _shoulder_R = shoulder_R_FinalValue;
+        }
+
+
+
+
+        // *** note that eyelids are different from other sine wave movements
+        if (_topLidSpeed != 0f)
+        {
+            _topLid_L_Time += Time.deltaTime * _topLidSpeed;
+            float topLid_L_Value = Mathf.Sin(_topLid_L_Time);
+            float topLid_L_Range = _eyeLidBot_L - _topLid_L_Min;
+            float topLid_L_FinalValue = (topLid_L_Value + 1f) / 2f * topLid_L_Range + _topLid_L_Min;
+            _eyeLidTop_L = topLid_L_FinalValue;
+
+            _topLid_R_Time += Time.deltaTime * _topLidSpeed;
+            float topLid_R_Value = Mathf.Sin(_topLid_R_Time);
+            float topLid_R_Range = _eyeLidBot_R - _topLid_R_Min;
+            float topLid_R_FinalValue = (topLid_R_Value + 1f) / 2f * topLid_R_Range + _topLid_R_Min;
+            _eyeLidTop_R = topLid_R_FinalValue;
+
+            if (_eyeLidTop_L <= _topLid_L_Min + 0.001 && !_pauseBlinking && _topLid_L_Time > 0.5)
+            {
+                StartCoroutine(BlinkPause(_blinkPauseDuration));
+            }
+        }
+
+        if(_botLidSpeed > 0) 
+        {
+            _botLid_L_Time += Time.deltaTime * _botLidSpeed;
+            float botLid_L_Value = Mathf.Sin(_botLid_L_Time);
+            float botLid_L_Range = _botLid_L_Max - _lidsMeet_L;
+            float botLid_L_FinalValue = (botLid_L_Value + 1f) / 2f * botLid_L_Range + _lidsMeet_L;
+            _eyeLidBot_L = botLid_L_FinalValue;
+
+            _botLid_R_Time += Time.deltaTime * _botLidSpeed;
+            float botLid_R_Value = Mathf.Sin(_botLid_R_Time);
+            float botLid_R_Range = _botLid_R_Max - _lidsMeet_R;
+            float botLid_R_FinalValue = (botLid_R_Value + 1f) / 2f * botLid_R_Range + _lidsMeet_R;
+            _eyeLidBot_R = botLid_R_FinalValue;
+        }        
         // *** note that eyelids are different from other sine wave movements (dont copy for other movements)
 
     }

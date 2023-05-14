@@ -293,28 +293,27 @@ public class CharacterBehaviour : MonoBehaviour
 
         if (_headNodSpeed != 0f)
         {
-            if(_headNodPlusTurn == true) // *** this bit of code is meant to make head swoop - needs work *TODO
+            if (_headNodPlusTurn == true) // *** this bit of code is meant to make head swoop - needs work *TODO
             {
-                _headNodTime = _headTurnTime *2;
+                _headNodTime = _headTurnTime * 2;
                 _headNodSpeed = _headTurnSpeed;
+
+                _headNodTime += Time.deltaTime * _headNodSpeed;
+                float headNodRange = _headNodMax - _headNodMin;
+                float headNodValue = Mathf.Cos(_headNodTime);// * _headNodAmplitude;
+                float headNodFinalValue = (headNodValue + 1f) / 2f * headNodRange + _headNodMin;
+                _headNod = headNodFinalValue;
             }
-            _headNodTime += Time.deltaTime * _headNodSpeed;
-            float headNodValue = Mathf.Sin(_headNodTime);// * _headNodAmplitude;
-            float headNodRange = _headNodMax - _headNodMin;
-            float headNodFinalValue = (headNodValue + 1f) / 2f * headNodRange + _headNodMin;
-            _headNod = headNodFinalValue;
+            else
+            {
+                _headNodTime += Time.deltaTime * _headNodSpeed;
+                float headNodValue = Mathf.Sin(_headNodTime);// * _headNodAmplitude;
+                float headNodRange = _headNodMax - _headNodMin;
+                float headNodFinalValue = (headNodValue + 1f) / 2f * headNodRange + _headNodMin;
+                _headNod = headNodFinalValue;
+            }
         }
 
-        if ( _headTurnSpeed != 0f) 
-        {
-            _lookUDTime += Time.deltaTime * _lookUDSpeed;
-            float lookUDValue = Mathf.Sin(_lookUDTime);// * _lookUDAmplitude;
-            float lookUDRange = _lookUDMax - _lookUDMin;
-            float lookUDFinalValue = (lookUDValue + 1f) / 2f * lookUDRange + _lookUDMin;
-            _lookUD = lookUDFinalValue;
-
-        }
-        
         if (_lookLRSpeed != 0f) 
         {
             _lookLRTime += Time.deltaTime * _lookLRSpeed;

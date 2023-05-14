@@ -9,13 +9,14 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Nose
   m_Shader: {fileID: 4800000, guid: 034460dc851505a42baca2ba6514f9f0, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords:
+  m_ValidKeywords:
   - VIGNETTE_MASKED
+  - _GLOSSYREFLECTIONS_OFF
   - _LIGHTINGMODE_TEXTURERAMP
   - _RIM2STYLE_POIYOMI
   - _RIMSTYLE_POIYOMI
   - _STOCHASTICMODE_DELIOT_HEITZ
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -1213,7 +1214,7 @@ Material:
     - _EnableOutlines: 1
     - _EnablePathing: 0
     - _EnableRim2Lighting: 0
-    - _EnableRimLighting: 0
+    - _EnableRimLighting: 1
     - _EnableTouchGlow: 0
     - _EnableUDIMDiscardOptions: 0
     - _EnableVolumeColor: 0
@@ -2118,10 +2119,10 @@ Material:
     - _RimBackfaceMask: 1
     - _RimBaseColorMix: 0
     - _RimBlendMode: 0
-    - _RimBlendStrength: 1
+    - _RimBlendStrength: 0.437
     - _RimBlur: 0.65
-    - _RimBorder: 0.5
-    - _RimBrightness: 1
+    - _RimBorder: 0.524
+    - _RimBrightness: 0.65
     - _RimClamp: 0
     - _RimColorTexUV: 0
     - _RimDirRange: 0
@@ -2152,7 +2153,7 @@ Material:
     - _RimMaskChannel: 0
     - _RimMaskUV: 0
     - _RimNormalStrength: 1
-    - _RimPower: 1
+    - _RimPower: 0.58
     - _RimShadowMask: 0.5
     - _RimShadowMaskInvert: 0
     - _RimShadowMaskRampType: 0
@@ -2164,7 +2165,7 @@ Material:
     - _RimStyle: 0
     - _RimTexUV: 0
     - _RimVRParallaxStrength: 1
-    - _RimWidth: 0.8
+    - _RimWidth: 0.558
     - _SDFBlur: 0.1
     - _SDFShadingTextureUV: 0
     - _SSIgnoreCastedShadows: 0
@@ -2430,7 +2431,7 @@ Material:
     - g_start_deliot: 0
     - g_start_hextile: 0
     - m_AudioLinkCategory: 0
-    - m_OutlineCategory: 1
+    - m_OutlineCategory: 0
     - m_end_ALDecalSpectrum: 0
     - m_end_ALVolumeColor: 0
     - m_end_Alpha: 0
@@ -2567,7 +2568,7 @@ Material:
     - m_end_vertexGlitching: 0
     - m_end_vertexManipulation: 0
     - m_end_videoEffects: 0
-    - m_lightingCategory: 0
+    - m_lightingCategory: 1
     - m_mainCategory: 0
     - m_modifierCategory: 0
     - m_postprocessing: 0
@@ -2698,7 +2699,7 @@ Material:
     - m_start_rgbanormals: 0
     - m_start_rim2LightOptions: 0
     - m_start_rimLight1Options: 0
-    - m_start_rimLightOptions: 0
+    - m_start_rimLightOptions: 1
     - m_start_stylizedSpec: 0
     - m_start_subsurfaceScattering: 0
     - m_start_udimdiscardOptions: 0

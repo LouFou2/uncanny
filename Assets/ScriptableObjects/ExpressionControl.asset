@@ -19,54 +19,54 @@ MonoBehaviour:
   headTilt: 0
   headLateralX: 0
   headLateralY: 0
-  headTurn: 0.94220066
+  headTurn: -0.20403297
   headTurnMax: 1
-  headTurnMin: -1
-  headTurnSpeed: 1.29
-  headTurnTime: 1081.937
-  headNod: 0.33649546
-  headNodMax: 0.549
-  headNodMin: 0.06
-  headNodSpeed: 1.29
-  headNodTime: 1975.9305
+  headTurnMin: -0.394
+  headTurnSpeed: 1.68
+  headTurnTime: 3649.716
+  headNod: -0.34122008
+  headNodMax: -0.416
+  headNodMin: -0.059
+  headNodSpeed: 2.97
+  headNodTime: 7259.6006
   headNodPlusTurn: 0
   lookUD: 0.47368023
   lookUDMax: 0.48
   lookUDMin: 0.13
   lookUDSpeed: 1.1
   lookUDTime: 184.05273
-  lookLR: 0.56984663
-  lookLRMax: 0.55
+  lookLR: 0.038329087
+  lookLRMax: -0.722
   lookLRMin: 0.59
-  lookLRSpeed: 0
-  lookLRTime: 0
+  lookLRSpeed: 1.59
+  lookLRTime: 929.7517
   shoulderSpeed: 3.6
-  shoulder_L: 0.108825035
+  shoulder_L: 0.013663454
   shoulder_L_Max: 0.503
   shoulder_L_Min: 0
-  shoulder_L_Time: 1739.8391
-  shoulder_R: 0.10774327
+  shoulder_L_Time: 5540.53
+  shoulder_R: 0.013527634
   shoulder_R_Max: 0.498
   shoulder_R_Min: 0
-  shoulder_R_Time: 1739.8391
-  eyeLidTop_L: 0.41802615
-  eyeLidTop_R: 0.42304102
-  topLid_L_Min: 0.417
-  topLid_R_Min: 0.422
-  topLid_L_Time: 4.5850472
-  topLid_R_Time: 4.5850472
+  shoulder_R_Time: 5540.53
+  eyeLidTop_L: 0.11285471
+  eyeLidTop_R: 0.11280053
+  topLid_L_Min: 0.104
+  topLid_R_Min: 0.104
+  topLid_L_Time: 4.428384
+  topLid_R_Time: 4.428384
   topLidSpeed: 0.001
-  blinkPauseDuration: 2.73
-  eyeLidBot_L: 0.6701165
-  eyeLidBot_R: 0.6787611
+  blinkPauseDuration: 1.59
+  eyeLidBot_L: 0.54710007
+  eyeLidBot_R: 0.54448825
   lidsMeet_L: 0.521
   lidsMeet_R: 0.516
   botLid_L_Max: 0.674
   botLid_R_Max: 0.683
-  botLid_L_Time: 579.94385
-  botLid_R_Time: 579.94385
-  botLidSpeed: 1.2
-  jawOpen: 0.056
+  botLid_L_Time: 2060.1655
+  botLid_R_Time: 2060.1655
+  botLidSpeed: 1.4
+  jawOpen: 0
   squint: 0
   whaleEye: 0
   browLift: 0
@@ -81,6 +81,6 @@ MonoBehaviour:
   tongueStretch: 0
   tongueUpDown: 0
   pleasure: -1
-  arousal: -0.113
+  arousal: 1
   subDom: -1
   blinkRate: 1

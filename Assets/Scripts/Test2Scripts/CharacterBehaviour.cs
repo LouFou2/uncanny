@@ -356,7 +356,7 @@ public class CharacterBehaviour : MonoBehaviour
             float topLid_R_FinalValue = (topLid_R_Value + 1f) / 2f * topLid_R_Range + _topLid_R_Min;
             _eyeLidTop_R = topLid_R_FinalValue;
 
-            if (_eyeLidTop_L <= _topLid_L_Min + 0.001f && !_pauseBlinking && _topLid_L_Time > 0.5f)
+            if (_eyeLidTop_L <= _topLid_L_Min + 0.01f && !_pauseBlinking && _topLid_L_Time > 0.5f)
             {
                 StartCoroutine(BlinkPause(_blinkPauseDuration));
             }

@@ -322,6 +322,14 @@ public class CharacterBehaviour : MonoBehaviour
             float lookLRFinalValue = (lookLRValue + 1f) / 2f * lookLRRange + _lookLRMin;
             _lookLR = lookLRFinalValue;
         }
+        if (_lookUDSpeed != 0f)
+        {
+            _lookUDTime += Time.deltaTime * _lookUDSpeed;
+            float lookUDValue = Mathf.Sin(_lookUDTime);// * _lookLRAmplitude;
+            float lookUDRange = _lookUDMax - _lookUDMin;
+            float lookUDFinalValue = (lookUDValue + 1f) / 2f * lookUDRange + _lookUDMin;
+            _lookUD = lookUDFinalValue;
+        }
 
         if (_shoulderSpeed != 0f)
         {

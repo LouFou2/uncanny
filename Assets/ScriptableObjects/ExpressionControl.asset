@@ -19,52 +19,61 @@ MonoBehaviour:
   headTilt: -0.01
   headLateralX: 0
   headLateralY: 0
-  headTurn: -0.19082291
-  headTurnMax: 0.51
-  headTurnMin: -0.27
-  headTurnSpeed: 2.6
-  headTurnTime: 9153.679
-  headNod: 0.63985384
+  headTurn: -0.6343838
+  headTurnMax: 1
+  headTurnMin: -1
+  headTurnSpeed: 1.2
+  headTurnTime: 12984.89
+  headNod: 0.28965697
   headNodMax: 0.64
   headNodMin: 0.23
-  headNodSpeed: 6.5
-  headNodTime: 18536.93
+  headNodSpeed: 0
+  headNodTime: 18589.592
   headNodPlusTurn: 0
-  lookUD: 0.4799563
+  lookUD: 0.06844515
   lookUDMax: 0.48
   lookUDMin: -0.509
   lookUDSpeed: 0.61
-  lookUDTime: 629.87604
-  lookLR: -0.53887165
+  lookUDTime: 1533.2657
+  lookLR: -0.3964009
   lookLRMax: -0.722
   lookLRMin: 0.59
   lookLRSpeed: 1.59
-  lookLRTime: 10903.663
+  lookLRTime: 13258.049
   shoulderSpeed: 3.6
-  shoulder_L: 0.0322356
+  shoulder_L: 0.32862377
   shoulder_L_Max: 0.503
   shoulder_L_Min: 0
-  shoulder_L_Time: 28122.479
-  shoulder_R: 0.031915165
+  shoulder_L_Time: 33458.273
+  shoulder_R: 0.3253571
   shoulder_R_Max: 0.498
   shoulder_R_Min: 0
-  shoulder_R_Time: 28122.479
-  eyeLidTop_L: 0.11280602
-  eyeLidTop_R: 0.112903774
+  shoulder_R_Time: 33458.273
+  earFlapSpeed: 13.3
+  earFlap_L: 0
+  earFlap_L_Max: 0.579
+  earFlap_L_Min: -1
+  earFlap_L_Time: 0.03485928
+  earFlap_R: 0
+  earFlap_R_Max: 0
+  earFlap_R_Min: 0
+  earFlap_R_Time: 0
+  eyeLidTop_L: 0.8530483
+  eyeLidTop_R: 0.8557267
   topLid_L_Min: 0.104
   topLid_R_Min: 0.104
-  topLid_L_Time: 4.501577
-  topLid_R_Time: 4.501577
+  topLid_L_Time: 1.4794272
+  topLid_R_Time: 1.4794272
   topLidSpeed: 0.001
   blinkPauseDuration: 1.59
-  eyeLidBot_L: 0.898662
-  eyeLidBot_R: 0.9073736
+  eyeLidBot_L: 0.8538311
+  eyeLidBot_R: 0.856408
   lidsMeet_L: 0.835
   lidsMeet_R: 0.835
   botLid_L_Max: 0.93
   botLid_R_Max: 0.943
-  botLid_L_Time: 10841.289
-  botLid_R_Time: 10841.289
+  botLid_L_Time: 12915.735
+  botLid_R_Time: 12915.735
   botLidSpeed: 1.4
   jawOpen: 0
   squint: 0

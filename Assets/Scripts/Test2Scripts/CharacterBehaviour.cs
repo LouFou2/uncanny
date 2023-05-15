@@ -50,6 +50,16 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _shoulder_R_Min;
     private float _shoulder_R_Time;
 
+    [HideInInspector] public float _earFlapSpeed;
+
+    [HideInInspector] public float _earFlap_L_Max;
+    [HideInInspector] public float _earFlap_L_Min;
+    private float _earFlap_L_Time;
+
+    [HideInInspector] public float _earFlap_R_Max;
+    [HideInInspector] public float _earFlap_R_Min;
+    private float _earFlap_R_Time;
+
     [HideInInspector] public float _topLidSpeed;
 
     [HideInInspector] public float _lidsMeet_L;
@@ -102,6 +112,8 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _tongueUpDown;
     [HideInInspector] public float _shoulder_L;
     [HideInInspector] public float _shoulder_R;
+    [HideInInspector] public float _earFlap_L;
+    [HideInInspector] public float _earFlap_R;
 
     [HideInInspector] public float _pleasure; // Mood Parameters
     [HideInInspector] public float _arousal;
@@ -220,6 +232,16 @@ public class CharacterBehaviour : MonoBehaviour
         _shoulder_R_Min = express.shoulder_R_Min;
         _shoulder_R_Time = express.shoulder_R_Time;
 
+        _earFlapSpeed = express.earFlapSpeed;
+
+        _earFlap_L_Max = express.earFlap_L_Max;
+        _earFlap_L_Min = express.earFlap_L_Min;
+        _earFlap_L_Time = express.earFlap_L_Time;
+
+        _earFlap_R_Max = express.earFlap_R_Max;
+        _earFlap_R_Min = express.earFlap_R_Min;
+        _earFlap_R_Time = express.earFlap_R_Time;
+
         _topLidSpeed = express.topLidSpeed;
 
         _lidsMeet_L = express.lidsMeet_L;
@@ -289,6 +311,12 @@ public class CharacterBehaviour : MonoBehaviour
             float headTurnRange = _headTurnMax - _headTurnMin;
             float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
             _headTurn = headTurnFinalValue;
+            
+            _earFlap_L_Time = Time.deltaTime * (_headTurnSpeed * 2);                                // *** TEST - want to piggyback a secondary motion off this motion
+            float earFlap_L_Value = Mathf.Cos(_headTurnTime) * (_headTurnSpeed / _earFlapSpeed);    //this is trying to use amplitude to control the amount
+            float earFlap_L_Range = _earFlap_L_Max - _earFlap_L_Min;
+            float earFlap_L_FinalValue = (earFlap_L_Value + 1f) / 2f * earFlap_L_Range + _earFlap_L_Min;
+            _earFlap_L = earFlap_L_FinalValue;
         }
 
         if (_headNodSpeed != 0f)
@@ -729,6 +757,16 @@ public class CharacterBehaviour : MonoBehaviour
         express.shoulder_R_Min = _shoulder_R_Min;
         express.shoulder_R_Time = _shoulder_R_Time;
 
+        express.earFlapSpeed = _earFlapSpeed;
+
+        express.earFlap_L_Max = _earFlap_L_Max;
+        express.earFlap_L_Min = _earFlap_L_Min;
+        express.earFlap_L_Time = _earFlap_L_Time;
+
+        express.earFlap_R_Max = _earFlap_R_Max;
+        express.earFlap_R_Min = _earFlap_R_Min;
+        express.earFlap_R_Time = _earFlap_R_Time;
+
         // *** DONT copy the lids for other things
         express.topLidSpeed = _topLidSpeed;
 
@@ -797,6 +835,8 @@ public class CharacterBehaviour : MonoBehaviour
         animator.SetFloat("LookUD", _lookUD);
         animator.SetFloat("Shoulder_L", _shoulder_L);
         animator.SetFloat("Shoulder_R", _shoulder_R);
+        animator.SetFloat("EarFlap_L", _earFlap_L);
+        animator.SetFloat("EarFlap_R", _earFlap_R);
         animator.SetFloat("Squint", _squint);
         animator.SetFloat("WhaleEye", _whaleEye);
         animator.SetFloat("BrowLift", _browLift);

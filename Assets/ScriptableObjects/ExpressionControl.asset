@@ -16,55 +16,55 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   moodOrEmote: 0
-  headTilt: 0
+  headTilt: -0.01
   headLateralX: 0
   headLateralY: 0
-  headTurn: -0.044085067
-  headTurnMax: 0.215
-  headTurnMin: -0.394
-  headTurnSpeed: 0.79
-  headTurnTime: 4235.0166
-  headNod: 0.15447772
-  headNodMax: 0.16
-  headNodMin: -0.059
-  headNodSpeed: 0.79
-  headNodTime: 8470.053
+  headTurn: 0.51704425
+  headTurnMax: 1
+  headTurnMin: -1
+  headTurnSpeed: 2.6
+  headTurnTime: 7253.394
+  headNod: -0.5138547
+  headNodMax: -1
+  headNodMin: 1
+  headNodSpeed: 2.6
+  headNodTime: 14506.844
   headNodPlusTurn: 1
-  lookUD: 0.47368023
+  lookUD: 0.228
   lookUDMax: 0.48
-  lookUDMin: 0.13
-  lookUDSpeed: 1.1
+  lookUDMin: -0.509
+  lookUDSpeed: 0.61
   lookUDTime: 184.05273
-  lookLR: -0.028143656
+  lookLR: -0.42539147
   lookLRMax: -0.722
   lookLRMin: 0.59
   lookLRSpeed: 1.59
-  lookLRTime: 1721.535
+  lookLRTime: 9741.499
   shoulderSpeed: 3.6
-  shoulder_L: 0.42503995
+  shoulder_L: 0.45567635
   shoulder_L_Max: 0.503
   shoulder_L_Min: 0
-  shoulder_L_Time: 7333.239
-  shoulder_R: 0.42081487
+  shoulder_L_Time: 25491.83
+  shoulder_R: 0.45114675
   shoulder_R_Max: 0.498
   shoulder_R_Min: 0
-  shoulder_R_Time: 7333.239
-  eyeLidTop_L: 0.3444737
-  eyeLidTop_R: 0.34227836
+  shoulder_R_Time: 25491.83
+  eyeLidTop_L: 0.11271405
+  eyeLidTop_R: 0.1127142
   topLid_L_Min: 0.104
   topLid_R_Min: 0.104
-  topLid_L_Time: 0.12176445
-  topLid_R_Time: 0.12176445
+  topLid_L_Time: 4.4936023
+  topLid_R_Time: 4.4936023
   topLidSpeed: 0.001
   blinkPauseDuration: 1.59
-  eyeLidBot_L: 0.5343241
-  eyeLidBot_R: 0.53054327
-  lidsMeet_L: 0.521
-  lidsMeet_R: 0.516
-  botLid_L_Max: 0.674
-  botLid_R_Max: 0.683
-  botLid_L_Time: 2757.3467
-  botLid_R_Time: 2757.3467
+  eyeLidBot_L: 0.8352
+  eyeLidBot_R: 0.83522743
+  lidsMeet_L: 0.835
+  lidsMeet_R: 0.835
+  botLid_L_Max: 0.93
+  botLid_R_Max: 0.943
+  botLid_L_Time: 9819.14
+  botLid_R_Time: 9819.14
   botLidSpeed: 1.4
   jawOpen: 0
   squint: 0
@@ -80,7 +80,7 @@ MonoBehaviour:
   sneer: 0
   tongueStretch: 0
   tongueUpDown: 0
-  pleasure: -1
-  arousal: 1
+  pleasure: 0.52
+  arousal: 0.17
   subDom: -1
   blinkRate: 1

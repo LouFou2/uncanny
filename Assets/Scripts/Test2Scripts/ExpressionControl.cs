@@ -61,7 +61,7 @@ public class ExpressionControl : ScriptableObject
     [Range(0.0f, 1.0f)] public float shoulder_R_Min;
     [HideInInspector] public float shoulder_R_Time = 0f;
 
-    [Range(0.0f, 200.0f)] public float earFlapSpeed;
+    [Range(1.0f, 100.0f)] public float earFlapSpeed;
 
     [Range(-1.0f, 1.0f)] public float earFlap_L;
     [Range(0.0f, 1.0f)] public float earFlap_L_Max;

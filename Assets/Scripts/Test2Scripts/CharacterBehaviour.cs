@@ -263,6 +263,8 @@ public class CharacterBehaviour : MonoBehaviour
         _blinkPauseDuration = express.blinkPauseDuration;
 
         // Expression parameters used to form all expressions (Expression Control)
+        _earFlap_L = express.earFlap_L;
+        _earFlap_R = express.earFlap_R;
         _shoulder_L = express.shoulder_L;
         _shoulder_R = express.shoulder_R;
         _lookLR = express.lookLR;
@@ -317,6 +319,12 @@ public class CharacterBehaviour : MonoBehaviour
             float earFlap_L_Range = _earFlap_L_Max - _earFlap_L_Min;
             float earFlap_L_FinalValue = (earFlap_L_Value + 1f) / 2f * earFlap_L_Range + _earFlap_L_Min;
             _earFlap_L = earFlap_L_FinalValue;
+
+            _earFlap_R_Time = Time.deltaTime * (_headTurnSpeed * 2);                                
+            float earFlap_R_Value = Mathf.Cos(_headTurnTime) * (_headTurnSpeed / _earFlapSpeed);    
+            float earFlap_R_Range = _earFlap_R_Max - _earFlap_R_Min;
+            float earFlap_R_FinalValue = (earFlap_R_Value + 1f) / 2f * earFlap_R_Range + _earFlap_R_Min;
+            _earFlap_L = earFlap_R_FinalValue;
         }
 
         if (_headNodSpeed != 0f)
@@ -790,7 +798,8 @@ public class CharacterBehaviour : MonoBehaviour
         // *** DONT copy the lids for other things
 
         //
-
+        express.earFlap_L = _earFlap_L;
+        express.earFlap_R = _earFlap_R;
         express.shoulder_L = _shoulder_L;
         express.shoulder_R = _shoulder_R;
         express.lookUD = _lookUD;

@@ -8,6 +8,9 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Analytics;
 using System.Threading.Tasks;
+using UnityEngine.Animations.Rigging;
+using JetBrains.Annotations;
+using UnityEditor.PackageManager;
 
 public class CharacterBehaviour : MonoBehaviour
 {
@@ -118,7 +121,6 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _pleasure; // Mood Parameters
     [HideInInspector] public float _arousal;
     [HideInInspector] public float _subDom;
-    [HideInInspector] public float _blinkRate;
     
     //MoodControl variables
     [HideInInspector] public float _pleasureChange;     // adjust pleasure parameter
@@ -164,6 +166,14 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public Ease _easeType;
     [HideInInspector] public float _sustain;
     [HideInInspector] public float _decay;
+    
+    [HideInInspector] public float _earFlap_L_Weight;
+    [HideInInspector] public float _earFlap_R_Weight;
+    private MultiRotationConstraint _ear_L_RotConstraint;
+    [SerializeField] public GameObject Ear_L_ConstrainedObject;
+
+    private MultiRotationConstraint _ear_R_RotConstraint;
+    [SerializeField] public GameObject Ear_R_ConstrainedObject;
 
     private void OnEnable()
     {
@@ -190,6 +200,10 @@ public class CharacterBehaviour : MonoBehaviour
     }
     void CheckParams()
     {
+        _ear_L_RotConstraint = Ear_L_ConstrainedObject.GetComponent<MultiRotationConstraint>();  //remember to assign the object in inspector
+        _ear_R_RotConstraint = Ear_R_ConstrainedObject.GetComponent<MultiRotationConstraint>();  //remember to assign the object in inspector
+        _earFlap_L_Weight = express.earFlap_L_Weight;
+        _earFlap_R_Weight = express.earFlap_R_Weight;
         //Head Movements (Expression Control)
         _headTurn = express.headTurn;
         _headNod = express.headNod;
@@ -292,7 +306,6 @@ public class CharacterBehaviour : MonoBehaviour
         _pleasure = express.pleasure;
         _arousal = express.arousal;
         _subDom = express.subDom;
-        _blinkRate = express.blinkRate;
 
         //MoodControl
         _pleasureDefault = mood.pleasureDefault;
@@ -306,6 +319,8 @@ public class CharacterBehaviour : MonoBehaviour
 
     void ExpressControlUpdates() // Can remove this once game is finished (only used for changeing parameters in runtime)
     {
+        _earFlap_L_Weight = express.earFlap_L_Weight;
+        _earFlap_R_Weight = express.earFlap_R_Weight;
         //Head Movements (Expression Control)
         _headTurn = express.headTurn;
         _headNod = express.headNod;
@@ -408,7 +423,6 @@ public class CharacterBehaviour : MonoBehaviour
         _pleasure = express.pleasure;
         _arousal = express.arousal;
         _subDom = express.subDom;
-        _blinkRate = express.blinkRate;
 
         //MoodControl
         _pleasureDefault = mood.pleasureDefault;
@@ -428,7 +442,15 @@ public class CharacterBehaviour : MonoBehaviour
             float headTurnRange = _headTurnMax - _headTurnMin;
             float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
             _headTurn = headTurnFinalValue;
-            
+
+            _earFlap_L_Weight = _ear_L_RotConstraint.weight;
+            _earFlap_L_Weight = Mathf.Clamp(_headTurnSpeed / 10, 0f, 1f);
+            _ear_L_RotConstraint.weight = _earFlap_L_Weight;
+
+            _earFlap_R_Weight = _ear_R_RotConstraint.weight;
+            _earFlap_R_Weight = Mathf.Clamp(_headTurnSpeed / 10, 0f, 1f);
+            _ear_R_RotConstraint.weight = _earFlap_R_Weight;
+
             _earFlap_L_Time = Time.deltaTime * (_headTurnSpeed);                                        // *** TEST - want to piggyback a secondary motion off this motion
             float earFlap_L_Value = Mathf.Cos(_headTurnTime);// * (_headTurnSpeed / _earFlapSpeed);     //this is trying to use amplitude to control the amount
             float earFlap_L_Range = _earFlap_L_Max - _earFlap_L_Min;
@@ -912,6 +934,8 @@ public class CharacterBehaviour : MonoBehaviour
         //
         express.earFlap_L = _earFlap_L;
         express.earFlap_R = _earFlap_R;
+        express.earFlap_L_Weight = _earFlap_L_Weight;
+        express.earFlap_R_Weight = _earFlap_R_Weight;
         express.shoulder_L = _shoulder_L;
         express.shoulder_R = _shoulder_R;
         express.lookUD = _lookUD;
@@ -935,7 +959,6 @@ public class CharacterBehaviour : MonoBehaviour
         express.pleasure = _pleasure;
         express.arousal = _arousal;
         express.subDom = _subDom;
-        express.blinkRate = _blinkRate;
         express.tongueStretch = _tongueStretch;
         express.tongueUpDown = _tongueUpDown;
 
@@ -977,7 +1000,6 @@ public class CharacterBehaviour : MonoBehaviour
         animator.SetFloat("Pleasure", _pleasure);
         animator.SetFloat("Arousal", _arousal);
         animator.SetFloat("SubDom", _subDom);
-        animator.SetFloat("BlinkRate", _blinkRate);
         animator.SetFloat("TongueStretch", _tongueStretch);
         animator.SetFloat("TongueUpDown", _tongueUpDown);
     }

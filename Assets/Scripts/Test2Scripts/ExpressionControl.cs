@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Animations.Rigging;
 
 
 // Script To Contain all Parameters for Expression Controls
@@ -73,6 +74,9 @@ public class ExpressionControl : ScriptableObject
     [Range(-1.0f, 1.0f)] public float earFlap_R_Min;
     [HideInInspector] public float earFlap_R_Time = 0f;
 
+    [Range(0.0f, 1.0f)] public float earFlap_L_Weight;
+    [Range(0.0f, 1.0f)] public float earFlap_R_Weight; //the weight values are just to check, not to manipulate
+
     // *** BLINKING *** [this works different from everything else]
     [Range(0.0f, 1.0f)] public float eyeLidTop_L;
     [Range(0.0f, 1.0f)] public float eyeLidTop_R;
@@ -93,9 +97,11 @@ public class ExpressionControl : ScriptableObject
     [HideInInspector] public float botLid_L_Time = 0f;
     [HideInInspector] public float botLid_R_Time = 0f;
     [Range(0.0f, 20.0f)] public float botLidSpeed;
+    
+    
 
     // *** FACIAL ARTICULATION ***
-    
+
     [Range(0.0f, 1.0f)] public float jawOpen;
     [Range(0.0f, 1.0f)] public float squint;
     [Range(0.0f, 1.0f)] public float whaleEye;
@@ -117,11 +123,6 @@ public class ExpressionControl : ScriptableObject
     [Range(-1.0f, 1.0f)] public float pleasure;
     [Range(-1.0f, 1.0f)] public float arousal;
     [Range(-1.0f, 1.0f)] public float subDom;
-
-    // *** OTHER ***
-
-    [Range(1f, 20.0f)] public float blinkRate;
-
 
     private void OnEnable()
     {

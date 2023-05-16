@@ -1872,7 +1872,6 @@ MonoBehaviour:
   _pleasure: 0
   _arousal: 0
   _subDom: 0
-  _blinkRate: 0
   _pleasureChange: 0
   _pleasureDefault: 0
   _arousalChange: 0
@@ -1911,6 +1910,10 @@ MonoBehaviour:
   _easeType: 0
   _sustain: 0
   _decay: 0
+  _earFlap_L_Weight: 0
+  _earFlap_R_Weight: 0
+  Ear_L_ConstrainedObject: {fileID: 925552921}
+  Ear_R_ConstrainedObject: {fileID: 1069426296}
 --- !u!114 &268113564
 MonoBehaviour:
   m_ObjectHideFlags: 0

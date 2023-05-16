@@ -358,7 +358,7 @@ public class CharacterBehaviour : MonoBehaviour
         _earFlap_R_Min = express.earFlap_R_Min;
         _earFlap_R_Time = express.earFlap_R_Time;
 
-        _topLidSpeed = express.topLidSpeed;
+        _topLidSpeed = express.topLidSpeed = 15f;
 
         _lidsMeet_L = express.lidsMeet_L;
         _topLid_L_Min = express.topLid_L_Min;
@@ -496,9 +496,6 @@ public class CharacterBehaviour : MonoBehaviour
             float shoulder_R_FinalValue = (shoulder_R_Value + 1f) / 2f * shoulder_R_Range + _shoulder_R_Min;
             _shoulder_R = shoulder_R_FinalValue;
         }
-
-
-
 
         // *** note that eyelids are different from other sine wave movements
         if (_topLidSpeed != 0f)
@@ -961,6 +958,7 @@ public class CharacterBehaviour : MonoBehaviour
         animator.SetFloat("Shoulder_R", _shoulder_R);
         animator.SetFloat("EarFlap_L", _earFlap_L);
         animator.SetFloat("EarFlap_R", _earFlap_R);
+        animator.SetFloat("JawOpen", _jawOpen);
         animator.SetFloat("Squint", _squint);
         animator.SetFloat("WhaleEye", _whaleEye);
         animator.SetFloat("BrowLift", _browLift);

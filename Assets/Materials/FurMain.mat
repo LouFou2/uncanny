@@ -2119,7 +2119,7 @@ Material:
     - _RimBackfaceMask: 1
     - _RimBaseColorMix: 1
     - _RimBlendMode: 0
-    - _RimBlendStrength: 0.437
+    - _RimBlendStrength: 0.111
     - _RimBlur: 0.65
     - _RimBorder: 0.524
     - _RimBrightness: 0.65
@@ -2153,19 +2153,19 @@ Material:
     - _RimMaskChannel: 0
     - _RimMaskUV: 0
     - _RimNormalStrength: 1
-    - _RimPower: 0.58
+    - _RimPower: 0.52
     - _RimShadowMask: 0.5
     - _RimShadowMaskInvert: 0
     - _RimShadowMaskRampType: 0
     - _RimShadowMaskStrength: 1
     - _RimShadowToggle: 0
     - _RimShadowWidth: 0
-    - _RimSharpness: 0.24
+    - _RimSharpness: 0.422
     - _RimStrength: 0
     - _RimStyle: 0
     - _RimTexUV: 0
     - _RimVRParallaxStrength: 1
-    - _RimWidth: 0.558
+    - _RimWidth: 0.534
     - _SDFBlur: 0.1
     - _SDFShadingTextureUV: 0
     - _SSIgnoreCastedShadows: 0

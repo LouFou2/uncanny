@@ -167,13 +167,13 @@ public class CharacterBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
-        express.updated.AddListener(CheckParams);
-        mood.updated.AddListener(CheckParams);
+        express.updated.AddListener(ExpressControlUpdates);
+        mood.updated.AddListener(ExpressControlUpdates);
     }
     private void OnDisable()
     {
-        express.updated.RemoveListener(CheckParams);
-        mood.updated.RemoveListener(CheckParams);
+        express.updated.RemoveListener(ExpressControlUpdates);
+        mood.updated.RemoveListener(ExpressControlUpdates);
     }
     
     void Start()
@@ -189,6 +189,122 @@ public class CharacterBehaviour : MonoBehaviour
         Animate();
     }
     void CheckParams()
+    {
+        //Head Movements (Expression Control)
+        _headTurn = express.headTurn;
+        _headNod = express.headNod;
+        _headTilt = express.headTilt;
+        _headLateralX = express.headLateralX;
+        _headLateralY = express.headLateralY;
+
+        //Mood (Idle) or Emote (Emotional expression or Reaction)
+        _moodOrEmote = express.moodOrEmote;
+
+        //Sine Wave variables (Expression Control)
+        _headTurnMax = express.headTurnMax;
+        _headTurnMin = express.headTurnMin;
+        _headTurnSpeed = express.headTurnSpeed;
+        _headTurnTime = express.headTurnTime = 0f;
+
+        _headNodMax = express.headNodMax;
+        _headNodMin = express.headNodMin;
+        _headNodSpeed = express.headNodSpeed;
+        _headNodTime = express.headNodTime = 0f;
+        _headNodPlusTurn = express.headNodPlusTurn;
+
+        _lookUDMax = express.lookUDMax;
+        _lookUDMin = express.lookUDMin;
+        _lookUDSpeed = express.lookUDSpeed;
+        _lookUDTime = express.lookUDTime = 0f;
+
+        _lookLRMax = express.lookLRMax;
+        _lookLRMin = express.lookLRMin;
+        _lookLRSpeed = express.lookLRSpeed;
+        _lookLRTime = express.lookLRTime = 0f;
+
+        _shoulderSpeed = express.shoulderSpeed;
+
+        _shoulder_L_Max = express.shoulder_L_Max;
+        _shoulder_L_Min = express.shoulder_L_Min;
+        _shoulder_L_Time = express.shoulder_L_Time = 0f;
+
+        _shoulder_R_Max = express.shoulder_R_Max;
+        _shoulder_R_Min = express.shoulder_R_Min;
+        _shoulder_R_Time = express.shoulder_R_Time = 0f;
+
+        _earFlapSpeed = express.earFlapSpeed;
+
+        _earFlap_L_Max = express.earFlap_L_Max;
+        _earFlap_L_Min = express.earFlap_L_Min;
+        _earFlap_L_Time = express.earFlap_L_Time = 0f;
+
+        _earFlap_R_Max = express.earFlap_R_Max;
+        _earFlap_R_Min = express.earFlap_R_Min;
+        _earFlap_R_Time = express.earFlap_R_Time = 0f;
+
+        _topLidSpeed = express.topLidSpeed = 15f;
+
+        _lidsMeet_L = express.lidsMeet_L;
+        _topLid_L_Min = express.topLid_L_Min;
+        _topLid_L_Time = express.topLid_L_Time = 0f;
+
+        _lidsMeet_R = express.lidsMeet_R;
+        _topLid_R_Min = express.topLid_R_Min;
+        _topLid_R_Time = express.topLid_R_Time = 0f;
+
+        _botLidSpeed = express.botLidSpeed;
+
+        _botLid_L_Max = express.botLid_L_Max;
+        _botLid_L_Time = express.botLid_L_Time = 0f;
+
+        _botLid_R_Max = express.botLid_R_Max;
+        _botLid_R_Time = express.botLid_R_Time = 0f;
+
+        _blinkPauseDuration = express.blinkPauseDuration = 2f;
+
+        // Expression parameters used to form all expressions (Expression Control)
+        _earFlap_L = express.earFlap_L;
+        _earFlap_R = express.earFlap_R;
+        _shoulder_L = express.shoulder_L;
+        _shoulder_R = express.shoulder_R;
+        _lookLR = express.lookLR;
+        _lookUD = express.lookUD;
+        _jawOpen = express.jawOpen;
+        _squint = express.squint;
+        _whaleEye = express.whaleEye;
+        _browLift = express.browLift;
+        _frown = express.frown;
+        _eyeLidTop_L = express.eyeLidTop_L;
+        _eyeLidTop_R = express.eyeLidTop_R;
+        _eyeLidBot_L = express.eyeLidBot_L;
+        _eyeLidBot_R = express.eyeLidBot_R;
+        _smile = express.smile;
+        _lipStretch = express.lipStretch;
+        _lipTight = express.lipTight;
+        _pout = express.pout;
+        _speak = express.speak;
+        _lipCnrs = express.lipCnrs;
+        _sneer = express.sneer;
+        _tongueStretch = express.tongueStretch;
+        _tongueUpDown = express.tongueUpDown;
+
+        //Mood Control parameters (Expression Control)
+        _pleasure = express.pleasure;
+        _arousal = express.arousal;
+        _subDom = express.subDom;
+        _blinkRate = express.blinkRate;
+
+        //MoodControl
+        _pleasureDefault = mood.pleasureDefault;
+        _arousalDefault = mood.arousalDefault;
+        _dominanceDefault = mood.dominanceDefault;
+        _moodBlinkRate = mood.moodBlinkRate;
+        _moodMouthMoves = mood.moodMouthMoves;
+        _moodHeadMoves = mood.moodHeadMoves;
+        _moodEqualiseSpeed = mood.moodEqualiseSpeed;
+    }
+
+    void ExpressControlUpdates() // Can remove this once game is finished (only used for changeing parameters in runtime)
     {
         //Head Movements (Expression Control)
         _headTurn = express.headTurn;
@@ -303,8 +419,7 @@ public class CharacterBehaviour : MonoBehaviour
         _moodHeadMoves = mood.moodHeadMoves;
         _moodEqualiseSpeed = mood.moodEqualiseSpeed;
     }
-    
-    void SineWaveMovements() //***TODO - Add a way to reset time to zero for each sine wave (figure out best way to do this)
+    void SineWaveMovements() //***TODO - Add a way to reset time to zero for each sine wave (resets to zero in start method.)
     {
         if (_headTurnSpeed != 0f)
         {
@@ -314,8 +429,8 @@ public class CharacterBehaviour : MonoBehaviour
             float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
             _headTurn = headTurnFinalValue;
             
-            _earFlap_L_Time = Time.deltaTime * (_headTurnSpeed);                                // *** TEST - want to piggyback a secondary motion off this motion
-            float earFlap_L_Value = Mathf.Cos(_headTurnTime);// * (_headTurnSpeed / _earFlapSpeed);    //this is trying to use amplitude to control the amount
+            _earFlap_L_Time = Time.deltaTime * (_headTurnSpeed);                                        // *** TEST - want to piggyback a secondary motion off this motion
+            float earFlap_L_Value = Mathf.Cos(_headTurnTime);// * (_headTurnSpeed / _earFlapSpeed);     //this is trying to use amplitude to control the amount
             float earFlap_L_Range = _earFlap_L_Max - _earFlap_L_Min;
             float earFlap_L_FinalValue = (earFlap_L_Value + 1f) / 2f * earFlap_L_Range + _earFlap_L_Min;
             _earFlap_L = earFlap_L_FinalValue;

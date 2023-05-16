@@ -314,17 +314,17 @@ public class CharacterBehaviour : MonoBehaviour
             float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
             _headTurn = headTurnFinalValue;
             
-            _earFlap_L_Time = Time.deltaTime * (_headTurnSpeed * 2);                                // *** TEST - want to piggyback a secondary motion off this motion
-            float earFlap_L_Value = Mathf.Cos(_headTurnTime) * (_headTurnSpeed / _earFlapSpeed);    //this is trying to use amplitude to control the amount
+            _earFlap_L_Time = Time.deltaTime * (_headTurnSpeed);                                // *** TEST - want to piggyback a secondary motion off this motion
+            float earFlap_L_Value = Mathf.Cos(_headTurnTime);// * (_headTurnSpeed / _earFlapSpeed);    //this is trying to use amplitude to control the amount
             float earFlap_L_Range = _earFlap_L_Max - _earFlap_L_Min;
             float earFlap_L_FinalValue = (earFlap_L_Value + 1f) / 2f * earFlap_L_Range + _earFlap_L_Min;
             _earFlap_L = earFlap_L_FinalValue;
 
-            _earFlap_R_Time = Time.deltaTime * (_headTurnSpeed * 2);                                
-            float earFlap_R_Value = Mathf.Cos(_headTurnTime) * (_headTurnSpeed / _earFlapSpeed);    
-            float earFlap_R_Range = _earFlap_R_Max - _earFlap_R_Min;
-            float earFlap_R_FinalValue = (earFlap_R_Value + 1f) / 2f * earFlap_R_Range + _earFlap_R_Min;
-            _earFlap_L = earFlap_R_FinalValue;
+            _earFlap_R_Time = Time.deltaTime * (_headTurnSpeed);
+            float earFlap_R_Value = Mathf.Cos(_headTurnTime);// * (_headTurnSpeed / _earFlapSpeed);    
+            float earFlap_R_Range = _earFlap_R_Min - _earFlap_R_Max;
+            float earFlap_R_FinalValue = (earFlap_R_Value + 1f) / 2f * earFlap_R_Range + _earFlap_R_Max;
+            _earFlap_R = earFlap_R_FinalValue;
         }
 
         if (_headNodSpeed != 0f)

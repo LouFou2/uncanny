@@ -11,7 +11,6 @@ Material:
   m_Shader: {fileID: 4800000, guid: 034460dc851505a42baca2ba6514f9f0, type: 3}
   m_ValidKeywords:
   - VIGNETTE_MASKED
-  - _GLOSSYREFLECTIONS_OFF
   - _LIGHTINGMODE_TEXTURERAMP
   - _RIM2STYLE_POIYOMI
   - _RIMSTYLE_POIYOMI
@@ -1214,7 +1213,7 @@ Material:
     - _EnableOutlines: 1
     - _EnablePathing: 0
     - _EnableRim2Lighting: 0
-    - _EnableRimLighting: 1
+    - _EnableRimLighting: 0
     - _EnableTouchGlow: 0
     - _EnableUDIMDiscardOptions: 0
     - _EnableVolumeColor: 0

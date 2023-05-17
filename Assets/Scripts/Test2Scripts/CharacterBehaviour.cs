@@ -445,12 +445,25 @@ public class CharacterBehaviour : MonoBehaviour
 
             _earFlap_L_Weight = _ear_L_RotConstraint.weight;
             _earFlap_L_Weight = Mathf.Clamp(_headTurnSpeed / 10, 0f, 1f);
-            _ear_L_RotConstraint.weight = _earFlap_L_Weight;
+            if (_headTilt < -0f)                                                        // if head Tilts to the left, the constraint should decrease its influence
+            {
+                _ear_L_RotConstraint.weight = _earFlap_L_Weight - Mathf.Abs(_headTilt); 
+            }
+            else 
+            {
+                _ear_L_RotConstraint.weight = _earFlap_L_Weight;
+            }
 
             _earFlap_R_Weight = _ear_R_RotConstraint.weight;
             _earFlap_R_Weight = Mathf.Clamp(_headTurnSpeed / 10, 0f, 1f);
-            _ear_R_RotConstraint.weight = _earFlap_R_Weight;
-
+            if (_headTilt > 0f)                                                        // if head Tilts to the right, the constraint should decrease its influence
+            {
+                _ear_R_RotConstraint.weight = _earFlap_R_Weight - Mathf.Abs(_headTilt);
+            }
+            else 
+            {
+                _ear_R_RotConstraint.weight = _earFlap_R_Weight;
+            }
             _earFlap_L_Time = Time.deltaTime * (_headTurnSpeed);                                        // *** TEST - want to piggyback a secondary motion off this motion
             float earFlap_L_Value = Mathf.Cos(_headTurnTime);// * (_headTurnSpeed / _earFlapSpeed);     //this is trying to use amplitude to control the amount
             float earFlap_L_Range = _earFlap_L_Max - _earFlap_L_Min;

@@ -33,6 +33,16 @@ public class CharacterBehaviour : MonoBehaviour
     private float _headNodTime;
     [HideInInspector] public bool _headNodPlusTurn;
 
+    [HideInInspector] public float _headTiltMax;
+    [HideInInspector] public float _headTiltMin;
+    [HideInInspector] public float _headTiltSpeed;
+    private float _headTiltTime;
+
+    [HideInInspector] public float _jawOpenMax;
+    [HideInInspector] public float _jawOpenMin;
+    [HideInInspector] public float _jawOpenSpeed;
+    private float _jawOpenTime;
+
     [HideInInspector] public float _lookUDMax;
     [HideInInspector] public float _lookUDMin;
     [HideInInspector] public float _lookUDSpeed;
@@ -170,10 +180,10 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _earFlap_L_Weight;
     [HideInInspector] public float _earFlap_R_Weight;
     private MultiRotationConstraint _ear_L_RotConstraint;
-    [SerializeField] public GameObject Ear_L_ConstrainedObject;
+    [SerializeField] public GameObject Ear_L_ConstrainedObject;//remember to assign the object in inspector
 
     private MultiRotationConstraint _ear_R_RotConstraint;
-    [SerializeField] public GameObject Ear_R_ConstrainedObject;
+    [SerializeField] public GameObject Ear_R_ConstrainedObject;//remember to assign the object in inspector
 
     private void OnEnable()
     {
@@ -200,16 +210,14 @@ public class CharacterBehaviour : MonoBehaviour
     }
     void CheckParams()
     {
-        _ear_L_RotConstraint = Ear_L_ConstrainedObject.GetComponent<MultiRotationConstraint>();  //remember to assign the object in inspector
-        _ear_R_RotConstraint = Ear_R_ConstrainedObject.GetComponent<MultiRotationConstraint>();  //remember to assign the object in inspector
+        _ear_L_RotConstraint = Ear_L_ConstrainedObject.GetComponent<MultiRotationConstraint>();
+        _ear_R_RotConstraint = Ear_R_ConstrainedObject.GetComponent<MultiRotationConstraint>();
         _earFlap_L_Weight = express.earFlap_L_Weight;
         _earFlap_R_Weight = express.earFlap_R_Weight;
         //Head Movements (Expression Control)
         _headTurn = express.headTurn;
         _headNod = express.headNod;
         _headTilt = express.headTilt;
-        _headLateralX = express.headLateralX;
-        _headLateralY = express.headLateralY;
 
         //Mood (Idle) or Emote (Emotional expression or Reaction)
         _moodOrEmote = express.moodOrEmote;
@@ -225,6 +233,16 @@ public class CharacterBehaviour : MonoBehaviour
         _headNodSpeed = express.headNodSpeed;
         _headNodTime = express.headNodTime = 0f;
         _headNodPlusTurn = express.headNodPlusTurn;
+
+        _headTiltMax = express.headTiltMax;
+        _headTiltMin = express.headTiltMin;
+        _headTiltSpeed = express.headTiltSpeed;
+        _headTiltTime = express.headTiltTime = 0f;
+
+        _jawOpenMax = express.jawOpenMax;
+        _jawOpenMin = express.jawOpenMin;
+        _jawOpenSpeed = express.jawOpenSpeed;
+        _jawOpenTime = express.jawOpenTime = 0f;
 
         _lookUDMax = express.lookUDMax;
         _lookUDMin = express.lookUDMin;
@@ -325,8 +343,6 @@ public class CharacterBehaviour : MonoBehaviour
         _headTurn = express.headTurn;
         _headNod = express.headNod;
         _headTilt = express.headTilt;
-        _headLateralX = express.headLateralX;
-        _headLateralY = express.headLateralY;
 
         //Mood (Idle) or Emote (Emotional expression or Reaction)
         _moodOrEmote = express.moodOrEmote;
@@ -342,6 +358,16 @@ public class CharacterBehaviour : MonoBehaviour
         _headNodSpeed = express.headNodSpeed;
         _headNodTime = express.headNodTime;
         _headNodPlusTurn = express.headNodPlusTurn;
+
+        _headTiltMax = express.headTiltMax;
+        _headTiltMin = express.headTiltMin;
+        _headTiltSpeed = express.headTiltSpeed;
+        _headTiltTime = express.headTiltTime;
+
+        _jawOpenMax = express.jawOpenMax;
+        _jawOpenMin = express.jawOpenMin;
+        _jawOpenSpeed = express.jawOpenSpeed;
+        _jawOpenTime = express.jawOpenTime;
 
         _lookUDMax = express.lookUDMax;
         _lookUDMin = express.lookUDMin;
@@ -500,6 +526,24 @@ public class CharacterBehaviour : MonoBehaviour
             }
         }
 
+        if (_headTiltSpeed != 0f)
+        {
+            _headTiltTime += Time.deltaTime * _headTiltSpeed;
+            float headTiltValue = Mathf.Sin(_headTiltTime);// * _headTurnAmplitude;
+            float headTiltRange = _headTiltMax - _headTiltMin;
+            float headTiltFinalValue = (headTiltValue + 1f) / 2f * headTiltRange + _headTiltMin;
+            _headTilt = headTiltFinalValue;
+        }
+
+        if (_jawOpenSpeed != 0f)
+        {
+            _jawOpenTime += Time.deltaTime * _jawOpenSpeed;
+            float jawOpenValue = Mathf.Sin(_jawOpenTime);// * _headTurnAmplitude;
+            float jawOpenRange = _jawOpenMax - _jawOpenMin;
+            float jawOpenFinalValue = (jawOpenValue + 1f) / 2f * jawOpenRange + _jawOpenMin;
+            _jawOpen = jawOpenFinalValue;
+        }
+
         if (_lookLRSpeed != 0f) 
         {
             _lookLRTime += Time.deltaTime * _lookLRSpeed;
@@ -508,6 +552,7 @@ public class CharacterBehaviour : MonoBehaviour
             float lookLRFinalValue = (lookLRValue + 1f) / 2f * lookLRRange + _lookLRMin;
             _lookLR = lookLRFinalValue;
         }
+        
         if (_lookUDSpeed != 0f)
         {
             _lookUDTime += Time.deltaTime * _lookUDSpeed;
@@ -876,8 +921,6 @@ public class CharacterBehaviour : MonoBehaviour
         express.headTurn = _headTurn;
         express.headNod = _headNod;
         express.headTilt = _headTilt;
-        express.headLateralX = _headLateralX;
-        express.headLateralY = _headLateralY;
 
         express.moodOrEmote = _moodOrEmote;
 
@@ -891,6 +934,16 @@ public class CharacterBehaviour : MonoBehaviour
         express.headNodMin = _headNodMin;
         express.headNodSpeed = _headNodSpeed;
         express.headNodTime = _headNodTime;
+
+        express.headTiltMax = _headTiltMax;
+        express.headTiltMin = _headTiltMin;
+        express.headTiltSpeed = _headTiltSpeed;
+        express.headTiltTime = _headTiltTime;
+
+        express.jawOpenMax = _jawOpenMax;
+        express.jawOpenMin = _jawOpenMin;
+        express.jawOpenSpeed = _jawOpenSpeed;
+        express.jawOpenTime = _jawOpenTime;
 
         express.lookUDMax = _lookUDMax;
         express.lookUDMin = _lookUDMin;
@@ -985,8 +1038,6 @@ public class CharacterBehaviour : MonoBehaviour
         animator.SetFloat("HeadTurn", _headTurn);
         animator.SetFloat("HeadNod", _headNod);
         animator.SetFloat("HeadTilt", _headTilt);
-        animator.SetFloat("HeadLateralX", _headLateralX);
-        animator.SetFloat("HeadLateralY", _headLateralY);
         animator.SetFloat("MoodOrEmote", _moodOrEmote);
         animator.SetFloat("LookLR", _lookLR);
         animator.SetFloat("LookUD", _lookUD);

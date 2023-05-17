@@ -18,12 +18,7 @@ public class ExpressionControl : ScriptableObject
     [Range(0.0f, 1.0f)] public float moodOrEmote;
 
     // *** HEAD MOVEMENT ***
-
-    [Range(-1.0f, 1.0f)] public float headTilt;
-    [Range(-1.0f, 1.0f)] public float headLateralX;
-    [Range(-1.0f, 1.0f)] public float headLateralY;    
     
-    // *** MOVEMENT WAVES ***
     [Range(-1.0f, 1.0f)] public float headTurn;
     [Range(-1.0f, 1.0f)] public float headTurnMax;
     [Range(-1.0f, 1.0f)] public float headTurnMin;
@@ -36,6 +31,18 @@ public class ExpressionControl : ScriptableObject
     [Range(0.0f, 20.0f)] public float headNodSpeed;
     [HideInInspector] public float headNodTime = 0f;
     public bool headNodPlusTurn = false;
+
+    [Range(-1.0f, 1.0f)] public float headTilt;
+    [Range(-1.0f, 1.0f)] public float headTiltMax;
+    [Range(-1.0f, 1.0f)] public float headTiltMin;
+    [Range(0.0f, 20.0f)] public float headTiltSpeed;
+    [HideInInspector] public float headTiltTime = 0f;
+
+    [Range(0.0f, 1.0f)] public float jawOpen;
+    [Range(0.0f, 1.0f)] public float jawOpenMax;
+    [Range(0.0f, 1.0f)] public float jawOpenMin;
+    [Range(0.0f, 20.0f)] public float jawOpenSpeed;
+    [HideInInspector] public float jawOpenTime = 0f;
 
 
     [Range(-1.0f, 1.0f)] public float lookUD; 
@@ -102,7 +109,7 @@ public class ExpressionControl : ScriptableObject
 
     // *** FACIAL ARTICULATION ***
 
-    [Range(0.0f, 1.0f)] public float jawOpen;
+    
     [Range(0.0f, 1.0f)] public float squint;
     [Range(0.0f, 1.0f)] public float whaleEye;
     [Range(0.0f, 1.0f)] public float browLift;

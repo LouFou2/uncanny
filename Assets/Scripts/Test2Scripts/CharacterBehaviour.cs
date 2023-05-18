@@ -24,6 +24,7 @@ public class CharacterBehaviour : MonoBehaviour
     // Sine Wave variables
     [HideInInspector] public float _headTurnMax;
     [HideInInspector] public float _headTurnMin;
+    private float _headTurnTarget = 1f;
     [HideInInspector] public float _headTurnSpeed;
     private float _headTurnTime;
 
@@ -463,11 +464,16 @@ public class CharacterBehaviour : MonoBehaviour
     {
         if (_headTurnSpeed != 0f)
         {
-            _headTurnTime += Time.deltaTime * _headTurnSpeed;
-            float headTurnValue = Mathf.Sin(_headTurnTime);// * _headTurnAmplitude;
-            float headTurnRange = _headTurnMax - _headTurnMin;
-            float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
-            _headTurn = headTurnFinalValue;
+            if (_headTurn == _headTurnMin) { _headTurnTarget = _headTurnMax; }
+            if (_headTurn == _headTurnMax) { _headTurnTarget = _headTurnMin; }
+
+            _headTurn = Mathf.MoveTowards(_headTurn, _headTurnTarget, _headTurnSpeed * Time.deltaTime);
+
+            //_headTurnTime += Time.deltaTime * _headTurnSpeed;
+            //float headTurnValue = Mathf.Sin(_headTurnTime);// * _headTurnAmplitude;
+            //float headTurnRange = _headTurnMax - _headTurnMin;
+            //float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
+            //_headTurn = headTurnFinalValue;
 
             _earFlap_L_Weight = _ear_L_RotConstraint.weight;
             _earFlap_L_Weight = Mathf.Clamp(_headTurnSpeed / 10, 0f, 1f);

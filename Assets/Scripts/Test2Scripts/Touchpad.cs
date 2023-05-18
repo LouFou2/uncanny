@@ -1,0 +1,113 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class Touchpad : MonoBehaviour, IDragHandler, IPointerDownHandler
+{
+    private RectTransform touchpadRect; // Reference to the square panel's RectTransform
+    private RectTransform buttonRect; // Reference to the button's RectTransform
+
+    private bool isDragging = false; // Track if the button is being dragged
+
+    private float maxX; // Maximum X value of the touchpad
+    private float maxY; // Maximum Y value of the touchpad
+
+    private void Start()
+    {
+        touchpadRect = GetComponent<RectTransform>();
+        buttonRect = transform.GetChild(0).GetComponent<RectTransform>();
+
+        maxX = touchpadRect.rect.width / 2f;
+        maxY = touchpadRect.rect.height / 2f;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        // Check if the pointer is clicking on the button
+        if (RectTransformUtility.RectangleContainsScreenPoint(buttonRect, eventData.position))
+        {
+            isDragging = true;
+            UpdateButtonPosition(eventData.position);
+        }
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (isDragging)
+        {
+            UpdateButtonPosition(eventData.position);
+        }
+    }
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        isDragging = false;
+    }
+
+    private void UpdateButtonPosition(Vector2 position)
+    {
+        Vector2 localPosition = ClampToTouchpadBounds(position);
+
+        buttonRect.anchoredPosition = localPosition;
+
+        // Map the button's position to range between -1 and 1 for X and Y
+        float mappedX = localPosition.x / maxX;
+        float mappedY = localPosition.y / maxY;
+
+        // Return the X and Y values
+        float xValue = Mathf.Clamp(mappedX, -1f, 1f);
+        float yValue = Mathf.Clamp(mappedY, -1f, 1f);
+
+        // Use xValue and yValue for your desired functionality
+        Debug.Log("X: " + xValue + ", Y: " + yValue);
+    }
+
+    private Vector2 ClampToTouchpadBounds(Vector2 position)
+    {
+        Vector2 touchpadCenter = touchpadRect.rect.center;
+        Vector2 localPosition = position - touchpadCenter;
+
+        localPosition.x = Mathf.Clamp(localPosition.x, -maxX, maxX);
+        localPosition.y = Mathf.Clamp(localPosition.y, -maxY, maxY);
+
+        return localPosition;
+    }
+    /*
+    private void Start()
+    {
+        touchpadRect = GetComponent<RectTransform>();
+        buttonRect = transform.GetChild(0).GetComponent<RectTransform>(); // Assuming the button is the first child of the touchpad
+
+        maxX = touchpadRect.sizeDelta.x / 2f;
+        maxY = touchpadRect.sizeDelta.y / 2f;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        startPosition = touchpadRect.InverseTransformPoint(eventData.position); // eventData.position - touchpadRect.anchoredPosition;
+        currentPosition = startPosition;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        currentPosition = touchpadRect.InverseTransformPoint(eventData.position);//eventData.position - touchpadRect.anchoredPosition; // - new Vector2(buttonRect.position.x, buttonRect.position.y);
+
+
+        // Clamp the button's position within the touchpad's bounds
+        currentPosition.x = Mathf.Clamp(currentPosition.x, -maxX, maxX);
+        currentPosition.y = Mathf.Clamp(currentPosition.y, -maxY, maxY);
+
+        buttonRect.anchoredPosition = currentPosition;
+
+        // Map the button's position to range between -1 and 1 for X and Y
+        float mappedX = currentPosition.x / maxX;
+        float mappedY = currentPosition.y / maxY;
+
+        // Return the X and Y values
+        float xValue = Mathf.Clamp(mappedX, -1f, 1f);
+        float yValue = Mathf.Clamp(mappedY, -1f, 1f);
+
+        // Use xValue and yValue for your desired functionality
+        Debug.Log("X: " + xValue + ", Y: " + yValue);
+    }
+    */
+}
+

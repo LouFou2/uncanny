@@ -22,10 +22,13 @@ public class CharacterBehaviour : MonoBehaviour
     public Animator animator;
 
     // Sine Wave variables
+    [HideInInspector] public AnimationCurve _testAnimCurve;
+    [HideInInspector] public bool _headIsTurning;
     [HideInInspector] public float _headTurnMax;
     [HideInInspector] public float _headTurnMin;
     private float _headTurnTarget = 1f;
     [HideInInspector] public float _headTurnSpeed;
+    [HideInInspector] public AnimationCurve _headTurnCurve;
     private float _headTurnTime;
 
     [HideInInspector] public float _headNodMax;
@@ -68,10 +71,12 @@ public class CharacterBehaviour : MonoBehaviour
 
     [HideInInspector] public float _earFlap_L_Max;
     [HideInInspector] public float _earFlap_L_Min;
+    [HideInInspector] public float _earFlap_L_Target;
     private float _earFlap_L_Time;
 
     [HideInInspector] public float _earFlap_R_Max;
     [HideInInspector] public float _earFlap_R_Min;
+    [HideInInspector] public float _earFlap_R_Target;
     private float _earFlap_R_Time;
 
     [HideInInspector] public float _topLidSpeed;
@@ -211,6 +216,7 @@ public class CharacterBehaviour : MonoBehaviour
     }
     void CheckParams()
     {
+        _testAnimCurve = express.testAnimCurve;
         _ear_L_RotConstraint = Ear_L_ConstrainedObject.GetComponent<MultiRotationConstraint>();
         _ear_R_RotConstraint = Ear_R_ConstrainedObject.GetComponent<MultiRotationConstraint>();
         _earFlap_L_Weight = express.earFlap_L_Weight;
@@ -224,10 +230,12 @@ public class CharacterBehaviour : MonoBehaviour
         _moodOrEmote = express.moodOrEmote;
 
         //Sine Wave variables (Expression Control)
+        _headIsTurning = express.headIsTurning;
         _headTurnMax = express.headTurnMax;
         _headTurnMin = express.headTurnMin;
         _headTurnSpeed = express.headTurnSpeed;
-        _headTurnTime = express.headTurnTime = 0f;
+        //_headTurnTime = express.headTurnTime = 0f;
+        _headTurnCurve = express.headTurnCurve;
 
         _headNodMax = express.headNodMax;
         _headNodMin = express.headNodMin;
@@ -342,6 +350,7 @@ public class CharacterBehaviour : MonoBehaviour
         _earFlap_R_Weight = express.earFlap_R_Weight;
         //Head Movements (Expression Control)
         _headTurn = express.headTurn;
+        //_headTurnCurve = express.headTurnCurve;
         _headNod = express.headNod;
         _headTilt = express.headTilt;
 
@@ -349,10 +358,11 @@ public class CharacterBehaviour : MonoBehaviour
         _moodOrEmote = express.moodOrEmote;
 
         //Sine Wave variables (Expression Control)
+        _headIsTurning = express.headIsTurning;
         _headTurnMax = express.headTurnMax;
         _headTurnMin = express.headTurnMin;
         _headTurnSpeed = express.headTurnSpeed;
-        _headTurnTime = express.headTurnTime;
+        //_headTurnTime = express.headTurnTime;
 
         _headNodMax = express.headNodMax;
         _headNodMin = express.headNodMin;
@@ -462,51 +472,97 @@ public class CharacterBehaviour : MonoBehaviour
     }
     void SineWaveMovements() //***TODO - Add a way to reset time to zero for each sine wave (resets to zero in start method.)
     {
-        if (_headTurnSpeed != 0f)
+        if (_headTurnSpeed != 0f && _headIsTurning == true)
         {
-            if (_headTurn == _headTurnMin) { _headTurnTarget = _headTurnMax; }
-            if (_headTurn == _headTurnMax) { _headTurnTarget = _headTurnMin; }
+            if (_headTurn <= _headTurnMin + 0.01f) { _headTurnTarget = _headTurnMax; }
+            if (_headTurn >= _headTurnMax - 0.01f) { _headTurnTarget = _headTurnMin; }
 
-            _headTurn = Mathf.MoveTowards(_headTurn, _headTurnTarget, _headTurnSpeed * Time.deltaTime);
+            _headTurnTime = _headTurnSpeed * Time.deltaTime;
+            float headTurnEvaluation = _headTurnCurve.Evaluate(_headTurnTime);                      
+            _headTurn = Mathf.Lerp(_headTurn, _headTurnTarget, headTurnEvaluation);
 
-            //_headTurnTime += Time.deltaTime * _headTurnSpeed;
+            //_headTurnTime += Time.deltaTime * _headTurnSpeed;                                     // *** This is the sine wave code
             //float headTurnValue = Mathf.Sin(_headTurnTime);// * _headTurnAmplitude;
             //float headTurnRange = _headTurnMax - _headTurnMin;
             //float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
             //_headTurn = headTurnFinalValue;
 
-            _earFlap_L_Weight = _ear_L_RotConstraint.weight;
-            _earFlap_L_Weight = Mathf.Clamp(_headTurnSpeed / 10, 0f, 1f);
-            if (_headTilt < -0f)                                                        // if head Tilts to the left, the constraint should decrease its influence
-            {
-                _ear_L_RotConstraint.weight = _earFlap_L_Weight - Mathf.Abs(_headTilt); 
-            }
-            else 
-            {
-                _ear_L_RotConstraint.weight = _earFlap_L_Weight;
-            }
+            //_earFlap_L_Time = Time.deltaTime * (_headTurnSpeed);                                        // *** this code is for using sine waves
+            //float earFlap_L_Value = Mathf.Cos(_headTurnTime);// * (_headTurnSpeed / _earFlapSpeed);     //this is trying to use amplitude to control the amount
+            //float earFlap_L_Range = _earFlap_L_Max - _earFlap_L_Min;
+            //float earFlap_L_FinalValue = (earFlap_L_Value + 1f) / 2f * earFlap_L_Range + _earFlap_L_Min;
+            //_earFlap_L = earFlap_L_FinalValue;
 
-            _earFlap_R_Weight = _ear_R_RotConstraint.weight;
-            _earFlap_R_Weight = Mathf.Clamp(_headTurnSpeed / 10, 0f, 1f);
-            if (_headTilt > 0f)                                                        // if head Tilts to the right, the constraint should decrease its influence
-            {
-                _ear_R_RotConstraint.weight = _earFlap_R_Weight - Mathf.Abs(_headTilt);
-            }
-            else 
-            {
-                _ear_R_RotConstraint.weight = _earFlap_R_Weight;
-            }
-            _earFlap_L_Time = Time.deltaTime * (_headTurnSpeed);                                        // *** TEST - want to piggyback a secondary motion off this motion
-            float earFlap_L_Value = Mathf.Cos(_headTurnTime);// * (_headTurnSpeed / _earFlapSpeed);     //this is trying to use amplitude to control the amount
-            float earFlap_L_Range = _earFlap_L_Max - _earFlap_L_Min;
-            float earFlap_L_FinalValue = (earFlap_L_Value + 1f) / 2f * earFlap_L_Range + _earFlap_L_Min;
-            _earFlap_L = earFlap_L_FinalValue;
+            //_earFlap_R_Time = Time.deltaTime * (_headTurnSpeed);
+            //float earFlap_R_Value = Mathf.Cos(_headTurnTime);// * (_headTurnSpeed / _earFlapSpeed);    
+            //float earFlap_R_Range = _earFlap_R_Min - _earFlap_R_Max;
+            //float earFlap_R_FinalValue = (earFlap_R_Value + 1f) / 2f * earFlap_R_Range + _earFlap_R_Max;
+            //_earFlap_R = earFlap_R_FinalValue;
 
-            _earFlap_R_Time = Time.deltaTime * (_headTurnSpeed);
-            float earFlap_R_Value = Mathf.Cos(_headTurnTime);// * (_headTurnSpeed / _earFlapSpeed);    
-            float earFlap_R_Range = _earFlap_R_Min - _earFlap_R_Max;
-            float earFlap_R_FinalValue = (earFlap_R_Value + 1f) / 2f * earFlap_R_Range + _earFlap_R_Max;
-            _earFlap_R = earFlap_R_FinalValue;
+        }
+        // *** SECONDARY MOTION - Ear Flap - piggyback off the head turn / tilt
+        
+        _earFlap_L_Weight = _ear_L_RotConstraint.weight;                            // First make sure the constraint weight will increase/decrease appropriately
+        _earFlap_L_Weight = Mathf.Clamp(_headTurnSpeed / 10, 0f, 1f);               // The constraint in relation to head turn speed 
+        
+        if (_headTilt < -0.01f && _headIsTurning)                                   // if head Tilts to the left, the constraint should decrease its influence
+        {
+            _ear_L_RotConstraint.weight = _earFlap_L_Weight - Mathf.Abs(_headTilt);
+        }
+        else if (_headIsTurning)
+        {
+            _ear_L_RotConstraint.weight = _earFlap_L_Weight;
+        }
+
+        _earFlap_R_Weight = _ear_R_RotConstraint.weight;
+        _earFlap_R_Weight = Mathf.Clamp(_headTurnSpeed / 10, 0f, 1f);
+
+        if (_headTilt > 0.01f && _headIsTurning)
+        {
+            _ear_R_RotConstraint.weight = _earFlap_R_Weight - Mathf.Abs(_headTilt);
+        }
+        else if (_headIsTurning)
+        {
+            _ear_R_RotConstraint.weight = _earFlap_R_Weight;
+        }
+
+        _earFlapSpeed = _headTurnSpeed * 0.2f;              // Here we use the headTurn to control the earFlap variables. 20% worked in this case, could change for other cases
+        if (_headTurn < (_headTurnMax + _headTurnMin) / 2 && _headIsTurning)  // Threshold for when the lerp should switch targets. Halfway point of the head turn range.
+        {
+            _earFlap_L_Target = _earFlap_L_Max;
+            _earFlap_R_Target = _earFlap_R_Min;
+
+        }
+        if (_headTurn > (_headTurnMax + _headTurnMin) / 2 && _headIsTurning)
+        {
+            _earFlap_L_Target = _earFlap_L_Min;
+            _earFlap_R_Target = _earFlap_R_Max;
+        }
+
+        if (_headIsTurning) 
+        {
+            _earFlap_L = Mathf.Lerp(_earFlap_L, _earFlap_L_Target, _earFlapSpeed * Time.deltaTime);
+            _earFlap_R = Mathf.Lerp(_earFlap_R, _earFlap_R_Target, _earFlapSpeed * Time.deltaTime);
+        }
+        if (!_headIsTurning && _earFlap_L < (Mathf.Abs(_earFlap_L_Target) - 0.3f))
+        {
+            _earFlap_L = Mathf.Lerp(_earFlap_L, _earFlap_L_Target, _earFlapSpeed * Time.deltaTime);
+        }
+        if (!_headIsTurning && _earFlap_R < (Mathf.Abs(_earFlap_R_Target) - 0.3f))
+        {
+            _earFlap_R = Mathf.Lerp(_earFlap_R, _earFlap_R_Target, _earFlapSpeed * Time.deltaTime);
+        }
+        if (!_headIsTurning && _earFlap_L >= (Mathf.Abs(_earFlap_L_Target) - 0.3f))
+        {
+            _earFlap_L_Target = (_earFlap_L_Max + _earFlap_L_Min) / 2;
+            _earFlap_L = Mathf.Lerp(_earFlap_L, _earFlap_L_Target, _testAnimCurve.Evaluate(_earFlapSpeed * Time.deltaTime));
+            _ear_L_RotConstraint.weight = Mathf.Lerp(_ear_L_RotConstraint.weight, 0f, _testAnimCurve.Evaluate(_earFlapSpeed * Time.deltaTime));
+        }
+        if (!_headIsTurning && _earFlap_R >= (Mathf.Abs(_earFlap_R_Target) - 0.3f))
+        {
+            _earFlap_R_Target = (_earFlap_R_Max + _earFlap_R_Min) / 2;
+            _earFlap_R = Mathf.Lerp(_earFlap_R, _earFlap_R_Target, _testAnimCurve.Evaluate(_earFlapSpeed * Time.deltaTime));
+            _ear_R_RotConstraint.weight = Mathf.Lerp(_ear_R_RotConstraint.weight, 0f, _testAnimCurve.Evaluate(_earFlapSpeed * Time.deltaTime));
         }
 
         if (_headNodSpeed != 0f)
@@ -931,10 +987,12 @@ public class CharacterBehaviour : MonoBehaviour
         express.moodOrEmote = _moodOrEmote;
 
         // *** Sine Waves ***
+        express.headIsTurning = _headIsTurning;
         express.headTurnMax = _headTurnMax;
         express.headTurnMin = _headTurnMin;
         express.headTurnSpeed = _headTurnSpeed;
-        express.headTurnTime = _headTurnTime;
+        //express.headTurnTime = _headTurnTime;
+       // express.headTurnCurve = _headTurnCurve;
 
         express.headNodMax = _headNodMax;
         express.headNodMin = _headNodMin;

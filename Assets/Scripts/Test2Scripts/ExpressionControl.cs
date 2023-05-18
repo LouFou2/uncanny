@@ -18,12 +18,15 @@ public class ExpressionControl : ScriptableObject
     [Range(0.0f, 1.0f)] public float moodOrEmote;
 
     // *** HEAD MOVEMENT ***
-    
+
+    public AnimationCurve testAnimCurve;
+    public bool headIsTurning = false;
     [Range(-1.0f, 1.0f)] public float headTurn;
     [Range(-1.0f, 1.0f)] public float headTurnMax;
     [Range(-1.0f, 1.0f)] public float headTurnMin;
     [Range(0.0f, 20.0f)] public float headTurnSpeed;
     [HideInInspector] public float headTurnTime = 0f;
+    public AnimationCurve headTurnCurve;
 
     [Range(-1.0f, 1.0f)] public float headNod;
     [Range(-1.0f, 1.0f)] public float headNodMax;

@@ -212,7 +212,7 @@ public class CharacterBehaviour : MonoBehaviour
     {
         //ControlMood();
         UserInputs();
-        SineWaveMovements();
+        AutoMovements();
         UpdateParams(); //updates ExpressionControl + MoodControl parameters (main data container for all expressions)
         Animate();
     }
@@ -485,7 +485,7 @@ public class CharacterBehaviour : MonoBehaviour
         }
         else { return; }
     }
-    void SineWaveMovements() //***TODO - Add a way to reset time to zero for each sine wave (resets to zero in start method.)
+    void AutoMovements() //***TODO - Add a way to reset time to zero for each sine wave (resets to zero in start method.)
     {
         if (_headTurnSpeed != 0f && _headIsTurning == true)
         {

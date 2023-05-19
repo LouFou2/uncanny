@@ -20,7 +20,7 @@ public class CharacterBehaviour : MonoBehaviour
     public Emote[] Emotes;              // Scriptable Objects that adjusts expression variables to create different expressions - Animated using Tweening
     public Emote currentEmote;
     public Animator animator;
-    public Touchpad touchpad;
+    public MoodPad moodPad;
 
     // Sine Wave variables
     [HideInInspector] public AnimationCurve _testAnimCurve;
@@ -218,8 +218,8 @@ public class CharacterBehaviour : MonoBehaviour
     }
     void CheckParams()
     {
-        _pleasure = touchpad.xValue;
-        _arousal = touchpad.yValue;
+        _pleasure = moodPad.xValue;
+        _arousal = moodPad.yValue;
 
         _testAnimCurve = express.testAnimCurve;
         _ear_L_RotConstraint = Ear_L_ConstrainedObject.GetComponent<MultiRotationConstraint>();
@@ -478,10 +478,10 @@ public class CharacterBehaviour : MonoBehaviour
     
     void UserInputs() 
     {
-        if (touchpad.touchPadActive == true) 
+        if (moodPad.moodPadActive == true) 
         {
-            _pleasure = touchpad.xValue;
-            _arousal = touchpad.yValue;
+            _pleasure = moodPad.xValue;
+            _arousal = moodPad.yValue;
         }
         else { return; }
     }

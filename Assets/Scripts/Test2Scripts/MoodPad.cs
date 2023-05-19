@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Touchpad : MonoBehaviour, IDragHandler, IPointerDownHandler
+public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler
 {
     private RectTransform touchpadRect; // Reference to the square panel's RectTransform
     private RectTransform buttonRect; // Reference to the button's RectTransform
@@ -13,7 +13,7 @@ public class Touchpad : MonoBehaviour, IDragHandler, IPointerDownHandler
 
     public float xValue;
     public float yValue;
-    public bool touchPadActive = false;
+    public bool moodPadActive = false;
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class Touchpad : MonoBehaviour, IDragHandler, IPointerDownHandler
         {
             isDragging = true;
             UpdateButtonPosition(eventData.position);
-            touchPadActive = true;
+            moodPadActive = true;
         }
     }
 
@@ -47,7 +47,7 @@ public class Touchpad : MonoBehaviour, IDragHandler, IPointerDownHandler
     public void OnPointerUp(PointerEventData eventData)
     {
         isDragging = false;
-        touchPadActive = false;
+        moodPadActive = false;
     }
 
     private void UpdateButtonPosition(Vector2 position)

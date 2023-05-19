@@ -1807,7 +1807,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8eb5b9cde2f8b14458ef1ef0aa888035, type: 2}
   currentEmote: {fileID: 0}
   animator: {fileID: 268113561}
-  touchpad: {fileID: 1639721348}
+  moodPad: {fileID: 1639721348}
   _testAnimCurve:
     serializedVersion: 2
     m_Curve: []
@@ -4405,7 +4405,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 45d81c8f50c4ce64c8063d9f4f72f999, type: 2}
     - target: {fileID: 6054129899495295132, guid: 835a7f42fe0591048971ba0ea3f9e7cb, type: 3}
       propertyPath: m_Name
-      value: Touchpad
+      value: MoodPad
       objectReference: {fileID: 0}
     - target: {fileID: 6054129899495295133, guid: 835a7f42fe0591048971ba0ea3f9e7cb, type: 3}
       propertyPath: m_Pivot.x

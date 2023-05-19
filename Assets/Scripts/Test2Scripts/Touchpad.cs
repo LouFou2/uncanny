@@ -11,6 +11,10 @@ public class Touchpad : MonoBehaviour, IDragHandler, IPointerDownHandler
     private float maxX; // Maximum X value of the touchpad
     private float maxY; // Maximum Y value of the touchpad
 
+    public float xValue;
+    public float yValue;
+    public bool touchPadActive = false;
+
     private void Start()
     {
         touchpadRect = GetComponent<RectTransform>();
@@ -29,6 +33,7 @@ public class Touchpad : MonoBehaviour, IDragHandler, IPointerDownHandler
         {
             isDragging = true;
             UpdateButtonPosition(eventData.position);
+            touchPadActive = true;
         }
     }
 
@@ -42,6 +47,7 @@ public class Touchpad : MonoBehaviour, IDragHandler, IPointerDownHandler
     public void OnPointerUp(PointerEventData eventData)
     {
         isDragging = false;
+        touchPadActive = false;
     }
 
     private void UpdateButtonPosition(Vector2 position)
@@ -69,11 +75,12 @@ public class Touchpad : MonoBehaviour, IDragHandler, IPointerDownHandler
         //float mappedY = localPosition.y / maxY;
 
         // Return the X and Y values
-        float xValue = Mathf.Clamp(mappedX, -1f, 1f);
-        float yValue = Mathf.Clamp(mappedY, -1f, 1f);
+        xValue = Mathf.Clamp(mappedX, -1f, 1f);
+        yValue = Mathf.Clamp(mappedY, -1f, 1f);
 
         // Use xValue and yValue for your desired functionality
         Debug.Log("X: " + xValue + ", Y: " + yValue);
+        
     }
 
     private Vector2 ClampToTouchpadBounds(Vector2 position)

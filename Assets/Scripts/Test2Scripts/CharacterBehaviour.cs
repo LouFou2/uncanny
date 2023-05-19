@@ -20,6 +20,7 @@ public class CharacterBehaviour : MonoBehaviour
     public Emote[] Emotes;              // Scriptable Objects that adjusts expression variables to create different expressions - Animated using Tweening
     public Emote currentEmote;
     public Animator animator;
+    public Touchpad touchpad;
 
     // Sine Wave variables
     [HideInInspector] public AnimationCurve _testAnimCurve;
@@ -210,12 +211,16 @@ public class CharacterBehaviour : MonoBehaviour
     void Update()
     {
         //ControlMood();
+        UserInputs();
         SineWaveMovements();
         UpdateParams(); //updates ExpressionControl + MoodControl parameters (main data container for all expressions)
         Animate();
     }
     void CheckParams()
     {
+        _pleasure = touchpad.xValue;
+        _arousal = touchpad.yValue;
+
         _testAnimCurve = express.testAnimCurve;
         _ear_L_RotConstraint = Ear_L_ConstrainedObject.GetComponent<MultiRotationConstraint>();
         _ear_R_RotConstraint = Ear_R_ConstrainedObject.GetComponent<MultiRotationConstraint>();
@@ -330,8 +335,8 @@ public class CharacterBehaviour : MonoBehaviour
         _tongueUpDown = express.tongueUpDown;
 
         //Mood Control parameters (Expression Control)
-        _pleasure = express.pleasure;
-        _arousal = express.arousal;
+        //_pleasure = express.pleasure;
+        //_arousal = express.arousal;
         _subDom = express.subDom;
 
         //MoodControl
@@ -457,8 +462,8 @@ public class CharacterBehaviour : MonoBehaviour
         _tongueUpDown = express.tongueUpDown;
 
         //Mood Control parameters (Expression Control)
-        _pleasure = express.pleasure;
-        _arousal = express.arousal;
+        //_pleasure = express.pleasure;
+        //_arousal = express.arousal;
         _subDom = express.subDom;
 
         //MoodControl
@@ -469,6 +474,16 @@ public class CharacterBehaviour : MonoBehaviour
         _moodMouthMoves = mood.moodMouthMoves;
         _moodHeadMoves = mood.moodHeadMoves;
         _moodEqualiseSpeed = mood.moodEqualiseSpeed;
+    }
+    
+    void UserInputs() 
+    {
+        if (touchpad.touchPadActive == true) 
+        {
+            _pleasure = touchpad.xValue;
+            _arousal = touchpad.yValue;
+        }
+        else { return; }
     }
     void SineWaveMovements() //***TODO - Add a way to reset time to zero for each sine wave (resets to zero in start method.)
     {

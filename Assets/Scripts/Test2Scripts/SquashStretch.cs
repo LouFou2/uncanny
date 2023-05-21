@@ -23,8 +23,7 @@ public class SquashStretch : MonoBehaviour
         Vector3 distance = shnozSpringTarget.position - shnozBaseTarget.position;
         float xDistance = distance.x;
         float yDistance = distance.y;
-        float zDistance = distance.z;
-        Debug.Log(xDistance);
+        float zDistance = distance.z;        
 
         // Update the shape key values based on the distance
         for (int i = 0; i < shapeKeyNames.Length; i++)

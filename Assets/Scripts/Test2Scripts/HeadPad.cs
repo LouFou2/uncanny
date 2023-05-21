@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler
+public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler
 {
     private RectTransform touchpadRect; // Reference to the square panel's RectTransform
     private RectTransform buttonRect; // Reference to the button's RectTransform
@@ -13,7 +13,7 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler
 
     public float xValue;
     public float yValue;
-    public bool moodPadActive = false;
+    public bool headPadActive = false;
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler
 
         //maxX = (touchpadRect.rect.width - (buttonRect.rect.width / 2)) / 2f;
         //maxY = (touchpadRect.rect.height - (buttonRect.rect.height / 2)) / 2f;
-        maxX = touchpadRect.rect.width / 2f; //<-previously
+        maxX = touchpadRect.rect.width / 2f;
         maxY = touchpadRect.rect.height / 2f;
     }
 
@@ -33,7 +33,7 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler
         {
             isDragging = true;
             UpdateButtonPosition(eventData.position);
-            moodPadActive = true;
+            headPadActive = true;
         }
     }
 
@@ -47,7 +47,7 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler
     public void OnPointerUp(PointerEventData eventData)
     {
         isDragging = false;
-        moodPadActive = false;
+        headPadActive = false;
     }
 
     private void UpdateButtonPosition(Vector2 position)
@@ -79,8 +79,8 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler
         yValue = Mathf.Clamp(mappedY, -1f, 1f);
 
         // Use xValue and yValue for your desired functionality
-        //Debug.Log("X: " + xValue + ", Y: " + yValue);
-        
+        Debug.Log("X: " + xValue + ", Y: " + yValue);
+
     }
 
     private Vector2 ClampToTouchpadBounds(Vector2 position)

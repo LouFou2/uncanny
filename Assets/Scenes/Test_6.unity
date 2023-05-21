@@ -1805,6 +1805,7 @@ GameObject:
   - component: {fileID: 268113561}
   - component: {fileID: 268113563}
   - component: {fileID: 268113564}
+  - component: {fileID: 268113565}
   m_Layer: 0
   m_Name: Rusty
   m_TagString: Untagged
@@ -1858,6 +1859,7 @@ Transform:
   - {fileID: 1779959646}
   - {fileID: 1292808915}
   - {fileID: 326265725}
+  - {fileID: 852775576}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2165,6 +2167,34 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
+  - m_Transform: {fileID: 852775576}
+    m_Style:
+      shape: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+      color: {r: 0.63904923, g: 1, b: 0.6273585, a: 0.5019608}
+      size: 0.1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    m_Visible: 1
+--- !u!114 &268113565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268113560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05fac3e32d66fb6448cb1c1428b99722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterMeshRenderer: {fileID: 1772347157}
+  shapeKeyNames:
+  - Shnoz_Stretch_L
+  - Shnoz_Stretch_R
+  - Shnoz_Stretch_U
+  - Shnoz_Stretch_D
+  shnozBaseTarget: {fileID: 852775576}
+  shnozSpringTarget: {fileID: 326265725}
 --- !u!4 &276819649 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6926193437330745757, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}
@@ -2237,7 +2267,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
+  m_Spring: 50
   m_Damper: 1
   m_MinDistance: 0
   m_MaxDistance: 0
@@ -2767,6 +2797,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4740251986915767947, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}
   m_PrefabInstance: {fileID: 58707108}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &852775575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 852775576}
+  - component: {fileID: 852775577}
+  m_Layer: 0
+  m_Name: SnozBaseTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &852775576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852775575}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.544097e-15, y: 1.4701622, z: 1.548}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 268113562}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1773428102 &852775577
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852775575}
+  m_Enabled: 1
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0, y: 1.4701622, z: 1.548}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets:
+  - {x: 0, y: 0.53720856, z: 1.2754606}
+  m_RotationOffsets:
+  - {x: -22.840239, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 1698287844}
+    weight: 1
 --- !u!4 &856582010 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2487196238314039796, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}
@@ -4690,6 +4778,11 @@ Transform:
 --- !u!4 &1772347156 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1625743499960067135, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}
+  m_PrefabInstance: {fileID: 58707108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1772347157 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4230672305955680476, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}
   m_PrefabInstance: {fileID: 58707108}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1779959645

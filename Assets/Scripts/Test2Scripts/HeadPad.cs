@@ -20,8 +20,6 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler
         touchpadRect = GetComponent<RectTransform>();
         buttonRect = transform.GetChild(0).GetComponent<RectTransform>();
 
-        //maxX = (touchpadRect.rect.width - (buttonRect.rect.width / 2)) / 2f;
-        //maxY = (touchpadRect.rect.height - (buttonRect.rect.height / 2)) / 2f;
         maxX = touchpadRect.rect.width / 2f;
         maxY = touchpadRect.rect.height / 2f;
     }

@@ -20,8 +20,9 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler
         touchpadRect = GetComponent<RectTransform>();
         buttonRect = transform.GetChild(0).GetComponent<RectTransform>();
 
-        maxX = touchpadRect.rect.width / 2f;
+        maxX = touchpadRect.rect.width / 2f; 
         maxY = touchpadRect.rect.height / 2f;
+        Debug.Log("maxX: " + maxX + ", maxY: " + maxY);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -50,6 +51,41 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler
 
     private void UpdateButtonPosition(Vector2 position)
     {
+        Vector2 touchpadCenter = touchpadRect.rect.center;
+        Debug.Log(touchpadRect.rect.center); 
+        Vector2 buttonOffset = new Vector2(buttonRect.rect.width / 2f, buttonRect.rect.height / 2f);
+        Vector2 localPosition = position - new Vector2(touchpadRect.position.x, touchpadRect.position.y);
+        Debug.Log(localPosition);
+
+
+        // Calculate the clamping bounds based on the touchpad's size and position
+        float minXClamp = touchpadCenter.x - maxX + buttonOffset.x;
+        float maxXClamp = touchpadCenter.x + maxX - buttonOffset.x;
+        float minYClamp = touchpadCenter.y - maxY + buttonOffset.y;
+        float maxYClamp = touchpadCenter.y + maxY - buttonOffset.y;
+
+        // Clamp the button's position within the touchpad's bounds
+        localPosition.x = Mathf.Clamp(localPosition.x, minXClamp, maxXClamp);
+        localPosition.y = Mathf.Clamp(localPosition.y, minYClamp, maxYClamp);
+
+        // Set the button's position
+        buttonRect.localPosition = localPosition;
+
+        // Map the button's position to range between -1 and 1 for X and Y
+        float mappedX = Mathf.InverseLerp(minXClamp, maxXClamp, localPosition.x);
+        float mappedY = Mathf.InverseLerp(minYClamp, maxYClamp, localPosition.y);
+
+        // Return the X and Y values
+        xValue = Mathf.Clamp(mappedX * 2f - 1f, -1f, 1f);
+        yValue = Mathf.Clamp(mappedY * 2f - 1f, -1f, 1f);
+
+        // Use xValue and yValue for your desired functionality
+        Debug.Log("X: " + xValue + ", Y: " + yValue);
+    }
+
+    /*
+    private void UpdateButtonPosition(Vector2 position)
+    {
         Vector2 localPosition = ClampToTouchpadBounds(position);
         Vector2 buttonOffset = new Vector2(buttonRect.rect.width / 2f, buttonRect.rect.height / 2f);
         buttonRect.anchoredPosition = localPosition - buttonOffset;
@@ -69,8 +105,6 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler
         // Map the button's position to range between -1 and 1 for X and Y
         float mappedX = clampedPosition.x / maxXClamp;
         float mappedY = clampedPosition.y / maxYClamp;
-        //float mappedX = localPosition.x / maxX; //<-previously
-        //float mappedY = localPosition.y / maxY;
 
         // Return the X and Y values
         xValue = Mathf.Clamp(mappedX, -1f, 1f);
@@ -91,4 +125,5 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler
 
         return localPosition;
     }
+    */
 }

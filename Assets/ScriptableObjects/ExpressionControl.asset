@@ -41,10 +41,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   headIsTurning: 0
-  headTurn: -0.592
+  headTurn: -0.20821857
   headTurnMax: 1
   headTurnMin: -1
-  headTurnSpeed: 11.05
+  headTurnSpeed: 5.5
   headTurnTime: 0.09432228
   headTurnCurve:
     serializedVersion: 2
@@ -70,7 +70,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  headNod: 0
+  headNod: -0.01095885
   headNodMax: 1
   headNodMin: -1
   headNodSpeed: 0
@@ -81,57 +81,57 @@ MonoBehaviour:
   headTiltMin: -1
   headTiltSpeed: 0
   headTiltTime: 0
-  jawOpen: 0.02811415
+  jawOpen: 0.14562313
   jawOpenMax: 0.149
   jawOpenMin: 0
   jawOpenSpeed: 0.45
-  jawOpenTime: 79.211914
+  jawOpenTime: 20.72259
   lookUD: 0
   lookUDMax: 0
   lookUDMin: 0
   lookUDSpeed: 0
   lookUDTime: 0
-  lookLR: -0.39488715
+  lookLR: -0.08633405
   lookLRMax: -0.4
   lookLRMin: 0
   lookLRSpeed: 0.9
-  lookLRTime: 158.42383
+  lookLRTime: 41.44518
   shoulderSpeed: 2.3
-  shoulder_L: 0.6968874
+  shoulder_L: 0.10876256
   shoulder_L_Max: 1
   shoulder_L_Min: 0
-  shoulder_L_Time: 404.86072
-  shoulder_R: 0.6968874
+  shoulder_L_Time: 105.91552
+  shoulder_R: 0.10876256
   shoulder_R_Max: 1
   shoulder_R_Min: 0
-  shoulder_R_Time: 404.86072
-  earFlapSpeed: 2.21
-  earFlap_L: 1.8e-44
+  shoulder_R_Time: 105.91552
+  earFlapSpeed: 1.1
+  earFlap_L: 0.39335838
   earFlap_L_Max: 1
   earFlap_L_Min: -1
   earFlap_L_Time: 0
-  earFlap_R: 1.8e-44
+  earFlap_R: -0.99999875
   earFlap_R_Max: 1
   earFlap_R_Min: -1
   earFlap_R_Time: 0
-  earFlap_L_Weight: 1
-  earFlap_R_Weight: 1
-  eyeLidTop_L: 0.12269024
-  eyeLidTop_R: 0.14150387
+  earFlap_L_Weight: 0.55
+  earFlap_R_Weight: 0.55
+  eyeLidTop_L: 0.11968569
+  eyeLidTop_R: 0.13857709
   topLid_L_Min: 0.115
   topLid_R_Min: 0.134
-  topLid_L_Time: 4.5039186
-  topLid_R_Time: 4.5039186
+  topLid_L_Time: 4.5524893
+  topLid_R_Time: 4.5524893
   topLidSpeed: 0.001
   blinkPauseDuration: 2
-  eyeLidBot_L: 0.8250933
-  eyeLidBot_R: 0.8268753
+  eyeLidBot_L: 0.8497089
+  eyeLidBot_R: 0.85168326
   lidsMeet_L: 0.725
   lidsMeet_R: 0.726
   botLid_L_Max: 0.853
   botLid_R_Max: 0.855
-  botLid_L_Time: 52.807903
-  botLid_R_Time: 52.807903
+  botLid_L_Time: 13.815082
+  botLid_R_Time: 13.815082
   botLidSpeed: 0.3
   squint: 0
   whaleEye: 0
@@ -146,6 +146,6 @@ MonoBehaviour:
   sneer: 0
   tongueStretch: 0
   tongueUpDown: 0
-  pleasure: 0
-  arousal: 0
+  pleasure: 0.010045878
+  arousal: -0.07762553
   subDom: 0

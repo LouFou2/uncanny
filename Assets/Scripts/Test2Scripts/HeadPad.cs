@@ -32,7 +32,8 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler
         {
             isDragging = true;
             UpdateButtonPosition(eventData.position);
-            headPadActive = true;
+            headPadActive = true; 
+            Debug.Log("Head Pad On");
         }
     }
 
@@ -47,16 +48,14 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler
     {
         isDragging = false;
         headPadActive = false;
+        Debug.Log("Head Pad Off");
     }
 
     private void UpdateButtonPosition(Vector2 position)
     {
-        Vector2 touchpadCenter = touchpadRect.rect.center;
-        Debug.Log(touchpadRect.rect.center); 
+        Vector2 touchpadCenter = touchpadRect.rect.center;       
         Vector2 buttonOffset = new Vector2(buttonRect.rect.width / 2f, buttonRect.rect.height / 2f);
         Vector2 localPosition = position - new Vector2(touchpadRect.position.x, touchpadRect.position.y);
-        Debug.Log(localPosition);
-
 
         // Calculate the clamping bounds based on the touchpad's size and position
         float minXClamp = touchpadCenter.x - maxX + buttonOffset.x;
@@ -80,7 +79,7 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler
         yValue = Mathf.Clamp(mappedY * 2f - 1f, -1f, 1f);
 
         // Use xValue and yValue for your desired functionality
-        Debug.Log("X: " + xValue + ", Y: " + yValue);
+        //Debug.Log("X: " + xValue + ", Y: " + yValue);
     }
 
     /*

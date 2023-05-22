@@ -21,6 +21,7 @@ public class CharacterBehaviour : MonoBehaviour
     public Emote currentEmote;
     public Animator animator;
     public MoodPad moodPad;
+    public HeadPad headPad;
 
     // Sine Wave variables
     [HideInInspector] public AnimationCurve _testAnimCurve;
@@ -483,11 +484,25 @@ public class CharacterBehaviour : MonoBehaviour
             _pleasure = moodPad.xValue;
             _arousal = moodPad.yValue;
         }
-        else { return; }
+        //else if (moodPad.moodPadActive ==  false)
+        //{
+        //    return; 
+        //}
+        
+        if (headPad.headPadActive == true)
+        {
+            _headIsTurning = false;
+            _headTurn = headPad.xValue;
+            _headNod = headPad.yValue;
+        }
+        else if (headPad.headPadActive == false)
+        {
+            _headIsTurning = true;
+        }
     }
     void AutoMovements() //***TODO - Add a way to reset time to zero for each sine wave (resets to zero in start method.)
     {
-        if (_headTurnSpeed != 0f && _headIsTurning == true)
+        if (_headTurnSpeed != 0f && _headIsTurning == true )
         {
             if (_headTurn <= _headTurnMin + 0.01f) { _headTurnTarget = _headTurnMax; }
             if (_headTurn >= _headTurnMax - 0.01f) { _headTurnTarget = _headTurnMin; }

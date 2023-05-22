@@ -1989,6 +1989,7 @@ MonoBehaviour:
   currentEmote: {fileID: 0}
   animator: {fileID: 268113561}
   moodPad: {fileID: 1639721348}
+  headPad: {fileID: 1790751314}
   _testAnimCurve:
     serializedVersion: 2
     m_Curve: []

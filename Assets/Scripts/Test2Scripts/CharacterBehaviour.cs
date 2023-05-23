@@ -211,7 +211,7 @@ public class CharacterBehaviour : MonoBehaviour
 
     void Update()
     {
-        //ControlMood();
+        ControlMood();
         UserInputs();
         AutoMovements();
         UpdateParams(); //updates ExpressionControl + MoodControl parameters (main data container for all expressions)
@@ -500,6 +500,7 @@ public class CharacterBehaviour : MonoBehaviour
             _headIsTurning = true;
         }
     }
+    
     void AutoMovements() //***TODO - Add a way to reset time to zero for each sine wave (resets to zero in start method.)
     {
         if (_headTurnSpeed != 0f && _headIsTurning == true )
@@ -730,33 +731,129 @@ public class CharacterBehaviour : MonoBehaviour
 
         //_subDom = Mathf.MoveTowards(_subDom, _dominanceDefault, _moodEqualiseSpeed * Time.deltaTime);
 
-        //DECAY expressions
-        _moodOrEmote = Mathf.MoveTowards(_moodOrEmote, 0, _decay * Time.deltaTime); //Transitions to other Blend Tree ***
+        if (_pleasure < -0.5f && _arousal > 0.5f)                                               // x -1, y1
+        {
+            if (_pleasure == 0 && _arousal == 1) 
+            {
+                _headTurnMax = 0.44f; //private float _modheadTurnMax = 0.44; _headTurnMax = Mathf.Lerp(_headTurnMax, _modvalue, t);
+                _headTurnMin = 0.21f;
+                _headTurnSpeed = 14f;
+                _headNodMax = 0.48f;
+                _headNodMin = 0.13f;
+                _headNodSpeed = 1f;
+                _headTiltMax = 0.46f;
+                _headTiltMin = 0.13f;
+                _headTiltSpeed = 0.3f;
+                _jawOpenMax = 0.039f;
+                _jawOpenMin = 0f;
+                _jawOpenSpeed = 6.4f;
+                _lookUDMax = 0.25f;
+                _lookUDMin = 0f;
+                _lookUDSpeed = 1f;
+                _lookLRMax = -0.43f;
+                _lookLRMin = 0f;
+                _lookLRSpeed = 1.1f;
+                _shoulderSpeed = 5.7f;
+                _shoulder_L_Max = 1f;
+                _shoulder_L_Min = 0f;
+                _shoulder_R_Max = 1f;
+                _shoulder_R_Min = 0f;
+                _topLid_L_Min = 0.115f;
+                _topLid_R_Min = 0.134f;
+                _blinkPauseDuration = 0.4f;
+                _lidsMeet_L = 0.76f;
+                _lidsMeet_R = 0.76f;
+                _botLid_L_Max = 0.85f;
+                _botLid_R_Max = 0.86f;
 
-        //_headTurn = Mathf.MoveTowards(_headTurn, 0, _decay * Time.deltaTime);     //***TODO Could Probably remove all these
-        //_headNod = Mathf.MoveTowards(_headNod, 0, _decay * Time.deltaTime);
-        //_headTilt = Mathf.MoveTowards(_headTilt, 0, _decay * Time.deltaTime);
-        //_headLateralX = Mathf.MoveTowards(_headLateralX, 0, _decay * Time.deltaTime);
-        //_headLateralY = Mathf.MoveTowards(_headLateralY, 0, _decay * Time.deltaTime);
 
-        //_shoulder_L = Mathf.MoveTowards(_shoulder_L, 0, _decay * Time.deltaTime);
-        //_shoulder_R = Mathf.MoveTowards(_shoulder_R, 0, _decay * Time.deltaTime);
-        //_jawOpen = Mathf.MoveTowards(_jawOpen, 0, _decay * Time.deltaTime);
-        //_squint = Mathf.MoveTowards(_squint, 0, _decay * Time.deltaTime);
-        //_whaleEye = Mathf.MoveTowards(_whaleEye, 0, _decay * Time.deltaTime);
-        //_browLift = Mathf.MoveTowards(_browLift, 0, _decay * Time.deltaTime);
-        //_frown = Mathf.MoveTowards(_frown, 0, _decay * Time.deltaTime);
-        //_eyeLidTop_L = Mathf.MoveTowards(_eyeLidTop_L, 0, _decay * Time.deltaTime);
-        //_eyeLidTop_R = Mathf.MoveTowards(_eyeLidTop_R, 0, _decay * Time.deltaTime);
-        //_eyeLidBot_L = Mathf.MoveTowards(_eyeLidBot_L, 0, _decay * Time.deltaTime);
-        //_eyeLidBot_R = Mathf.MoveTowards(_eyeLidBot_R, 0, _decay * Time.deltaTime);
-        //_smile = Mathf.MoveTowards(_smile, 0, _decay * Time.deltaTime);
-        //_lipStretch = Mathf.MoveTowards(_lipStretch, 0, _decay * Time.deltaTime);
-        //_lipTight = Mathf.MoveTowards(_lipTight, 0, _decay * Time.deltaTime);
-        //_pout = Mathf.MoveTowards(_pout, 0, _decay * Time.deltaTime);
-        //_speak = Mathf.MoveTowards(_speak, 0, _decay * Time.deltaTime);
-        //_lipCnrs = Mathf.MoveTowards(_lipCnrs, 0, _decay * Time.deltaTime);
-        //_sneer = Mathf.MoveTowards(_sneer, 0, _decay * Time.deltaTime);
+            }
+            else 
+            {
+                return;
+            }
+        }
+        if (_pleasure >= -0.5f && _pleasure <= 0.5f && _arousal > 0.5f)                         //x 0, y 1
+        {
+            if (_arousal == 1) 
+            {
+                return;
+            }
+            else 
+            {
+                return;
+            }
+        }
+        if (_pleasure > 0.5f && _arousal > 0.5f)                                                //x 1, y 1
+        {
+            if (_pleasure == 1 && _arousal == 1) 
+            {
+                return;
+            }
+            else 
+            {
+                return;
+            }
+        }
+        if (_pleasure < -0.5f && _arousal <= 0.5f && _arousal >= -0.5f)                          //x -1, y 0
+        {
+            if (_pleasure == -1) 
+            {
+                return;
+            }
+            else 
+            {
+                return;
+            }
+        }
+        if (_pleasure >= -0.5f && _pleasure <= 0.5f && _arousal <= 0.5f && _arousal >= -0.5f)   //x 0, y 0
+        {
+            return;
+        }
+        if (_pleasure > 0.5f && _arousal <= 0.5f && _arousal >= -0.5f)                          //x 1, y 0
+        {
+            if (_arousal == 1) 
+            {
+                return;
+            }
+            else 
+            {
+                return;
+            }
+        }
+        if (_pleasure < -0.5f && _arousal < -0.5f)                                              //x -1, y -1
+        {
+            if (_pleasure == -1 && _arousal == -1)
+            {
+                return;
+            }
+            else
+            {
+                return;
+            }
+        }
+        if (_pleasure >= -0.5f && _pleasure <= 0.5f && _arousal < -0.5f)                        //x 0, y -1
+        {
+            if (_arousal == -1)
+            {
+                return;
+            }
+            else
+            {
+                return;
+            }
+        }
+        if (_pleasure > 0.5f && _arousal < -0.5f)                                               //x 1, y -1
+        {
+            if (_pleasure == 1 && _arousal == -1)
+            {
+                return;
+            }
+            else
+            {
+                return;
+            }
+        }
 
     }
 
@@ -858,11 +955,39 @@ public class CharacterBehaviour : MonoBehaviour
         //Mood Impacts:
         DOVirtual.Float(_pleasure, _pleasure + _pleasureImpact, _sustain, OnPleasureUpdate).SetEase(_easeType);
         DOVirtual.Float(_arousal, _arousal + _arousalImpact, _sustain, OnArousalUpdate).SetEase(_easeType);
-        DOVirtual.Float(_subDom, _subDom + _dominanceImpact, _sustain, OnSubDomUpdate).SetEase(_easeType).OnComplete(OnEmoteTransitionCompleted);
+        DOVirtual.Float(_subDom, _subDom + _dominanceImpact, _sustain, OnSubDomUpdate).SetEase(_easeType).OnComplete(OnEmoteTransitionCompleted); //OnComplete(DecayEmote);
     }
+    //void DecayEmote()
+    //{
+    //DECAY expressions
+    //_moodOrEmote = Mathf.MoveTowards(_moodOrEmote, 0, _decay* Time.deltaTime); //Transitions to other Blend Tree ***
 
-    //*** TODO: "Decay" of emotional reaction - in Mood Control
-    // *** mood impacts = change "default" mood. Decay = Mood equalisation to new "default".
+    //_headTurn = Mathf.MoveTowards(_headTurn, 0, _decay * Time.deltaTime);     //***TODO Could Probably remove all these
+    //_headNod = Mathf.MoveTowards(_headNod, 0, _decay * Time.deltaTime);
+    //_headTilt = Mathf.MoveTowards(_headTilt, 0, _decay * Time.deltaTime);
+    //_headLateralX = Mathf.MoveTowards(_headLateralX, 0, _decay * Time.deltaTime);
+    //_headLateralY = Mathf.MoveTowards(_headLateralY, 0, _decay * Time.deltaTime);
+
+    //_shoulder_L = Mathf.MoveTowards(_shoulder_L, 0, _decay * Time.deltaTime);
+    //_shoulder_R = Mathf.MoveTowards(_shoulder_R, 0, _decay * Time.deltaTime);
+    //_jawOpen = Mathf.MoveTowards(_jawOpen, 0, _decay * Time.deltaTime);
+    //_squint = Mathf.MoveTowards(_squint, 0, _decay * Time.deltaTime);
+    //_whaleEye = Mathf.MoveTowards(_whaleEye, 0, _decay * Time.deltaTime);
+    //_browLift = Mathf.MoveTowards(_browLift, 0, _decay * Time.deltaTime);
+    //_frown = Mathf.MoveTowards(_frown, 0, _decay * Time.deltaTime);
+    //_eyeLidTop_L = Mathf.MoveTowards(_eyeLidTop_L, 0, _decay * Time.deltaTime);
+    //_eyeLidTop_R = Mathf.MoveTowards(_eyeLidTop_R, 0, _decay * Time.deltaTime);
+    //_eyeLidBot_L = Mathf.MoveTowards(_eyeLidBot_L, 0, _decay * Time.deltaTime);
+    //_eyeLidBot_R = Mathf.MoveTowards(_eyeLidBot_R, 0, _decay * Time.deltaTime);
+    //_smile = Mathf.MoveTowards(_smile, 0, _decay * Time.deltaTime);
+    //_lipStretch = Mathf.MoveTowards(_lipStretch, 0, _decay * Time.deltaTime);
+    //_lipTight = Mathf.MoveTowards(_lipTight, 0, _decay * Time.deltaTime);
+    //_pout = Mathf.MoveTowards(_pout, 0, _decay * Time.deltaTime);
+    //_speak = Mathf.MoveTowards(_speak, 0, _decay * Time.deltaTime);
+    //_lipCnrs = Mathf.MoveTowards(_lipCnrs, 0, _decay * Time.deltaTime);
+    //_sneer = Mathf.MoveTowards(_sneer, 0, _decay * Time.deltaTime);
+    //}
+
     void OnEmoteTransitionCompleted() 
     {
         Debug.Log("Hey, I've now completed my emote transition...");

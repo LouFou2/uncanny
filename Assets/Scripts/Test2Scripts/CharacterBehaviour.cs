@@ -1211,7 +1211,38 @@ public class CharacterBehaviour : MonoBehaviour
         {
             if (_arousal == -1)
             {
-                return;
+                _headTurnMax = 0.14f;
+                _headTurnMin = -0.23f;
+                _headTurnSpeed = 0.2f;
+                _headNodMax = -1f;
+                _headNodMin = -0.66f;
+                _headNodSpeed = 0.5f;
+                _headTiltMax = 0.1f;
+                _headTiltMin = -0.1f;
+                _headTiltSpeed = 0.3f;
+                _jawOpenMax = 0.17f;
+                _jawOpenMin = 0f;
+                _jawOpenSpeed = 1.1f;
+                _lookUDMax = -0.3f;
+                _lookUDMin = -0.3f;
+                _lookUDSpeed = 0.1f;
+                _lookLRMax = 0.36f;
+                _lookLRMin = -0.36f;
+                _lookLRSpeed = 0.2f;
+                _shoulderSpeed = 1.8f;
+                _shoulder_L_Max = 0.54f;
+                _shoulder_L_Min = 0f;
+                _shoulder_R_Max = 0.54f;
+                _shoulder_R_Min = 0f;
+                _topLid_L_Min = 0.53f;
+                _topLid_R_Min = 0.45f;
+                _blinkPauseDuration = 6f;
+                _lidsMeet_L = 0.6f;
+                _lidsMeet_R = 0.53f;
+                _botLid_L_Max = 0.61f;
+                _botLid_R_Max = 0.57f;
+                _botLidSpeed = 1.1f;
+                _topLidSpeed = 2f;
             }
             else
             {
@@ -1253,11 +1284,73 @@ public class CharacterBehaviour : MonoBehaviour
         {
             if (_pleasure == 1 && _arousal == -1)
             {
-                return;
+                _headTurnMax = 0.45f;
+                _headTurnMin = -0.23f;
+                _headTurnSpeed = 0.2f;
+                _headNodMax = -1f;
+                _headNodMin = -0.39f;
+                _headNodSpeed = 1f;
+                _headTiltMax = 0.35f;
+                _headTiltMin = -0.41f;
+                _headTiltSpeed = 0.3f;
+                _jawOpenMax = 0.162f;
+                _jawOpenMin = 0f;
+                _jawOpenSpeed = 0.7f;
+                _lookUDMax = -0.03f;
+                _lookUDMin = -0.03f;
+                _lookUDSpeed = 0.2f;
+                _lookLRMax = 0.36f;
+                _lookLRMin = -0.36f;
+                _lookLRSpeed = 0.2f;
+                _shoulderSpeed = 1.8f;
+                _shoulder_L_Max = 0.77f;
+                _shoulder_L_Min = 0f;
+                _shoulder_R_Max = 0.76f;
+                _shoulder_R_Min = 0f;
+                _topLid_L_Min = 0.42f;
+                _topLid_R_Min = 0.45f;
+                _blinkPauseDuration = 4f;
+                _lidsMeet_L = 0.5f;
+                _lidsMeet_R = 0.5f;
+                _botLid_L_Max = 0.5f;
+                _botLid_R_Max = 0.5f;
+                _botLidSpeed = 0.1f;
+                _topLidSpeed = 2f;
             }
             else
             {
-                return;
+                _headTurnMax = 0.14f;
+                _headTurnMin = -0.23f;
+                _headTurnSpeed = 0.2f;
+                _headNodMax = -0.21f;
+                _headNodMin = -0.39f;
+                _headNodSpeed = 1.1f;
+                _headTiltMax = 0.19f;
+                _headTiltMin = -0.21f;
+                _headTiltSpeed = 0.7f;
+                _jawOpenMax = 0.162f;
+                _jawOpenMin = 0.058f;
+                _jawOpenSpeed = 0.4f;
+                _lookUDMax = -0.03f;
+                _lookUDMin = -0.03f;
+                _lookUDSpeed = 0.2f;
+                _lookLRMax = 0.36f;
+                _lookLRMin = -0.36f;
+                _lookLRSpeed = 0.2f;
+                _shoulderSpeed = 1.8f;
+                _shoulder_L_Max = 0.365f;
+                _shoulder_L_Min = 0f;
+                _shoulder_R_Max = 0.365f;
+                _shoulder_R_Min = 0f;
+                _topLid_L_Min = 0.42f;
+                _topLid_R_Min = 0.45f;
+                _blinkPauseDuration = 2f;
+                _lidsMeet_L = 0.58f;
+                _lidsMeet_R = 0.58f;
+                _botLid_L_Max = 0.61f;
+                _botLid_R_Max = 0.61f;
+                _botLidSpeed = 1.1f;
+                _topLidSpeed = 3f;
             }
         }
 

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using UnityEngine.Animations.Rigging;
 using JetBrains.Annotations;
 using UnityEditor.PackageManager;
+using System.Runtime.CompilerServices;
 
 public class CharacterBehaviour : MonoBehaviour
 {
@@ -685,6 +686,7 @@ public class CharacterBehaviour : MonoBehaviour
             float topLid_L_Range = _eyeLidBot_L - _topLid_L_Min;
             float topLid_L_FinalValue = (topLid_L_Value + 1f) / 2f * topLid_L_Range + _topLid_L_Min;
             _eyeLidTop_L = topLid_L_FinalValue;
+            
 
             _topLid_R_Time += Time.deltaTime * _topLidSpeed;
             float topLid_R_Value = Mathf.Sin(_topLid_R_Time);
@@ -692,8 +694,10 @@ public class CharacterBehaviour : MonoBehaviour
             float topLid_R_FinalValue = (topLid_R_Value + 1f) / 2f * topLid_R_Range + _topLid_R_Min;
             _eyeLidTop_R = topLid_R_FinalValue;
 
-            if (_eyeLidTop_L <= _topLid_L_Min + 0.01f && !_pauseBlinking && _topLid_L_Time > 0.6f)
+            if (_eyeLidTop_L <= _topLid_L_Min && !_pauseBlinking)
             {
+                _eyeLidTop_L = _topLid_L_Min;
+                Debug.Log("Blink");
                 StartCoroutine(BlinkPause(_blinkPauseDuration));
             }
         }
@@ -727,6 +731,7 @@ public class CharacterBehaviour : MonoBehaviour
         _topLid_R_Time = 0;
         _topLidSpeed = originalSpeed;
         _pauseBlinking = false;
+        
     }
 
 

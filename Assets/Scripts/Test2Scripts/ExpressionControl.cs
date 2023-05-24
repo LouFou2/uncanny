@@ -20,7 +20,7 @@ public class ExpressionControl : ScriptableObject
     // *** HEAD MOVEMENT ***
 
     public AnimationCurve testAnimCurve;
-    public bool headIsTurning = false;
+    public bool headIsTurning = true;
     [Range(-1.0f, 1.0f)] public float headTurn;
     [Range(-1.0f, 1.0f)] public float headTurnMax;
     [Range(-1.0f, 1.0f)] public float headTurnMin;
@@ -28,6 +28,7 @@ public class ExpressionControl : ScriptableObject
     [HideInInspector] public float headTurnTime = 0f;
     public AnimationCurve headTurnCurve;
 
+    public bool headIsNodding = true;
     [Range(-1.0f, 1.0f)] public float headNod;
     [Range(-1.0f, 1.0f)] public float headNodMax;
     [Range(-1.0f, 1.0f)] public float headNodMin;
@@ -72,20 +73,20 @@ public class ExpressionControl : ScriptableObject
     [Range(0.0f, 1.0f)] public float shoulder_R_Min;
     [HideInInspector] public float shoulder_R_Time = 0f;
 
-    [Range(1.0f, 100.0f)] public float earFlapSpeed;
+    [HideInInspector][Range(1.0f, 100.0f)] public float earFlapSpeed; // ***TODO Take out earflap vars
 
-    [Range(-1.0f, 1.0f)] public float earFlap_L;
-    [Range(0.0f, 1.0f)] public float earFlap_L_Max;
-    [Range(-1.0f, 1.0f)] public float earFlap_L_Min;
+    [HideInInspector][Range(-1.0f, 1.0f)] public float earFlap_L;
+    [HideInInspector][Range(0.0f, 1.0f)] public float earFlap_L_Max;
+    [HideInInspector][Range(-1.0f, 1.0f)] public float earFlap_L_Min;
     [HideInInspector] public float earFlap_L_Time = 0f;
 
-    [Range(-1.0f, 1.0f)] public float earFlap_R;
-    [Range(0.0f, 1.0f)] public float earFlap_R_Max;
-    [Range(-1.0f, 1.0f)] public float earFlap_R_Min;
+    [HideInInspector][Range(-1.0f, 1.0f)] public float earFlap_R;
+    [HideInInspector][Range(0.0f, 1.0f)] public float earFlap_R_Max;
+    [HideInInspector][Range(-1.0f, 1.0f)] public float earFlap_R_Min;
     [HideInInspector] public float earFlap_R_Time = 0f;
 
-    [Range(0.0f, 1.0f)] public float earFlap_L_Weight;
-    [Range(0.0f, 1.0f)] public float earFlap_R_Weight; //the weight values are just to check, not to manipulate
+    [HideInInspector][Range(0.0f, 1.0f)] public float earFlap_L_Weight;
+    [HideInInspector][Range(0.0f, 1.0f)] public float earFlap_R_Weight; //the weight values are just to check, not to manipulate
 
     // *** BLINKING *** [this works different from everything else]
     [Range(0.0f, 1.0f)] public float eyeLidTop_L;
@@ -107,26 +108,27 @@ public class ExpressionControl : ScriptableObject
     [HideInInspector] public float botLid_L_Time = 0f;
     [HideInInspector] public float botLid_R_Time = 0f;
     [Range(0.0f, 20.0f)] public float botLidSpeed;
-    
-    
+
+
 
     // *** FACIAL ARTICULATION ***
 
+
+    [HideInInspector][Range(0.0f, 1.0f)] public float squint;
+    [HideInInspector][Range(0.0f, 1.0f)] public float whaleEye;
+    [HideInInspector][Range(0.0f, 1.0f)] public float browLift;
+    [HideInInspector][Range(0.0f, 1.0f)] public float frown;
     
-    [Range(0.0f, 1.0f)] public float squint;
-    [Range(0.0f, 1.0f)] public float whaleEye;
-    [Range(0.0f, 1.0f)] public float browLift;
-    [Range(0.0f, 1.0f)] public float frown;
-    
-    [Range(0.0f, 1.0f)] public float smile;
-    [Range(0.0f, 1.0f)] public float lipStretch;
-    [Range(0.0f, 1.0f)] public float lipTight;
-    [Range(0.0f, 1.0f)] public float pout;
-    [Range(0.0f, 1.0f)] public float speak;
-    [Range(0.0f, 1.0f)] public float lipCnrs;
-    [Range(0.0f, 1.0f)] public float sneer;
+    [HideInInspector][Range(0.0f, 1.0f)] public float smile;
+    [HideInInspector][Range(0.0f, 1.0f)] public float lipStretch;
+    [HideInInspector][Range(0.0f, 1.0f)] public float lipTight;
+    [HideInInspector][Range(0.0f, 1.0f)] public float pout;
+    [HideInInspector][Range(0.0f, 1.0f)] public float speak;
+    [HideInInspector][Range(0.0f, 1.0f)] public float lipCnrs;
+    [HideInInspector][Range(0.0f, 1.0f)] public float sneer;
     [Range(0.0f, 1.0f)] public float tongueStretch;
     [Range(0.0f, 1.0f)] public float tongueUpDown;
+    
 
     // *** MOOD PARAMETERS ***
 

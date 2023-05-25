@@ -25,11 +25,11 @@ public class CharacterBehaviour : MonoBehaviour
     public HeadPad headPad;
 
     // Sine Wave variables
-    [HideInInspector] public AnimationCurve _testAnimCurve;
+    [HideInInspector] public AnimationCurve _blinkCurve;
     [HideInInspector] public bool _headIsTurning;
     [HideInInspector] public float _headTurnMax;
     [HideInInspector] public float _headTurnMin;
-    [HideInInspector] public float headEQTime = 0f;
+    [HideInInspector] public float _headTurnEQTime = 0f;
     //private float _headTurnTarget = 1f;
     [HideInInspector] public float _headTurnSpeed;
     [HideInInspector] public AnimationCurve _headTurnCurve;
@@ -40,6 +40,7 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _headNodMin;
     [HideInInspector] public float _headNodSpeed;
     private float _headNodTime;
+    [HideInInspector] public float _headNodEQTime = 0f;
     [HideInInspector] public bool _headNodPlusTurn;
 
     [HideInInspector] public float _headTiltMax;
@@ -104,14 +105,11 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _lookLR; // Body and Facial keys
     [HideInInspector] public float _lookUD;
     [HideInInspector] public float _jawOpen;
+    /*
     [HideInInspector] public float _squint;
     [HideInInspector] public float _whaleEye;
     [HideInInspector] public float _browLift;
     [HideInInspector] public float _frown;
-    [HideInInspector] public float _eyeLidTop_L;
-    [HideInInspector] public float _eyeLidTop_R;
-    [HideInInspector] public float _eyeLidBot_L;
-    [HideInInspector] public float _eyeLidBot_R;
     [HideInInspector] public float _smile;
     [HideInInspector] public float _lipStretch;
     [HideInInspector] public float _lipTight;
@@ -119,18 +117,26 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _speak;
     [HideInInspector] public float _lipCnrs;
     [HideInInspector] public float _sneer;
-    [HideInInspector] public float _tongueStretch;
-    [HideInInspector] public float _tongueUpDown;
-    [HideInInspector] public float _shoulder_L;
-    [HideInInspector] public float _shoulder_R;
+    
     [HideInInspector] public float _earFlap_L;
     [HideInInspector] public float _earFlap_R;
+    */
+    [HideInInspector] public float _eyeLidTop_L;
+    [HideInInspector] public float _eyeLidTop_R;
+    [HideInInspector] public float _eyeLidBot_L;
+    [HideInInspector] public float _eyeLidBot_R;
+    [HideInInspector] public float _shoulder_L;
+    [HideInInspector] public float _shoulder_R;
+
+    [HideInInspector] public float _tongueStretch; // May or may not add tongue
+    [HideInInspector] public float _tongueUpDown;
 
     [HideInInspector] public float _pleasure; // Mood Parameters
     [HideInInspector] public float _arousal;
     [HideInInspector] public float _subDom;
     
     //MoodControl variables
+    /*
     [HideInInspector] public float _pleasureChange;     // adjust pleasure parameter
     [HideInInspector] public float _pleasureDefault;   // mood parameters slowly return to default. Can be changed
     [HideInInspector] public float _arousalChange;      // adjust arousal parameter
@@ -141,7 +147,7 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _moodMouthMoves;    // to change mouth movement variations in idle
     [HideInInspector] public float _moodHeadMoves;     // to change head movement variations in idle
     [HideInInspector] public float _moodEqualiseSpeed;
-
+    
     //Emote, to be used in Tweening
     [HideInInspector] public float _shoulder_L_Amount;
     [HideInInspector] public float _shoulder_R_Amount;
@@ -169,7 +175,7 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _pleasureImpact;
     [HideInInspector] public float _arousalImpact;
     [HideInInspector] public float _dominanceImpact;
-
+    */
     [HideInInspector] public float _attack;
     [HideInInspector] public Ease _easeType;
     [HideInInspector] public float _sustain;
@@ -204,7 +210,7 @@ public class CharacterBehaviour : MonoBehaviour
         _pleasure = moodPad.xValue;
         _arousal = moodPad.yValue;
 
-        _testAnimCurve = express.testAnimCurve;
+        _blinkCurve = express.blinkCurve;
 
         //Head Movements (Expression Control)
         _headTurn = express.headTurn;
@@ -284,14 +290,18 @@ public class CharacterBehaviour : MonoBehaviour
         _lookLR = express.lookLR;
         _lookUD = express.lookUD;
         _jawOpen = express.jawOpen;
-        _squint = express.squint;
-        _whaleEye = express.whaleEye;
-        _browLift = express.browLift;
-        _frown = express.frown;
         _eyeLidTop_L = express.eyeLidTop_L;
         _eyeLidTop_R = express.eyeLidTop_R;
         _eyeLidBot_L = express.eyeLidBot_L;
         _eyeLidBot_R = express.eyeLidBot_R;
+        _tongueStretch = express.tongueStretch;
+        _tongueUpDown = express.tongueUpDown;
+        /*
+        _squint = express.squint;
+        _whaleEye = express.whaleEye;
+        _browLift = express.browLift;
+        _frown = express.frown;
+        
         _smile = express.smile;
         _lipStretch = express.lipStretch;
         _lipTight = express.lipTight;
@@ -299,15 +309,15 @@ public class CharacterBehaviour : MonoBehaviour
         _speak = express.speak;
         _lipCnrs = express.lipCnrs;
         _sneer = express.sneer;
-        _tongueStretch = express.tongueStretch;
-        _tongueUpDown = express.tongueUpDown;
-
+        
+        */
         //Mood Control parameters (Expression Control)
         //_pleasure = express.pleasure;
         //_arousal = express.arousal;
         _subDom = express.subDom;
 
         //MoodControl
+        /*
         _pleasureDefault = mood.pleasureDefault;
         _arousalDefault = mood.arousalDefault;
         _dominanceDefault = mood.dominanceDefault;
@@ -315,6 +325,7 @@ public class CharacterBehaviour : MonoBehaviour
         _moodMouthMoves = mood.moodMouthMoves;
         _moodHeadMoves = mood.moodHeadMoves;
         _moodEqualiseSpeed = mood.moodEqualiseSpeed;
+        */
     }
     void ExpressControlUpdates() // Can remove this once game is finished (only used for changeing parameters in runtime)
     {
@@ -396,14 +407,15 @@ public class CharacterBehaviour : MonoBehaviour
         _lookLR = express.lookLR;
         _lookUD = express.lookUD;
         _jawOpen = express.jawOpen;
-        _squint = express.squint;
-        _whaleEye = express.whaleEye;
-        _browLift = express.browLift;
-        _frown = express.frown;
         _eyeLidTop_L = express.eyeLidTop_L;
         _eyeLidTop_R = express.eyeLidTop_R;
         _eyeLidBot_L = express.eyeLidBot_L;
         _eyeLidBot_R = express.eyeLidBot_R;
+        /*
+        _squint = express.squint;
+        _whaleEye = express.whaleEye;
+        _browLift = express.browLift;
+        _frown = express.frown;
         _smile = express.smile;
         _lipStretch = express.lipStretch;
         _lipTight = express.lipTight;
@@ -411,6 +423,7 @@ public class CharacterBehaviour : MonoBehaviour
         _speak = express.speak;
         _lipCnrs = express.lipCnrs;
         _sneer = express.sneer;
+        */
         _tongueStretch = express.tongueStretch;
         _tongueUpDown = express.tongueUpDown;
 
@@ -420,6 +433,7 @@ public class CharacterBehaviour : MonoBehaviour
         _subDom = express.subDom;
 
         //MoodControl
+        /*
         _pleasureDefault = mood.pleasureDefault;
         _arousalDefault = mood.arousalDefault;
         _dominanceDefault = mood.dominanceDefault;
@@ -427,6 +441,7 @@ public class CharacterBehaviour : MonoBehaviour
         _moodMouthMoves = mood.moodMouthMoves;
         _moodHeadMoves = mood.moodHeadMoves;
         _moodEqualiseSpeed = mood.moodEqualiseSpeed;
+        */
     }
     
     void UserInputs() 
@@ -453,66 +468,68 @@ public class CharacterBehaviour : MonoBehaviour
     
     void AutoMovements() //***TODO - Add a way to reset time to zero for each sine wave (resets to zero in start method.)
     {
-        if (_headTurnSpeed != 0f && _headIsTurning == true )
+        if (_headTurnSpeed != 0f && _headIsTurning)
         {
             //if (_headTurn <= _headTurnMin + 0.01f) { _headTurnTarget = _headTurnMax; }        //This uses Lerp. Change to control lerp with duration, not speed.
             //if (_headTurn >= _headTurnMax - 0.01f) { _headTurnTarget = _headTurnMin; }
             //_headTurnTime = _headTurnSpeed * Time.deltaTime;
             //float headTurnEvaluation = _headTurnCurve.Evaluate(_headTurnTime);                      
             //_headTurn = Mathf.Lerp(_headTurn, _headTurnTarget, headTurnEvaluation);
-            
-            
-            
-            if (_headTurn > _headTurnMax ) 
-            {
-                float _headOutBoundMax = headPad.xValue;
-                _headTurn = Mathf.Lerp(_headOutBoundMax, _headTurnMax, headEQTime / 2f);
-                Debug.Log("HeadOutBoundMax");
-                headEQTime += Time.deltaTime;
-                _headTurnTime = 0f;
-            }
-            if (_headTurn < _headTurnMin)
-            {
-                float _headOutBoundMin = headPad.xValue;
-                _headTurn = Mathf.Lerp(_headOutBoundMin, _headTurnMin, headEQTime / 2f);
-                Debug.Log("HeadOutBoundMin");
-                headEQTime += Time.deltaTime;
-                _headTurnTime = 0f;
-            }
-            if (_headTurn <= _headTurnMax && _headTurn >= _headTurnMin) 
-            {
+
+            //if (_headTurn > _headTurnMax ) 
+            //{
+            //    float _headOutBoundMaxX = headPad.xValue;
+            //    _headTurn = Mathf.Lerp(_headOutBoundMaxX, _headTurnMax, _headTurnEQTime / 2f);
+            //    Debug.Log("HeadTurnOutBoundMax");
+            //    _headTurnEQTime += Time.deltaTime;
+            //   _headTurnTime = 0f;
+            //}
+            //if (_headTurn < _headTurnMin)
+            //{
+            //    float _headOutBoundMinX = headPad.xValue;
+            //    _headTurn = Mathf.Lerp(_headOutBoundMinX, _headTurnMin, _headTurnEQTime / 2f);
+            //    Debug.Log("HeadTurnOutBoundMin");
+            //    _headTurnEQTime += Time.deltaTime;
+            //    _headTurnTime = 0f;
+            //}
+            //if (_headTurn <= _headTurnMax && _headTurn >= _headTurnMin) 
+            //{
                 float headTurnValue = Mathf.Sin(_headTurnTime);// *** This is the sine wave code
                 float headTurnRange = _headTurnMax - _headTurnMin;
                 float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
                 _headTurn = headTurnFinalValue;
                 _headTurnTime += Time.deltaTime * _headTurnSpeed;
-                headEQTime = 0f;
-            }
-            
-
+                _headTurnEQTime = 0f;
+            //}
         }
 
-        if (_headNodSpeed != 0f && _headIsNodding == true)
+        if (_headNodSpeed != 0f && _headIsNodding)
         {
-            if (_headNodPlusTurn == true) // *** this bit of code is meant to make head swoop - needs work *TODO
-            {
-                _headNodTime = _headTurnTime * 2;
-                _headNodSpeed = _headTurnSpeed;
-
-                _headNodTime += Time.deltaTime * _headNodSpeed;
+            //if (_headNod > _headNodMax)
+            //{
+             //   float _headOutBoundMaxY = headPad.yValue;
+            //    _headNod = Mathf.Lerp(_headOutBoundMaxY, _headNodMax, _headNodEQTime / 2f);
+            //    Debug.Log("HeadNodOutBoundMax");
+            //    _headNodEQTime += Time.deltaTime;
+            //    _headNodTime = 0f;
+            //}
+            //if (_headNod < _headNodMin)
+            //{
+            //    float _headOutBoundMinY = headPad.yValue;
+            //   _headNod = Mathf.Lerp(_headOutBoundMinY, _headNodMin, _headNodEQTime / 2f);
+            //    Debug.Log("HeadNodOutBoundMin");
+            //    _headNodEQTime += Time.deltaTime;
+            //    _headNodTime = 0f;
+            //}
+            //if (_headNod <= _headNodMax && _headNod >= _headNodMin)
+            //{                
+                float headNodValue = Mathf.Sin(_headNodTime);
                 float headNodRange = _headNodMax - _headNodMin;
-                float headNodValue = Mathf.Cos(_headNodTime);// * _headNodAmplitude;
                 float headNodFinalValue = (headNodValue + 1f) / 2f * headNodRange + _headNodMin;
                 _headNod = headNodFinalValue;
-            }
-            else
-            {
                 _headNodTime += Time.deltaTime * _headNodSpeed;
-                float headNodValue = Mathf.Sin(_headNodTime);// * _headNodAmplitude;
-                float headNodRange = _headNodMax - _headNodMin;
-                float headNodFinalValue = (headNodValue + 1f) / 2f * headNodRange + _headNodMin;
-                _headNod = headNodFinalValue;
-            }
+                _headNodEQTime = 0;
+            //}
         }
 
         if (_headTiltSpeed != 0f)
@@ -570,8 +587,8 @@ public class CharacterBehaviour : MonoBehaviour
         
         if (_topLid_L_Time < _blinkDuration && !_pauseBlinking)
         {
-            _eyeLidTop_L = Mathf.Lerp(_topLid_L_Min, _eyeLidBot_L, _testAnimCurve.Evaluate(_topLid_L_Time / _blinkDuration));
-            _eyeLidTop_R = Mathf.Lerp(_topLid_R_Min, _eyeLidBot_R, _testAnimCurve.Evaluate(_topLid_L_Time / _blinkDuration));
+            _eyeLidTop_L = Mathf.Lerp(_topLid_L_Min, _eyeLidBot_L, _blinkCurve.Evaluate(_topLid_L_Time / _blinkDuration));
+            _eyeLidTop_R = Mathf.Lerp(_topLid_R_Min, _eyeLidBot_R, _blinkCurve.Evaluate(_topLid_L_Time / _blinkDuration));
             _topLid_L_Time += Time.deltaTime;
         }
 
@@ -1235,6 +1252,7 @@ public class CharacterBehaviour : MonoBehaviour
 
     }
     */// Seems like a better way to do this is to add the values as properties in the animator
+    /*
     public void SetNewEmote(string _emoteName)
     {
        Emote newEmote = null;
@@ -1510,7 +1528,7 @@ public class CharacterBehaviour : MonoBehaviour
         _sneer = Mathf.Clamp(_sneer, 0f, 1f);
         express.sneer = _sneer;
     }
-
+    */// Might end up cutting the emotes alltogether
     void UpdateParams() //send updated variable values back to ExpressionControl
     {
         express.headTurn = _headTurn;
@@ -1562,7 +1580,7 @@ public class CharacterBehaviour : MonoBehaviour
         express.shoulder_R_Min = _shoulder_R_Min;
         express.shoulder_R_Time = _shoulder_R_Time;
 
-        // *** DONT copy the lids for other things
+        // *** vv DONT copy the lids for other things vv
         express.lidsMeet_L = _lidsMeet_L;
         express.topLid_L_Min = _topLid_L_Min;
         express.topLid_L_Time = _topLid_L_Time;
@@ -1581,21 +1599,24 @@ public class CharacterBehaviour : MonoBehaviour
 
         express.blinkDuration = _blinkDuration;
         express.blinkPauseDuration = _blinkPauseDuration;
-        // *** DONT copy the lids for other things
+        // *** ^^ DONT copy the lids for other things ^^
 
         express.shoulder_L = _shoulder_L;
         express.shoulder_R = _shoulder_R;
         express.lookUD = _lookUD;
         express.lookLR = _lookLR;
         express.jawOpen = _jawOpen;
-        express.squint = _squint;
-        express.whaleEye = _whaleEye;
-        express.browLift = _browLift;
-        express.frown = _frown;
         express.eyeLidTop_L = _eyeLidTop_L;
         express.eyeLidTop_R = _eyeLidTop_R;
         express.eyeLidBot_L = _eyeLidBot_L;
         express.eyeLidBot_R = _eyeLidBot_R;
+        express.tongueStretch = _tongueStretch;
+        express.tongueUpDown = _tongueUpDown;
+        /*
+        express.squint = _squint;
+        express.whaleEye = _whaleEye;
+        express.browLift = _browLift;
+        express.frown = _frown;        
         express.smile = _smile;
         express.lipStretch = _lipStretch;
         express.lipTight = _lipTight;
@@ -1603,11 +1624,11 @@ public class CharacterBehaviour : MonoBehaviour
         express.speak = _speak;
         express.lipCnrs = _lipCnrs;
         express.sneer = _sneer;
+        */
         express.pleasure = _pleasure;
         express.arousal = _arousal;
         express.subDom = _subDom;
-        express.tongueStretch = _tongueStretch;
-        express.tongueUpDown = _tongueUpDown;
+        
     }
     void Animate()
     {
@@ -1619,17 +1640,20 @@ public class CharacterBehaviour : MonoBehaviour
         animator.SetFloat("LookUD", _lookUD);
         animator.SetFloat("Shoulder_L", _shoulder_L);
         animator.SetFloat("Shoulder_R", _shoulder_R);
-        animator.SetFloat("EarFlap_L", _earFlap_L);
-        animator.SetFloat("EarFlap_R", _earFlap_R);
-        animator.SetFloat("JawOpen", _jawOpen);
-        animator.SetFloat("Squint", _squint);
-        animator.SetFloat("WhaleEye", _whaleEye);
-        animator.SetFloat("BrowLift", _browLift);
-        animator.SetFloat("Frown", _frown);
         animator.SetFloat("EyeLidTop_L", _eyeLidTop_L);
         animator.SetFloat("EyeLidTop_R", _eyeLidTop_R);
         animator.SetFloat("EyeLidBot_L", _eyeLidBot_L);
         animator.SetFloat("EyeLidBot_R", _eyeLidBot_R);
+        animator.SetFloat("TongueStretch", _tongueStretch);
+        animator.SetFloat("TongueUpDown", _tongueUpDown);
+        animator.SetFloat("JawOpen", _jawOpen);
+        /*
+        animator.SetFloat("EarFlap_L", _earFlap_L);
+        animator.SetFloat("EarFlap_R", _earFlap_R);
+        animator.SetFloat("Squint", _squint);
+        animator.SetFloat("WhaleEye", _whaleEye);
+        animator.SetFloat("BrowLift", _browLift);
+        animator.SetFloat("Frown", _frown);
         animator.SetFloat("Smile", _smile);
         animator.SetFloat("LipStretch", _lipStretch);
         animator.SetFloat("LipTight", _lipTight);
@@ -1637,10 +1661,10 @@ public class CharacterBehaviour : MonoBehaviour
         animator.SetFloat("Speak", _speak);
         animator.SetFloat("LipCnrs", _lipCnrs);
         animator.SetFloat("Sneer", _sneer);
+        */
         animator.SetFloat("Pleasure", _pleasure);
         animator.SetFloat("Arousal", _arousal);
         animator.SetFloat("SubDom", _subDom);
-        animator.SetFloat("TongueStretch", _tongueStretch);
-        animator.SetFloat("TongueUpDown", _tongueUpDown);
+        
     }
 }

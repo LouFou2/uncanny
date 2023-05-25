@@ -23,7 +23,8 @@ public class ButtonEmote : MonoBehaviour
 
         if(characterBehaviour != null )
         {
-            characterBehaviour.SetNewEmote( emoteName );   
+            //characterBehaviour.SetNewEmote( emoteName );
+            Debug.Log("set emote not active in script");
         }
     }
 }

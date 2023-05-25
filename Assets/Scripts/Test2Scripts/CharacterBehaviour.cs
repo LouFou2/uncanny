@@ -585,8 +585,8 @@ public class CharacterBehaviour : MonoBehaviour
         _pauseBlinking = false;
     }
 
-
-    void ControlMood() 
+    /*
+    void ControlMood()
     {
         //_pleasure = Mathf.MoveTowards(_pleasure, _pleasureDefault, _moodEqualiseSpeed * Time.deltaTime);
 
@@ -1209,7 +1209,7 @@ public class CharacterBehaviour : MonoBehaviour
         }
 
     }
-
+    */// Seems like a better way to do this is to add the values as properties in the animator
     public void SetNewEmote(string _emoteName)
     {
        Emote newEmote = null;

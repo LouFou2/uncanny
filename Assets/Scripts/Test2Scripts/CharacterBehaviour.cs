@@ -216,8 +216,8 @@ public class CharacterBehaviour : MonoBehaviour
     void Update()
     {
         UserInputs();
-        ControlMood();
         AutoMovements();
+        ControlMood();        
         UpdateParams(); //updates ExpressionControl + MoodControl parameters (main data container for all expressions)
         Animate();
     }
@@ -747,6 +747,7 @@ public class CharacterBehaviour : MonoBehaviour
         //float originalSpeed = _topLidSpeed;
         //_topLidSpeed = 0.001f;
         _eyeLidTop_L = _topLid_L_Min;
+        _eyeLidTop_R = _topLid_R_Min;
 
         yield return new WaitForSeconds(duration);
 

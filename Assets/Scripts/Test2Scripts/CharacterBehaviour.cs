@@ -84,6 +84,7 @@ public class CharacterBehaviour : MonoBehaviour
     private float _earFlap_R_Time;
 
     [HideInInspector] public float _topLidSpeed;
+    private float _topLidTarget;
 
     [HideInInspector] public float _lidsMeet_L;
     [HideInInspector] public float _topLid_L_Min;
@@ -101,6 +102,7 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _botLid_R_Max;
     private float _botLid_R_Time;
 
+    [HideInInspector] public float _blinkDuration;
     [HideInInspector] public float _blinkPauseDuration;
     private bool _pauseBlinking = false;
 
@@ -213,8 +215,8 @@ public class CharacterBehaviour : MonoBehaviour
 
     void Update()
     {
-        ControlMood();
         UserInputs();
+        ControlMood();
         AutoMovements();
         UpdateParams(); //updates ExpressionControl + MoodControl parameters (main data container for all expressions)
         Animate();
@@ -292,7 +294,7 @@ public class CharacterBehaviour : MonoBehaviour
         _earFlap_R_Min = express.earFlap_R_Min;
         _earFlap_R_Time = express.earFlap_R_Time = 0f;
 
-        _topLidSpeed = express.topLidSpeed = 15f;
+        //_topLidSpeed = express.topLidSpeed = 15f;
 
         _lidsMeet_L = express.lidsMeet_L;
         _topLid_L_Min = express.topLid_L_Min;
@@ -310,6 +312,7 @@ public class CharacterBehaviour : MonoBehaviour
         _botLid_R_Max = express.botLid_R_Max;
         _botLid_R_Time = express.botLid_R_Time = 0f;
 
+        _blinkDuration = express.blinkDuration = 0.2f;
         _blinkPauseDuration = express.blinkPauseDuration = 2f;
 
         // Expression parameters used to form all expressions (Expression Control)
@@ -420,7 +423,7 @@ public class CharacterBehaviour : MonoBehaviour
         _earFlap_R_Min = express.earFlap_R_Min;
         _earFlap_R_Time = express.earFlap_R_Time;
 
-        _topLidSpeed = express.topLidSpeed = 15f;
+        //_topLidSpeed = express.topLidSpeed = 15f;
 
         _lidsMeet_L = express.lidsMeet_L;
         _topLid_L_Min = express.topLid_L_Min;
@@ -438,6 +441,7 @@ public class CharacterBehaviour : MonoBehaviour
         _botLid_R_Max = express.botLid_R_Max;
         _botLid_R_Time = express.botLid_R_Time;
 
+        _blinkDuration = express.blinkDuration;
         _blinkPauseDuration = express.blinkPauseDuration;
 
         // Expression parameters used to form all expressions (Expression Control)
@@ -511,9 +515,8 @@ public class CharacterBehaviour : MonoBehaviour
     {
         if (_headTurnSpeed != 0f && _headIsTurning == true )
         {
-            //if (_headTurn <= _headTurnMin + 0.01f) { _headTurnTarget = _headTurnMax; }
+            //if (_headTurn <= _headTurnMin + 0.01f) { _headTurnTarget = _headTurnMax; }        //This uses Lerp. Change to control lerp with duration, not speed.
             //if (_headTurn >= _headTurnMax - 0.01f) { _headTurnTarget = _headTurnMin; }
-
             //_headTurnTime = _headTurnSpeed * Time.deltaTime;
             //float headTurnEvaluation = _headTurnCurve.Evaluate(_headTurnTime);                      
             //_headTurn = Mathf.Lerp(_headTurn, _headTurnTarget, headTurnEvaluation);
@@ -679,8 +682,19 @@ public class CharacterBehaviour : MonoBehaviour
         }
 
         // *** note that eyelids are different from other sine wave movements
-        if (_topLidSpeed != 0f)
+        //if (_topLidSpeed != 0f)
+        
+        
+        if (_topLid_L_Time < _blinkDuration && !_pauseBlinking)
         {
+
+            //_topLidTarget = _eyeLidBot_L;
+            //if (_topLid_L_Time == _blinkDuration / 2) { _topLidTarget = _topLid_L_Min; }
+            
+            _eyeLidTop_L = Mathf.Lerp(_topLid_L_Min, _eyeLidBot_L, _testAnimCurve.Evaluate(_topLid_L_Time / _blinkDuration));
+            _eyeLidTop_R = Mathf.Lerp(_topLid_R_Min, _eyeLidBot_R, _testAnimCurve.Evaluate(_topLid_L_Time / _blinkDuration));
+            _topLid_L_Time += Time.deltaTime;
+            /*
             _topLid_L_Time += Time.deltaTime * _topLidSpeed;
             float topLid_L_Value = Mathf.Sin(_topLid_L_Time);
             float topLid_L_Range = _eyeLidBot_L - _topLid_L_Min;
@@ -693,16 +707,24 @@ public class CharacterBehaviour : MonoBehaviour
             float topLid_R_Range = _eyeLidBot_R - _topLid_R_Min;
             float topLid_R_FinalValue = (topLid_R_Value + 1f) / 2f * topLid_R_Range + _topLid_R_Min;
             _eyeLidTop_R = topLid_R_FinalValue;
-
+            
             if (_eyeLidTop_L <= _topLid_L_Min && !_pauseBlinking)
             {
                 _eyeLidTop_L = _topLid_L_Min;
                 Debug.Log("Blink");
                 StartCoroutine(BlinkPause(_blinkPauseDuration));
             }
+            */
         }
 
-        if(_botLidSpeed > 0) 
+        if (_topLid_L_Time >= _blinkDuration && !_pauseBlinking)
+        {
+            //_eyeLidTop_L = _topLidTarget;
+            Debug.Log("BlinkPause");
+            StartCoroutine(BlinkPause(_blinkPauseDuration));
+        }
+
+        if (_botLidSpeed > 0) 
         {
             _botLid_L_Time += Time.deltaTime * _botLidSpeed;
             float botLid_L_Value = Mathf.Sin(_botLid_L_Time);
@@ -722,14 +744,15 @@ public class CharacterBehaviour : MonoBehaviour
     private IEnumerator BlinkPause(float duration)
     {
         _pauseBlinking = true;
-        float originalSpeed = _topLidSpeed;
-        _topLidSpeed = 0.001f;
+        //float originalSpeed = _topLidSpeed;
+        //_topLidSpeed = 0.001f;
+        _eyeLidTop_L = _topLid_L_Min;
 
         yield return new WaitForSeconds(duration);
 
-        _topLid_L_Time = 0;
-        _topLid_R_Time = 0;
-        _topLidSpeed = originalSpeed;
+        _topLid_L_Time = 0f;
+        _topLid_R_Time = 0f;
+        //_topLidSpeed = originalSpeed;
         _pauseBlinking = false;
         
     }
@@ -772,8 +795,9 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0f;
                 _topLid_L_Min = 0.115f;
                 _topLid_R_Min = 0.134f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 0.4f;
-                _topLidSpeed = 15f;
+                //_topLidSpeed = 15f;
                 _lidsMeet_L = 0.76f;
                 _lidsMeet_R = 0.76f;
                 _botLid_L_Max = 0.85f;
@@ -808,8 +832,9 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0.7f;
                 _topLid_L_Min = 0.115f;
                 _topLid_R_Min = 0.134f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 0.35f;
-                _topLidSpeed = 15f;
+                //_topLidSpeed = 15f;
                 _lidsMeet_L = 0.72f;
                 _lidsMeet_R = 0.72f;
                 _botLid_L_Max = 0.8f;
@@ -845,8 +870,9 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0f;
                 _topLid_L_Min = 0f;
                 _topLid_R_Min = 0f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 2f;
-                _topLidSpeed = 15f;
+                //_topLidSpeed = 15f;
                 _lidsMeet_L = 0.72f;
                 _lidsMeet_R = 0.72f;
                 _botLid_L_Max = 0.8f;
@@ -879,8 +905,9 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0f;
                 _topLid_L_Min = 0.165f;
                 _topLid_R_Min = 0.165f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 2f;
-                _topLidSpeed = 15f;
+                //_topLidSpeed = 15f;
                 _lidsMeet_L = 0.72f;
                 _lidsMeet_R = 0.72f;
                 _botLid_L_Max = 0.8f;
@@ -916,8 +943,9 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0f;
                 _topLid_L_Min = 0f;
                 _topLid_R_Min = 0f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 0.69f;
-                _topLidSpeed = 15f;
+                //_topLidSpeed = 15f;
                 _lidsMeet_L = 0.92f;
                 _lidsMeet_R = 0.92f;
                 _botLid_L_Max = 1f;
@@ -950,8 +978,9 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0f;
                 _topLid_L_Min = 0.158f;
                 _topLid_R_Min = 0.158f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 1.52f;
-                _topLidSpeed = 15f;
+                //_topLidSpeed = 15f;
                 _lidsMeet_L = 0.679f;
                 _lidsMeet_R = 0.679f;
                 _botLid_L_Max = 0.727f;
@@ -987,8 +1016,9 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0.809f;
                 _topLid_L_Min = 0.558f;
                 _topLid_R_Min = 0.558f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 0.4f;
-                _topLidSpeed = 15f;
+                //_topLidSpeed = 15f;
                 _lidsMeet_L = 0.558f;
                 _lidsMeet_R = 0.558f;
                 _botLid_L_Max = 0.565f;
@@ -1022,8 +1052,9 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0.63f;
                 _topLid_L_Min = 0.523f;
                 _topLid_R_Min = 0.523f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 0.4f;
-                _topLidSpeed = 15f;
+                //_topLidSpeed = 15f;
                 _lidsMeet_L = 0.631f;
                 _lidsMeet_R = 0.631f;
                 _botLid_L_Max = 0.672f;
@@ -1058,8 +1089,9 @@ public class CharacterBehaviour : MonoBehaviour
             _shoulder_R_Min = 0f;
             _topLid_L_Min = 0.275f;
             _topLid_R_Min = 0.275f;
+            _blinkDuration = 0.5f;
             _blinkPauseDuration = 3f;
-            _topLidSpeed = 15f;
+            //_topLidSpeed = 15f;
             _lidsMeet_L = 0.78f;
             _lidsMeet_R = 0.78f;
             _botLid_L_Max = 0.81f;
@@ -1095,8 +1127,9 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0f;
                 _topLid_L_Min = 0.303f;
                 _topLid_R_Min = 0.303f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 1.5f;
-                _topLidSpeed = 15f;
+                //_topLidSpeed = 15f;
                 _lidsMeet_L = 0.566f;
                 _lidsMeet_R = 0.566f;
                 _botLid_L_Max = 0.6f;
@@ -1130,8 +1163,9 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0f;
                 _topLid_L_Min = 0.303f;
                 _topLid_R_Min = 0.303f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 3f;
-                _topLidSpeed = 15f;
+                //_topLidSpeed = 15f;
                 _lidsMeet_L = 0.65f;
                 _lidsMeet_R = 0.65f;
                 _botLid_L_Max = 0.7f;
@@ -1168,13 +1202,14 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0.334f;
                 _topLid_L_Min = 0.44f;
                 _topLid_R_Min = 0.44f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 6f;
                 _lidsMeet_L = 0.57f;
                 _lidsMeet_R = 0.57f;
                 _botLid_L_Max = 0.6f;
                 _botLid_R_Max = 0.6f;
                 _botLidSpeed = 0.12f;
-                _topLidSpeed = 1f;
+                //_topLidSpeed = 1f;
             }
             else
             {
@@ -1203,13 +1238,14 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0.63f;
                 _topLid_L_Min = 0.44f;
                 _topLid_R_Min = 0.44f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 6f;
                 _lidsMeet_L = 0.57f;
                 _lidsMeet_R = 0.57f;
                 _botLid_L_Max = 0.6f;
                 _botLid_R_Max = 0.6f;
                 _botLidSpeed = 0.12f;
-                _topLidSpeed = 3f;
+                //_topLidSpeed = 3f;
             }
         }
         if (_pleasure >= -0.5f && _pleasure <= 0.5f && _arousal < -0.5f)                        //x 0, y -1
@@ -1241,13 +1277,14 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0f;
                 _topLid_L_Min = 0.53f;
                 _topLid_R_Min = 0.45f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 6f;
                 _lidsMeet_L = 0.6f;
                 _lidsMeet_R = 0.53f;
                 _botLid_L_Max = 0.61f;
                 _botLid_R_Max = 0.57f;
                 _botLidSpeed = 1.1f;
-                _topLidSpeed = 2f;
+                //_topLidSpeed = 2f;
             }
             else
             {
@@ -1276,13 +1313,14 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0f;
                 _topLid_L_Min = 0.45f;
                 _topLid_R_Min = 0.45f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 6f;
                 _lidsMeet_L = 0.58f;
                 _lidsMeet_R = 0.58f;
                 _botLid_L_Max = 0.61f;
                 _botLid_R_Max = 0.61f;
                 _botLidSpeed = 1.1f;
-                _topLidSpeed = 3f;
+                //_topLidSpeed = 3f;
             }
         }
         if (_pleasure > 0.5f && _arousal < -0.5f)                                               //x 1, y -1
@@ -1314,13 +1352,14 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0f;
                 _topLid_L_Min = 0.42f;
                 _topLid_R_Min = 0.45f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 4f;
                 _lidsMeet_L = 0.5f;
                 _lidsMeet_R = 0.5f;
                 _botLid_L_Max = 0.5f;
                 _botLid_R_Max = 0.5f;
                 _botLidSpeed = 0.1f;
-                _topLidSpeed = 2f;
+                //_topLidSpeed = 2f;
             }
             else
             {
@@ -1349,13 +1388,14 @@ public class CharacterBehaviour : MonoBehaviour
                 _shoulder_R_Min = 0f;
                 _topLid_L_Min = 0.42f;
                 _topLid_R_Min = 0.45f;
+                _blinkDuration = 0.5f;
                 _blinkPauseDuration = 2f;
                 _lidsMeet_L = 0.58f;
                 _lidsMeet_R = 0.58f;
                 _botLid_L_Max = 0.61f;
                 _botLid_R_Max = 0.61f;
                 _botLidSpeed = 1.1f;
-                _topLidSpeed = 3f;
+                //_topLidSpeed = 3f;
             }
         }
 
@@ -1699,7 +1739,7 @@ public class CharacterBehaviour : MonoBehaviour
         express.earFlap_R_Time = _earFlap_R_Time;
 
         // *** DONT copy the lids for other things
-        express.topLidSpeed = _topLidSpeed;
+        //express.topLidSpeed = _topLidSpeed;
 
         express.lidsMeet_L = _lidsMeet_L;
         express.topLid_L_Min = _topLid_L_Min;
@@ -1717,6 +1757,7 @@ public class CharacterBehaviour : MonoBehaviour
         express.botLid_R_Max = _botLid_R_Max;
         express.botLid_R_Time = _botLid_R_Time;
 
+        express.blinkDuration = _blinkDuration;
         express.blinkPauseDuration = _blinkPauseDuration;
         // *** DONT copy the lids for other things
 

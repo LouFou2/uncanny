@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler
+public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     private RectTransform touchpadRect; // Reference to the square panel's RectTransform
     private RectTransform buttonRect; // Reference to the button's RectTransform
@@ -20,9 +20,7 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler
         touchpadRect = GetComponent<RectTransform>();
         buttonRect = transform.GetChild(0).GetComponent<RectTransform>();
 
-        //maxX = (touchpadRect.rect.width - (buttonRect.rect.width / 2)) / 2f;
-        //maxY = (touchpadRect.rect.height - (buttonRect.rect.height / 2)) / 2f;
-        maxX = touchpadRect.rect.width / 2f; //<-previously
+        maxX = touchpadRect.rect.width / 2f;
         maxY = touchpadRect.rect.height / 2f;
     }
 
@@ -34,6 +32,7 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler
             isDragging = true;
             UpdateButtonPosition(eventData.position);
             moodPadActive = true;
+            Debug.Log("Mood Pad On");
         }
     }
 
@@ -47,7 +46,8 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler
     public void OnPointerUp(PointerEventData eventData)
     {
         isDragging = false;
-        moodPadActive = false;
+        moodPadActive = false; 
+        Debug.Log("Mood Pad Off");
     }
 
     private void UpdateButtonPosition(Vector2 position)
@@ -80,49 +80,5 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler
         // Use xValue and yValue for your desired functionality
         //Debug.Log("X: " + xValue + ", Y: " + yValue);
     }
-    /* THE PREVIOUS METHODS FOR UPDATING BUTTON POSITION
-    private void UpdateButtonPosition(Vector2 position) 
-    {
-        Vector2 localPosition = ClampToTouchpadBounds(position);
-        Vector2 buttonOffset = new Vector2(buttonRect.rect.width / 2f, buttonRect.rect.height / 2f);
-        buttonRect.anchoredPosition = localPosition - buttonOffset;
 
-        // Calculate the clamping bounds with button size adjustment
-        float minXClamp = -maxX + buttonOffset.x;
-        float maxXClamp = maxX - buttonOffset.x;
-        float minYClamp = -maxY + buttonOffset.y;
-        float maxYClamp = maxY - buttonOffset.y;
-
-        // Clamp the button's position within the touchpad's bounds
-        Vector2 clampedPosition = buttonRect.anchoredPosition;
-        clampedPosition.x = Mathf.Clamp(clampedPosition.x, minXClamp, maxXClamp);
-        clampedPosition.y = Mathf.Clamp(clampedPosition.y, minYClamp, maxYClamp);
-        buttonRect.anchoredPosition = clampedPosition;
-
-        // Map the button's position to range between -1 and 1 for X and Y
-        float mappedX = clampedPosition.x / maxXClamp;
-        float mappedY = clampedPosition.y / maxYClamp;
-        //float mappedX = localPosition.x / maxX; //<-previously
-        //float mappedY = localPosition.y / maxY;
-
-        // Return the X and Y values
-        xValue = Mathf.Clamp(mappedX, -1f, 1f);
-        yValue = Mathf.Clamp(mappedY, -1f, 1f);
-
-        // Use xValue and yValue for your desired functionality
-        //Debug.Log("X: " + xValue + ", Y: " + yValue);
-        
-    }
-
-    private Vector2 ClampToTouchpadBounds(Vector2 position)
-    {
-        Vector2 touchpadCenter = touchpadRect.rect.center;
-        Vector2 localPosition = position - touchpadCenter;
-
-        localPosition.x = Mathf.Clamp(localPosition.x, -maxX, maxX);
-        localPosition.y = Mathf.Clamp(localPosition.y, -maxY, maxY);
-
-        return localPosition;
-    }
-    */
 }

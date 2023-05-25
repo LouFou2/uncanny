@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private RectTransform touchpadRect; // Reference to the square panel's RectTransform
     private RectTransform buttonRect; // Reference to the button's RectTransform
@@ -16,6 +16,7 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointe
     public float xValue;
     public float yValue;
     public bool headPadActive = false;
+    public bool headPadEnter = false;
 
     private void Start()
     {
@@ -27,6 +28,14 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointe
         Debug.Log("maxX: " + maxX + ", maxY: " + maxY);
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        headPadEnter = true;
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        headPadEnter = false;
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
         // Check if the pointer is clicking on the button

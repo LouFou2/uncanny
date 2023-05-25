@@ -73,20 +73,20 @@ public class ExpressionControl : ScriptableObject
     [Range(0.0f, 1.0f)] public float shoulder_R_Min;
     [HideInInspector] public float shoulder_R_Time = 0f;
 
-    [HideInInspector][Range(1.0f, 100.0f)] public float earFlapSpeed; // ***TODO Take out earflap vars
+    //[HideInInspector][Range(1.0f, 100.0f)] public float earFlapSpeed; // ***TODO Take out earflap vars
 
-    [HideInInspector][Range(-1.0f, 1.0f)] public float earFlap_L;
-    [HideInInspector][Range(0.0f, 1.0f)] public float earFlap_L_Max;
-    [HideInInspector][Range(-1.0f, 1.0f)] public float earFlap_L_Min;
-    [HideInInspector] public float earFlap_L_Time = 0f;
+    //[HideInInspector][Range(-1.0f, 1.0f)] public float earFlap_L;
+    //[HideInInspector][Range(0.0f, 1.0f)] public float earFlap_L_Max;
+    //[HideInInspector][Range(-1.0f, 1.0f)] public float earFlap_L_Min;
+    //[HideInInspector] public float earFlap_L_Time = 0f;
 
-    [HideInInspector][Range(-1.0f, 1.0f)] public float earFlap_R;
-    [HideInInspector][Range(0.0f, 1.0f)] public float earFlap_R_Max;
-    [HideInInspector][Range(-1.0f, 1.0f)] public float earFlap_R_Min;
-    [HideInInspector] public float earFlap_R_Time = 0f;
+    //[HideInInspector][Range(-1.0f, 1.0f)] public float earFlap_R;
+    //[HideInInspector][Range(0.0f, 1.0f)] public float earFlap_R_Max;
+    //[HideInInspector][Range(-1.0f, 1.0f)] public float earFlap_R_Min;
+    //[HideInInspector] public float earFlap_R_Time = 0f;
 
-    [HideInInspector][Range(0.0f, 1.0f)] public float earFlap_L_Weight;
-    [HideInInspector][Range(0.0f, 1.0f)] public float earFlap_R_Weight; //the weight values are just to check, not to manipulate
+    //[HideInInspector][Range(0.0f, 1.0f)] public float earFlap_L_Weight;
+    //[HideInInspector][Range(0.0f, 1.0f)] public float earFlap_R_Weight; //the weight values are just to check, not to manipulate
 
     // *** BLINKING *** [this works different from everything else]
     [Range(0.0f, 1.0f)] public float eyeLidTop_L;

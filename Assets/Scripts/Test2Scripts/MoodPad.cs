@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private RectTransform touchpadRect; // Reference to the square panel's RectTransform
     private RectTransform buttonRect; // Reference to the button's RectTransform
@@ -14,6 +14,7 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointe
     public float xValue;
     public float yValue;
     public bool moodPadActive = false;
+    public bool moodPadEnter = false;    
 
     private void Start()
     {
@@ -23,7 +24,14 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointe
         maxX = touchpadRect.rect.width / 2f;
         maxY = touchpadRect.rect.height / 2f;
     }
-
+    public void OnPointerEnter(PointerEventData eventData) 
+    {
+        moodPadEnter = true;
+    }
+    public void OnPointerExit(PointerEventData eventData) 
+    {
+        moodPadEnter = false;
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
         // Check if the pointer is clicking on the button

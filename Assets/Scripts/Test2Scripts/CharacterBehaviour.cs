@@ -466,7 +466,7 @@ public class CharacterBehaviour : MonoBehaviour
             if (_headTurn > _headTurnMax ) 
             {
                 float _headOutBoundMax = headPad.xValue;
-                _headTurn = Mathf.Lerp(_headOutBoundMax, _headTurnMax - _headTurnMin, headEQTime / 2f);
+                _headTurn = Mathf.Lerp(_headOutBoundMax, _headTurnMax, headEQTime / 2f);
                 Debug.Log("HeadOutBoundMax");
                 headEQTime += Time.deltaTime;
                 _headTurnTime = 0f;

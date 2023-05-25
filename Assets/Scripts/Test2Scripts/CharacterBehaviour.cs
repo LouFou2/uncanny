@@ -29,6 +29,7 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public bool _headIsTurning;
     [HideInInspector] public float _headTurnMax;
     [HideInInspector] public float _headTurnMin;
+    [HideInInspector] public float headEQTime = 0f;
     //private float _headTurnTarget = 1f;
     [HideInInspector] public float _headTurnSpeed;
     [HideInInspector] public AnimationCurve _headTurnCurve;
@@ -459,12 +460,36 @@ public class CharacterBehaviour : MonoBehaviour
             //_headTurnTime = _headTurnSpeed * Time.deltaTime;
             //float headTurnEvaluation = _headTurnCurve.Evaluate(_headTurnTime);                      
             //_headTurn = Mathf.Lerp(_headTurn, _headTurnTarget, headTurnEvaluation);
+            
+            
+            
+            if (_headTurn > _headTurnMax ) 
+            {
+                float _headOutBoundMax = headPad.xValue;
+                _headTurn = Mathf.Lerp(_headOutBoundMax, _headTurnMax - _headTurnMin, headEQTime / 2f);
+                Debug.Log("HeadOutBoundMax");
+                headEQTime += Time.deltaTime;
+                _headTurnTime = 0f;
+            }
+            if (_headTurn < _headTurnMin)
+            {
+                float _headOutBoundMin = headPad.xValue;
+                _headTurn = Mathf.Lerp(_headOutBoundMin, _headTurnMin, headEQTime / 2f);
+                Debug.Log("HeadOutBoundMin");
+                headEQTime += Time.deltaTime;
+                _headTurnTime = 0f;
+            }
+            if (_headTurn <= _headTurnMax && _headTurn >= _headTurnMin) 
+            {
+                float headTurnValue = Mathf.Sin(_headTurnTime);// *** This is the sine wave code
+                float headTurnRange = _headTurnMax - _headTurnMin;
+                float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
+                _headTurn = headTurnFinalValue;
+                _headTurnTime += Time.deltaTime * _headTurnSpeed;
+                headEQTime = 0f;
+            }
+            
 
-            _headTurnTime += Time.deltaTime * _headTurnSpeed;                                     // *** This is the sine wave code
-            float headTurnValue = Mathf.Sin(_headTurnTime);// * _headTurnAmplitude;
-            float headTurnRange = _headTurnMax - _headTurnMin;
-            float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
-            _headTurn = headTurnFinalValue;
         }
 
         if (_headNodSpeed != 0f && _headIsNodding == true)

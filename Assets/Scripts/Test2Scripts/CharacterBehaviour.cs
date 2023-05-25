@@ -194,7 +194,7 @@ public class CharacterBehaviour : MonoBehaviour
     {
         UserInputs();
         AutoMovements();
-        ControlMood();        
+        //ControlMood();        
         UpdateParams(); //updates ExpressionControl + MoodControl parameters (main data container for all expressions)
         Animate();
     }

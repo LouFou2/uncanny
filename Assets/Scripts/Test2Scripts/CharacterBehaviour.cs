@@ -463,6 +463,7 @@ public class CharacterBehaviour : MonoBehaviour
             {
                 _headTurn = headPad.xValue;
                 _headNod = headPad.yValue;
+                _headEQTime = 0f;
             }            
         }
         else if (headPad.headPadActive == false && !_headIsTurning && !_headIsNodding) // should I add code to make button return?

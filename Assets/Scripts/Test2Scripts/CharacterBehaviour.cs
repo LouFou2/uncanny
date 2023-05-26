@@ -459,77 +459,58 @@ public class CharacterBehaviour : MonoBehaviour
             _headTurn = headPad.xValue;
             _headNod = headPad.yValue;
         }
-        else if (headPad.headPadActive == false)
+        else if (headPad.headPadActive == false && !_headIsTurning && !_headIsNodding) // should I add code to make button return?
         {
+            HeadReturn();
+        }
+    }
+    void HeadReturn() 
+    {
+        _headIsTurning = false;
+        _headIsNodding = false;
+        float _headReturnDuration = 2f;
+        float _headTurnMidPoint = (_headNodMax + _headNodMin) / 2; // find midpoint of the head turn range
+        float _headNodMidPoint = (_headNodMax + _headNodMin) / 2; // find midpoint of the head nod range
+        float _headOutBoundX = headPad.xValue;
+        float _headOutBoundY = headPad.yValue;
+        if (_headTurnEQTime < _headReturnDuration || _headNodEQTime < _headReturnDuration) 
+        {
+            _headTurn = Mathf.Lerp(_headOutBoundX, _headTurnMidPoint, _headTurnCurve.Evaluate(_headTurnEQTime / _headReturnDuration));
+            _headNod = Mathf.Lerp(_headOutBoundY, _headNodMidPoint, _headTurnCurve.Evaluate(_headNodEQTime / _headReturnDuration));
+            _headTurnEQTime += Time.deltaTime;
+            _headNodEQTime += Time.deltaTime;
+            _headTurnTime = 0f;
+            _headNodTime = 0f;
+        }
+        else 
+        {
+            _headTurn = _headTurnMidPoint;
+            _headNod = _headNodMidPoint;            
             _headIsTurning = true;
             _headIsNodding = true;
         }
     }
-    
+
     void AutoMovements() //***TODO - Add a way to reset time to zero for each sine wave (resets to zero in start method.)
     {
         if (_headTurnSpeed != 0f && _headIsTurning)
         {
-            //if (_headTurn <= _headTurnMin + 0.01f) { _headTurnTarget = _headTurnMax; }        //This uses Lerp. Change to control lerp with duration, not speed.
-            //if (_headTurn >= _headTurnMax - 0.01f) { _headTurnTarget = _headTurnMin; }
-            //_headTurnTime = _headTurnSpeed * Time.deltaTime;
-            //float headTurnEvaluation = _headTurnCurve.Evaluate(_headTurnTime);                      
-            //_headTurn = Mathf.Lerp(_headTurn, _headTurnTarget, headTurnEvaluation);
-
-            //if (_headTurn > _headTurnMax ) 
-            //{
-            //    float _headOutBoundMaxX = headPad.xValue;
-            //    _headTurn = Mathf.Lerp(_headOutBoundMaxX, _headTurnMax, _headTurnEQTime / 2f);
-            //    Debug.Log("HeadTurnOutBoundMax");
-            //    _headTurnEQTime += Time.deltaTime;
-            //   _headTurnTime = 0f;
-            //}
-            //if (_headTurn < _headTurnMin)
-            //{
-            //    float _headOutBoundMinX = headPad.xValue;
-            //    _headTurn = Mathf.Lerp(_headOutBoundMinX, _headTurnMin, _headTurnEQTime / 2f);
-            //    Debug.Log("HeadTurnOutBoundMin");
-            //    _headTurnEQTime += Time.deltaTime;
-            //    _headTurnTime = 0f;
-            //}
-            //if (_headTurn <= _headTurnMax && _headTurn >= _headTurnMin) 
-            //{
-                float headTurnValue = Mathf.Sin(_headTurnTime);// *** This is the sine wave code
-                float headTurnRange = _headTurnMax - _headTurnMin;
-                float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
-                _headTurn = headTurnFinalValue;
-                _headTurnTime += Time.deltaTime * _headTurnSpeed;
-                _headTurnEQTime = 0f;
-            //}
+            float headTurnValue = Mathf.Sin(_headTurnTime);// *** This is the sine wave code
+            float headTurnRange = _headTurnMax - _headTurnMin;
+            float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
+            _headTurn = headTurnFinalValue;
+            _headTurnTime += Time.deltaTime * _headTurnSpeed;
+            _headTurnEQTime = 0f;
         }
 
         if (_headNodSpeed != 0f && _headIsNodding)
-        {
-            //if (_headNod > _headNodMax)
-            //{
-             //   float _headOutBoundMaxY = headPad.yValue;
-            //    _headNod = Mathf.Lerp(_headOutBoundMaxY, _headNodMax, _headNodEQTime / 2f);
-            //    Debug.Log("HeadNodOutBoundMax");
-            //    _headNodEQTime += Time.deltaTime;
-            //    _headNodTime = 0f;
-            //}
-            //if (_headNod < _headNodMin)
-            //{
-            //    float _headOutBoundMinY = headPad.yValue;
-            //   _headNod = Mathf.Lerp(_headOutBoundMinY, _headNodMin, _headNodEQTime / 2f);
-            //    Debug.Log("HeadNodOutBoundMin");
-            //    _headNodEQTime += Time.deltaTime;
-            //    _headNodTime = 0f;
-            //}
-            //if (_headNod <= _headNodMax && _headNod >= _headNodMin)
-            //{                
-                float headNodValue = Mathf.Sin(_headNodTime);
-                float headNodRange = _headNodMax - _headNodMin;
-                float headNodFinalValue = (headNodValue + 1f) / 2f * headNodRange + _headNodMin;
-                _headNod = headNodFinalValue;
-                _headNodTime += Time.deltaTime * _headNodSpeed;
-                _headNodEQTime = 0;
-            //}
+        {              
+            float headNodValue = Mathf.Sin(_headNodTime);
+            float headNodRange = _headNodMax - _headNodMin;
+            float headNodFinalValue = (headNodValue + 1f) / 2f * headNodRange + _headNodMin;
+            _headNod = headNodFinalValue;
+            _headNodTime += Time.deltaTime * _headNodSpeed;
+            _headNodEQTime = 0;
         }
 
         if (_headTiltSpeed != 0f)

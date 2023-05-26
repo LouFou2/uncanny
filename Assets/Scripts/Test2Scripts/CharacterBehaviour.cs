@@ -29,8 +29,6 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public bool _headIsTurning;
     [HideInInspector] public float _headTurnMax;
     [HideInInspector] public float _headTurnMin;
-    [HideInInspector] public float _headTurnEQTime = 0f;
-    //private float _headTurnTarget = 1f;
     [HideInInspector] public float _headTurnSpeed;
     [HideInInspector] public AnimationCurve _headTurnCurve;
     private float _headTurnTime;
@@ -40,8 +38,9 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _headNodMin;
     [HideInInspector] public float _headNodSpeed;
     private float _headNodTime;
-    [HideInInspector] public float _headNodEQTime = 0f;
     [HideInInspector] public bool _headNodPlusTurn;
+
+    [HideInInspector] public float _headEQTime = 0f;
 
     [HideInInspector] public float _headTiltMax;
     [HideInInspector] public float _headTiltMin;
@@ -456,29 +455,52 @@ public class CharacterBehaviour : MonoBehaviour
         {
             _headIsTurning = false;
             _headIsNodding = false;
-            _headTurn = headPad.xValue;
-            _headNod = headPad.yValue;
+            if (_headTurn != headPad.xValue || _headNod != headPad.yValue) 
+            {
+                HeadReturnToButton();
+            }
+            else 
+            {
+                _headTurn = headPad.xValue;
+                _headNod = headPad.yValue;
+            }            
         }
         else if (headPad.headPadActive == false && !_headIsTurning && !_headIsNodding) // should I add code to make button return?
         {
-            HeadReturn();
+            HeadReturnToAuto();
         }
     }
-    void HeadReturn() 
+    void HeadReturnToButton() 
+    {
+        float _headAutoPointX = _headTurn;
+        float _headAutoPointY = _headNod;
+        float _backToButtonDuration = 1f;
+        if (_headEQTime < _backToButtonDuration) 
+        {
+            _headTurn = Mathf.Lerp(_headAutoPointX, headPad.xValue, _headTurnCurve.Evaluate(_headEQTime / _backToButtonDuration));
+            _headNod = Mathf.Lerp(_headAutoPointY, headPad.yValue, _headTurnCurve.Evaluate(_headEQTime / _backToButtonDuration));
+            _headEQTime += Time.deltaTime * Mathf.Max(_headTurnSpeed, _headNodSpeed);
+        }
+        else 
+        {
+            _headTurn = headPad.xValue;
+            _headNod = headPad.yValue;
+        }        
+    }
+    void HeadReturnToAuto() 
     {
         _headIsTurning = false;
         _headIsNodding = false;
-        float _headReturnDuration = 2f;
-        float _headTurnMidPoint = (_headNodMax + _headNodMin) / 2; // find midpoint of the head turn range
+        float _headReturnDuration = 1f;
+        float _headTurnMidPoint = (_headTurnMax + _headTurnMin) / 2; // find midpoint of the head turn range
         float _headNodMidPoint = (_headNodMax + _headNodMin) / 2; // find midpoint of the head nod range
         float _headOutBoundX = headPad.xValue;
         float _headOutBoundY = headPad.yValue;
-        if (_headTurnEQTime < _headReturnDuration || _headNodEQTime < _headReturnDuration) 
+        if (_headEQTime < _headReturnDuration) 
         {
-            _headTurn = Mathf.Lerp(_headOutBoundX, _headTurnMidPoint, _headTurnCurve.Evaluate(_headTurnEQTime / _headReturnDuration));
-            _headNod = Mathf.Lerp(_headOutBoundY, _headNodMidPoint, _headTurnCurve.Evaluate(_headNodEQTime / _headReturnDuration));
-            _headTurnEQTime += Time.deltaTime;
-            _headNodEQTime += Time.deltaTime;
+            _headTurn = Mathf.Lerp(_headOutBoundX, _headTurnMidPoint, _headTurnCurve.Evaluate(_headEQTime / _headReturnDuration));
+            _headNod = Mathf.Lerp(_headOutBoundY, _headNodMidPoint, _headTurnCurve.Evaluate(_headEQTime / _headReturnDuration));
+            _headEQTime += Time.deltaTime * Mathf.Max(_headTurnSpeed, _headNodSpeed);
             _headTurnTime = 0f;
             _headNodTime = 0f;
         }
@@ -490,6 +512,7 @@ public class CharacterBehaviour : MonoBehaviour
             _headIsNodding = true;
         }
     }
+    //# END HEAD TOUCHPAD FUNCTIONALITY
 
     void AutoMovements() //***TODO - Add a way to reset time to zero for each sine wave (resets to zero in start method.)
     {
@@ -500,7 +523,7 @@ public class CharacterBehaviour : MonoBehaviour
             float headTurnFinalValue = (headTurnValue + 1f) / 2f * headTurnRange + _headTurnMin;
             _headTurn = headTurnFinalValue;
             _headTurnTime += Time.deltaTime * _headTurnSpeed;
-            _headTurnEQTime = 0f;
+            _headEQTime = 0f;
         }
 
         if (_headNodSpeed != 0f && _headIsNodding)
@@ -510,7 +533,7 @@ public class CharacterBehaviour : MonoBehaviour
             float headNodFinalValue = (headNodValue + 1f) / 2f * headNodRange + _headNodMin;
             _headNod = headNodFinalValue;
             _headNodTime += Time.deltaTime * _headNodSpeed;
-            _headNodEQTime = 0;
+            _headEQTime = 0;
         }
 
         if (_headTiltSpeed != 0f)

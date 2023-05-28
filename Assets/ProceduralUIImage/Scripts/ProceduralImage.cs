@@ -230,6 +230,7 @@ namespace UnityEngine.UI.ProceduralImage
                 vh.PopulateUIVertex(ref vert, i);
 
                 vert.position += ((Vector3)vert.uv0 - new Vector3(0.5f, 0.5f)) * info.fallOffDistance;
+
                 //vert.uv0 = vert.uv0;
                 vert.uv1 = uv1;
                 vert.uv2 = uv2;

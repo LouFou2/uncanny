@@ -4056,8 +4056,8 @@ GameObject:
   - component: {fileID: 1639721347}
   - component: {fileID: 1639721350}
   - component: {fileID: 1639721349}
-  - component: {fileID: 1639721348}
   - component: {fileID: 1639721351}
+  - component: {fileID: 1639721348}
   m_Layer: 5
   m_Name: MoodPad
   m_TagString: Untagged

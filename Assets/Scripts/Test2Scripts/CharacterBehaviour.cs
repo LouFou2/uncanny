@@ -326,6 +326,7 @@ public class CharacterBehaviour : MonoBehaviour
         _moodEqualiseSpeed = mood.moodEqualiseSpeed;
         */
     }
+    
     void ExpressControlUpdates() // Can remove this once game is finished (only used for changeing parameters in runtime)
     {
         //Head Movements (Expression Control)
@@ -442,7 +443,8 @@ public class CharacterBehaviour : MonoBehaviour
         _moodEqualiseSpeed = mood.moodEqualiseSpeed;
         */
     }
-    
+
+
     void UserInputs() 
     {
         if (moodPad.moodPadActive == true) 

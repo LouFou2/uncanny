@@ -50,10 +50,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   headIsTurning: 1
-  headTurn: 0.32374135
-  headTurnMax: 0.32495502
-  headTurnMin: -0.31558576
-  headTurnSpeed: 0.20000003
+  headTurn: 0.32538354
+  headTurnMax: 0.33
+  headTurnMin: -0.33
+  headTurnSpeed: 0.2
   headTurnTime: 0.09432228
   headTurnCurve:
     serializedVersion: 2
@@ -80,60 +80,60 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   headIsNodding: 1
-  headNod: -0.15642092
-  headNodMax: 0.06982068
-  headNodMin: -0.22117004
-  headNodSpeed: 3.5161922
-  headNodTime: 225.6559
+  headNod: 0.08273101
+  headNodMax: 0.17
+  headNodMin: -0.09
+  headNodSpeed: 0.4
+  headNodTime: 15.376865
   headNodPlusTurn: 0
-  headTilt: -0.08159352
-  headTiltMax: 0.23752981
-  headTiltMin: -0.2418541
-  headTiltSpeed: 1.6479535
-  headTiltTime: 131.60912
-  jawOpen: 0.09412511
-  jawOpenMax: 0.21472023
-  jawOpenMin: 0.09301149
-  jawOpenSpeed: 2.1378984
-  jawOpenTime: 576.29065
-  lookUD: 0.22896917
-  lookUDMax: 0.2412212
-  lookUDMin: -0.02378358
-  lookUDSpeed: 0.8346713
-  lookUDTime: 115.101555
-  lookLR: 0.355564
-  lookLRMax: 0.36000004
-  lookLRMin: -0.36000004
-  lookLRSpeed: 0.45675713
-  lookLRTime: 51.67913
-  shoulderSpeed: 2.527464
-  shoulder_L: 0.47439006
-  shoulder_L_Max: 0.5600885
+  headTilt: -0.087921254
+  headTiltMax: 0.1
+  headTiltMin: -0.1
+  headTiltSpeed: 0.6
+  headTiltTime: 23.065355
+  jawOpen: 0.013443557
+  jawOpenMax: 0.076
+  jawOpenMin: 0
+  jawOpenSpeed: 0.1
+  jawOpenTime: 3.8442163
+  lookUD: 0
+  lookUDMax: 0
+  lookUDMin: 0
+  lookUDSpeed: 0.1
+  lookUDTime: 3.8442163
+  lookLR: 0.13069642
+  lookLRMax: 0.36
+  lookLRMin: -0.36
+  lookLRSpeed: 0.5
+  lookLRTime: 19.22109
+  shoulderSpeed: 1.8
+  shoulder_L: 0.0049422197
+  shoulder_L_Max: 0.365
   shoulder_L_Min: 0
-  shoulder_L_Time: 918.11206
-  shoulder_R: 0.47377962
-  shoulder_R_Max: 0.5593678
+  shoulder_L_Time: 67.7775
+  shoulder_R: 0.0049422197
+  shoulder_R_Max: 0.365
   shoulder_R_Min: 0
-  shoulder_R_Time: 918.11206
-  eyeLidTop_L: 0.59058076
-  eyeLidTop_R: 0.58687073
-  topLid_L_Min: 0.31837788
-  topLid_R_Min: 0.3147743
-  topLid_L_Time: 0.3256043
+  shoulder_R_Time: 67.7775
+  eyeLidTop_L: 0.275
+  eyeLidTop_R: 0.275
+  topLid_L_Min: 0.275
+  topLid_R_Min: 0.275
+  topLid_L_Time: 0.20288295
   topLid_R_Time: 0
-  blinkDuration: 0.8603572
-  blinkPauseDuration: 2.4083114
-  eyeLidBot_L: 0.6535036
-  eyeLidBot_R: 0.6498143
-  lidsMeet_L: 0.635649
-  lidsMeet_R: 0.630604
-  botLid_L_Max: 0.664124
-  botLid_R_Max: 0.6612411
-  botLid_L_Time: 195.03561
-  botLid_R_Time: 195.03561
-  botLidSpeed: 3.0452528
+  blinkDuration: 0.20204274
+  blinkPauseDuration: 2.006809
+  eyeLidBot_L: 0.782112
+  eyeLidBot_R: 0.782112
+  lidsMeet_L: 0.7799999
+  lidsMeet_R: 0.7799999
+  botLid_L_Max: 0.81
+  botLid_R_Max: 0.81
+  botLid_L_Time: 11.532678
+  botLid_R_Time: 11.532678
+  botLidSpeed: 0.3
   tongueStretch: 0
   tongueUpDown: 0
-  pleasure: 0.6071309
-  arousal: -0.08420968
-  subDom: 0
+  pleasure: -1
+  arousal: 0
+  subDom: 1

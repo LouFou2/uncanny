@@ -96,18 +96,7 @@ public class ExpressionControl : ScriptableObject
     [Range(0.0f, 20.0f)] public float botLidSpeed;
 
     // *** FACIAL ARTICULATION ***
-    /*
-    [HideInInspector][Range(0.0f, 1.0f)] public float squint;
-    [HideInInspector][Range(0.0f, 1.0f)] public float browLift;
-    [HideInInspector][Range(0.0f, 1.0f)] public float frown;    
-    [HideInInspector][Range(0.0f, 1.0f)] public float smile;
-    [HideInInspector][Range(0.0f, 1.0f)] public float lipStretch;
-    [HideInInspector][Range(0.0f, 1.0f)] public float lipTight;
-    [HideInInspector][Range(0.0f, 1.0f)] public float pout;
-    [HideInInspector][Range(0.0f, 1.0f)] public float speak;
-    [HideInInspector][Range(0.0f, 1.0f)] public float lipCnrs;
-    [HideInInspector][Range(0.0f, 1.0f)] public float sneer;
-    */
+
     [Range(0.0f, 1.0f)] public float tongueStretch;
     [Range(0.0f, 1.0f)] public float tongueUpDown;
     

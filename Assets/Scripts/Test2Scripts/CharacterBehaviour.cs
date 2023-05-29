@@ -4,13 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-//using UnityEditor.Experimental.GraphView;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Analytics;
 using System.Threading.Tasks;
 using UnityEngine.Animations.Rigging;
 using JetBrains.Annotations;
-//using UnityEditor.PackageManager;
+using UnityEditor.PackageManager;
 using System.Runtime.CompilerServices;
 
 public class CharacterBehaviour : MonoBehaviour
@@ -65,7 +65,7 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _shoulderSpeed;
 
     [HideInInspector] public float _shoulder_L_Max;
-    [HideInInspector] public float _shoulder_L_Min;    
+    [HideInInspector] public float _shoulder_L_Min;
     private float _shoulder_L_Time;
 
     [HideInInspector] public float _shoulder_R_Max;
@@ -80,6 +80,7 @@ public class CharacterBehaviour : MonoBehaviour
     [HideInInspector] public float _topLid_R_Min;
     private float _topLid_R_Time;
 
+    [HideInInspector] public float _topLidSpeed;
     [HideInInspector] public float _botLidSpeed;
 
     [HideInInspector] public float _botLid_L_Max;
@@ -94,7 +95,7 @@ public class CharacterBehaviour : MonoBehaviour
 
     //ExpressionControl variables
     [HideInInspector] public float _moodOrEmote; // NB: To transition between Mood Animations (idle state) to Emotional Expressions Animations
-    
+
     [HideInInspector] public float _headTurn; // Head Movement keys
     [HideInInspector] public float _headNod;
     [HideInInspector] public float _headTilt;
@@ -122,14 +123,12 @@ public class CharacterBehaviour : MonoBehaviour
     private void OnEnable()
     {
         express.updated.AddListener(ExpressControlUpdates);
-        mood.updated.AddListener(ExpressControlUpdates);
     }
     private void OnDisable()
     {
-        express.updated.RemoveListener(ExpressControlUpdates);
-        mood.updated.RemoveListener(ExpressControlUpdates);
+        express.updated.RemoveListener(ExpressControlUpdates);        
     }
-    
+
     void Start()
     {
         CheckParams();
@@ -138,7 +137,7 @@ public class CharacterBehaviour : MonoBehaviour
     void Update()
     {
         UserInputs();
-        AutoMovements();     
+        AutoMovements();
         UpdateParams(); //updates ExpressionControl + MoodControl parameters (main data container for all expressions)
         Animate();
     }
@@ -162,7 +161,7 @@ public class CharacterBehaviour : MonoBehaviour
         _headTurnMax = express.headTurnMax;
         _headTurnMin = express.headTurnMin;
         _headTurnSpeed = express.headTurnSpeed;
-        //_headTurnTime = express.headTurnTime = 0f;
+        _headTurnTime = express.headTurnTime = 0f;
         _headTurnCurve = express.headTurnCurve;
 
         _headIsNodding = express.headIsNodding;
@@ -210,6 +209,7 @@ public class CharacterBehaviour : MonoBehaviour
         _topLid_R_Min = express.topLid_R_Min;
         _topLid_R_Time = express.topLid_R_Time = 0f;
 
+        _topLidSpeed = express.topLidSpeed;
         _botLidSpeed = express.botLidSpeed;
 
         _botLid_L_Max = express.botLid_L_Max;
@@ -241,7 +241,7 @@ public class CharacterBehaviour : MonoBehaviour
         //_subDom = express.subDom;
         */
     }
-    
+
     void ExpressControlUpdates() // Can remove this once game is finished (only used for changeing parameters in runtime)
     {
         //Head Movements (Expression Control)
@@ -304,6 +304,7 @@ public class CharacterBehaviour : MonoBehaviour
         _topLid_R_Min = express.topLid_R_Min;
         _topLid_R_Time = express.topLid_R_Time;
 
+        _topLidSpeed = express.topLidSpeed;
         _botLidSpeed = express.botLidSpeed;
 
         _botLid_L_Max = express.botLid_L_Max;
@@ -348,52 +349,52 @@ public class CharacterBehaviour : MonoBehaviour
     }
 
 
-    void UserInputs() 
+    void UserInputs()
     {
-        if (moodPad.moodPadActive == true) 
+        if (moodPad.moodPadActive == true)
         {
             _subDom = moodPad.xValue;
             _pleasure = moodPad.yValue;
         }
-        
+
         if (headPad.headPadActive == true)
         {
             _headIsTurning = false;
             _headIsNodding = false;
-            if (_headTurn != headPad.xValue || _headNod != headPad.yValue) 
+            if (_headTurn != headPad.xValue || _headNod != headPad.yValue)
             {
                 HeadReturnToButton();
             }
-            else 
+            else
             {
                 _headTurn = headPad.xValue;
                 _headNod = headPad.yValue;
                 _headEQTime = 0f;
-            }            
+            }
         }
         else if (headPad.headPadActive == false && !_headIsTurning && !_headIsNodding) // should I add code to make button return?
         {
             HeadReturnToAuto();
         }
     }
-    void HeadReturnToButton() 
+    void HeadReturnToButton()
     {
         float _headAutoPointX = _headTurn;
         float _headAutoPointY = _headNod;
         float _backToButtonDuration = 1f;
-        if (_headEQTime < _backToButtonDuration) 
+        if (_headEQTime < _backToButtonDuration)
         {
             _headTurn = Mathf.Lerp(_headAutoPointX, headPad.xValue, _headTurnCurve.Evaluate(_headEQTime / _backToButtonDuration));
             _headNod = Mathf.Lerp(_headAutoPointY, headPad.yValue, _headTurnCurve.Evaluate(_headEQTime / _backToButtonDuration));
             _headEQTime += Time.deltaTime * Mathf.Max(_headTurnSpeed, _headNodSpeed);
         }
-        else 
+        else
         {
             _headTurn = headPad.xValue;
             _headNod = headPad.yValue;
-        }        
+        }
     }
-    void HeadReturnToAuto() 
+    void HeadReturnToAuto()
     {
         _headIsTurning = false;
         _headIsNodding = false;
@@ -402,7 +403,7 @@ public class CharacterBehaviour : MonoBehaviour
         float _headNodMidPoint = (_headNodMax + _headNodMin) / 2; // find midpoint of the head nod range
         float _headOutBoundX = headPad.xValue;
         float _headOutBoundY = headPad.yValue;
-        if (_headEQTime < _headReturnDuration) 
+        if (_headEQTime < _headReturnDuration)
         {
             _headTurn = Mathf.Lerp(_headOutBoundX, _headTurnMidPoint, _headTurnCurve.Evaluate(_headEQTime / _headReturnDuration));
             _headNod = Mathf.Lerp(_headOutBoundY, _headNodMidPoint, _headTurnCurve.Evaluate(_headEQTime / _headReturnDuration));
@@ -410,10 +411,10 @@ public class CharacterBehaviour : MonoBehaviour
             _headTurnTime = 0f;
             _headNodTime = 0f;
         }
-        else 
+        else
         {
             _headTurn = _headTurnMidPoint;
-            _headNod = _headNodMidPoint;            
+            _headNod = _headNodMidPoint;
             _headIsTurning = true;
             _headIsNodding = true;
         }
@@ -433,7 +434,7 @@ public class CharacterBehaviour : MonoBehaviour
         }
 
         if (_headNodSpeed != 0f && _headIsNodding)
-        {              
+        {
             float headNodValue = Mathf.Sin(_headNodTime);
             float headNodRange = _headNodMax - _headNodMin;
             float headNodFinalValue = (headNodValue + 1f) / 2f * headNodRange + _headNodMin;
@@ -460,7 +461,7 @@ public class CharacterBehaviour : MonoBehaviour
             _jawOpen = jawOpenFinalValue;
         }
 
-        if (_lookLRSpeed != 0f) 
+        if (_lookLRSpeed != 0f)
         {
             _lookLRTime += Time.deltaTime * _lookLRSpeed;
             float lookLRValue = Mathf.Sin(_lookLRTime);// * _lookLRAmplitude;
@@ -468,7 +469,7 @@ public class CharacterBehaviour : MonoBehaviour
             float lookLRFinalValue = (lookLRValue + 1f) / 2f * lookLRRange + _lookLRMin;
             _lookLR = lookLRFinalValue;
         }
-        
+
         if (_lookUDSpeed != 0f)
         {
             _lookUDTime += Time.deltaTime * _lookUDSpeed;
@@ -494,20 +495,22 @@ public class CharacterBehaviour : MonoBehaviour
         }
 
         // *** note that eyelids are different from other sine wave movements      
-        
-        if (_topLid_L_Time < _blinkDuration && !_pauseBlinking)
+        if (_topLidSpeed != 0f)
         {
-            _eyeLidTop_L = Mathf.Lerp(_topLid_L_Min, _eyeLidBot_L, _blinkCurve.Evaluate(_topLid_L_Time / _blinkDuration));
-            _eyeLidTop_R = Mathf.Lerp(_topLid_R_Min, _eyeLidBot_R, _blinkCurve.Evaluate(_topLid_L_Time / _blinkDuration));
-            _topLid_L_Time += Time.deltaTime;
-        }
+            if (_topLid_L_Time < _blinkDuration && !_pauseBlinking)
+            {
+                _eyeLidTop_L = Mathf.Lerp(_topLid_L_Min, _eyeLidBot_L, _blinkCurve.Evaluate(_topLid_L_Time / _blinkDuration));
+                _eyeLidTop_R = Mathf.Lerp(_topLid_R_Min, _eyeLidBot_R, _blinkCurve.Evaluate(_topLid_L_Time / _blinkDuration));
+                _topLid_L_Time += Time.deltaTime;
+            }
 
-        if (_topLid_L_Time >= _blinkDuration && !_pauseBlinking)
-        {
-            StartCoroutine(BlinkPause(_blinkPauseDuration));
-        }
+            if (_topLid_L_Time >= _blinkDuration && !_pauseBlinking)
+            {
+                StartCoroutine(BlinkPause(_blinkPauseDuration));
+            }
+        }        
 
-        if (_botLidSpeed > 0) 
+        if (_botLidSpeed > 0f)
         {
             _botLid_L_Time += Time.deltaTime * _botLidSpeed;
             float botLid_L_Value = Mathf.Sin(_botLid_L_Time);
@@ -520,7 +523,7 @@ public class CharacterBehaviour : MonoBehaviour
             float botLid_R_Range = _botLid_R_Max - _lidsMeet_R;
             float botLid_R_FinalValue = (botLid_R_Value + 1f) / 2f * botLid_R_Range + _lidsMeet_R;
             _eyeLidBot_R = botLid_R_FinalValue;
-        }        
+        }
         // *** note that eyelids are different from other sine wave movements (dont copy for other movements)
 
     }
@@ -550,8 +553,9 @@ public class CharacterBehaviour : MonoBehaviour
         express.headTurnMin = _headTurnMin;
         express.headTurnSpeed = _headTurnSpeed;
         //express.headTurnTime = _headTurnTime;
-       // express.headTurnCurve = _headTurnCurve;
+        //express.headTurnCurve = _headTurnCurve;
 
+        express.headIsNodding = _headIsNodding;
         express.headNodMax = _headNodMax;
         express.headNodMin = _headNodMin;
         express.headNodSpeed = _headNodSpeed;
@@ -580,7 +584,7 @@ public class CharacterBehaviour : MonoBehaviour
         express.shoulderSpeed = _shoulderSpeed;
 
         express.shoulder_L_Max = _shoulder_L_Max;
-        express.shoulder_L_Min = _shoulder_L_Min;        
+        express.shoulder_L_Min = _shoulder_L_Min;
         express.shoulder_L_Time = _shoulder_L_Time;
 
         express.shoulder_R_Max = _shoulder_R_Max;
@@ -596,6 +600,7 @@ public class CharacterBehaviour : MonoBehaviour
         express.topLid_R_Min = _topLid_R_Min;
         express.topLid_R_Time = _topLid_R_Time;
 
+        express.topLidSpeed = _topLidSpeed;
         express.botLidSpeed = _botLidSpeed;
 
         express.botLid_L_Max = _botLid_L_Max;
@@ -635,7 +640,7 @@ public class CharacterBehaviour : MonoBehaviour
         express.pleasure = _pleasure;
         express.arousal = _arousal;
         express.subDom = _subDom;
-        
+
     }
     void Animate()
     {
@@ -672,6 +677,6 @@ public class CharacterBehaviour : MonoBehaviour
         animator.SetFloat("Pleasure", _pleasure);
         animator.SetFloat("Arousal", _arousal);
         animator.SetFloat("SubDom", _subDom);
-        
+
     }
 }

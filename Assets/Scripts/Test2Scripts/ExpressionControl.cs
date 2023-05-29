@@ -14,7 +14,7 @@ public class ExpressionControl : ScriptableObject
     [HideInInspector] public UnityEvent updated;
 
     // *** Transition between Idle and Expressing ***
-    
+
     [Range(0.0f, 1.0f)] public float moodOrEmote;
 
     // *** HEAD MOVEMENT ***
@@ -49,7 +49,7 @@ public class ExpressionControl : ScriptableObject
     [Range(0.0f, 20.0f)] public float jawOpenSpeed;
     [HideInInspector] public float jawOpenTime = 0f;
 
-    [Range(-1.0f, 1.0f)] public float lookUD; 
+    [Range(-1.0f, 1.0f)] public float lookUD;
     [Range(-1.0f, 1.0f)] public float lookUDMax;
     [Range(-1.0f, 1.0f)] public float lookUDMin;
     [Range(0.0f, 20.0f)] public float lookUDSpeed;
@@ -74,12 +74,13 @@ public class ExpressionControl : ScriptableObject
     [HideInInspector] public float shoulder_R_Time = 0f;
 
     // *** BLINKING *** [this works different from everything else]
+    [Range(0.0f, 20.0f)] public float topLidSpeed;
     [Range(0.0f, 1.0f)] public float eyeLidTop_L;
     [Range(0.0f, 1.0f)] public float eyeLidTop_R;
     [Range(0.0f, 1.0f)] public float topLid_L_Min;
     [Range(0.0f, 1.0f)] public float topLid_R_Min;
-     
-    [HideInInspector] public float topLid_L_Time = 0f;    
+
+    [HideInInspector] public float topLid_L_Time = 0f;
     [HideInInspector] public float topLid_R_Time = 0f;
 
     [Range(0.0f, 10f)] public float blinkDuration;
@@ -99,7 +100,7 @@ public class ExpressionControl : ScriptableObject
 
     [Range(0.0f, 1.0f)] public float tongueStretch;
     [Range(0.0f, 1.0f)] public float tongueUpDown;
-    
+
 
     // *** MOOD PARAMETERS ***
 

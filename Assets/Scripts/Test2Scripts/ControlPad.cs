@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
-public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class ControlPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     private RectTransform touchpadRect; // Reference to the square panel's RectTransform
     private RectTransform buttonRect; // Reference to the button's RectTransform
@@ -16,8 +16,8 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointe
 
     public float xValue;
     public float yValue;
-    public bool headPadActive = false;
-    public bool headPadEnter = false;
+    public bool controlPadActive = false;
+    //public bool controlPadEnter = false;
    
     private Coroutine animCoroutine; // Reference to the running animation coroutine
     private Coroutine animFadeCoroutine;
@@ -43,7 +43,7 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointe
         {
             isDragging = true;
             UpdateButtonPosition(eventData.position);
-            headPadActive = true; 
+            controlPadActive = true; 
             Debug.Log("Head Pad On");
             PlayButtonPressedAnim(true);
             return;
@@ -65,7 +65,7 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointe
     public void OnPointerUp(PointerEventData eventData)
     {
         isDragging = false;
-        headPadActive = false;
+        controlPadActive = false;
         Debug.Log("Head Pad Off");
       
         PlayButtonPressedAnim(false);
@@ -81,7 +81,7 @@ public class HeadPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointe
     private void UpdateButtonPosition(Vector2 position)
     {
         Vector2 touchpadCenter = touchpadRect.rect.center;       
-        Vector2 buttonOffset = new Vector2(buttonRect.rect.width / 2f, buttonRect.rect.height / 2f);
+        Vector2 buttonOffset = new Vector2((buttonRect.rect.width-40f) / 2f, (buttonRect.rect.height-40f) / 2f);
         Vector2 localPosition = position - new Vector2(touchpadRect.position.x, touchpadRect.position.y);
 
         // Calculate the clamping bounds based on the touchpad's size and position

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
+public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     private RectTransform touchpadRect; // Reference to the square panel's RectTransform
     private RectTransform buttonRect; // Reference to the button's RectTransform
@@ -28,20 +28,16 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointe
         touchpadRect = GetComponent<RectTransform>();
         buttonRect = transform.GetChild(0).GetComponent<RectTransform>();
         buttonAnimRect = transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
-
+        /*
+        buttonRect = transform.GetChild(0).GetComponent<RectTransform>();
+        buttonAnimRect = transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
+        */
         maxX = touchpadRect.rect.width / 2f;
         maxY = touchpadRect.rect.height / 2f;
 
         buttonAnimRect.localScale = Vector3.zero;
     }
-    public void OnPointerEnter(PointerEventData eventData) 
-    {
-        moodPadEnter = true;
-    }
-    public void OnPointerExit(PointerEventData eventData) 
-    {
-        moodPadEnter = false;
-    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         // Check if the pointer is clicking on the button
@@ -111,7 +107,7 @@ public class MoodPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointe
 
     private IEnumerator AnimateButton(float targetScale, float targetAlpha)
     {
-        float duration = 0.5f; // Adjust the duration of the animation as desired
+        float duration = 0.2f; // Adjust the duration of the animation as desired
         float elapsed = 0f;
         Vector3 initialScale = Vector3.zero;  // or new Vector3(0.1f, 0.1f, 0.1f) for a small percentage scale
         Color initialColor = buttonAnimRect.GetComponent<Image>().color;

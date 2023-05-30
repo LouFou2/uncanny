@@ -21,8 +21,8 @@ public class CharacterBehaviour : MonoBehaviour
     public Emote[] Emotes;              // Scriptable Objects that adjusts expression variables to create different expressions - Animated using Tweening
     public Emote currentEmote;
     public Animator animator;
-    public MoodPad moodPad;
-    public HeadPad headPad;
+    public ControlPad moodPad;
+    public ControlPad headPad;
 
     // Sine Wave variables
     [HideInInspector] public AnimationCurve _blinkCurve;
@@ -447,13 +447,13 @@ public class CharacterBehaviour : MonoBehaviour
 
     void UserInputs() 
     {
-        if (moodPad.moodPadActive == true) 
+        if (moodPad.controlPadActive == true) 
         {
             _pleasure = moodPad.xValue;
             _arousal = moodPad.yValue;
         }
         
-        if (headPad.headPadActive == true)
+        if (headPad.controlPadActive == true)
         {
             _headIsTurning = false;
             _headIsNodding = false;
@@ -468,7 +468,7 @@ public class CharacterBehaviour : MonoBehaviour
                 _headEQTime = 0f;
             }            
         }
-        else if (headPad.headPadActive == false && !_headIsTurning && !_headIsNodding) // should I add code to make button return?
+        else if (headPad.controlPadActive == false && !_headIsTurning && !_headIsNodding) // should I add code to make button return?
         {
             HeadReturnToAuto();
         }

@@ -47,11 +47,13 @@ public class ControlPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
             Debug.Log("Head Pad On");
             PlayButtonPressedAnim(true);
             return;
+            /*
             if (animFadeCoroutine != null)
             {
                 StopCoroutine(animFadeCoroutine);
             }                
             StartCoroutine(AnimateButton(1f, 1f));
+            */
         }
     }
 
@@ -70,11 +72,13 @@ public class ControlPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
       
         PlayButtonPressedAnim(false);
         return;
+        /*
           if (animCoroutine != null)
           {
               StopCoroutine(animCoroutine);
           }
           StartCoroutine(ReverseAnimateButton(0f, 0f));
+        */
       
     }
 
@@ -108,6 +112,8 @@ public class ControlPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
         // Use xValue and yValue for your desired functionality
         //Debug.Log("X: " + xValue + ", Y: " + yValue);
     }
+    
+    /*
     private IEnumerator AnimateButton(float targetScale, float targetAlpha)
     {
         float duration = 0.2f; // Adjust the duration of the animation as desired
@@ -134,7 +140,7 @@ public class ControlPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
         buttonAnimRect.localScale = new Vector3(targetScale, targetScale, 1f);
         buttonAnimRect.GetComponent<Image>().color = new Color(initialColor.r, initialColor.g, initialColor.b, targetAlpha);
     }
-    
+    */
     void PlayButtonPressedAnim(bool isPressed)
     {
         buttonAnimRect.GetComponent<Image>().DOComplete(); 
@@ -145,6 +151,7 @@ public class ControlPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
 
 
     }
+    /*
     private IEnumerator ReverseAnimateButton(float targetScale, float targetAlpha)
     {
         float duration = 0.5f; // Adjust the duration of the animation as desired
@@ -167,8 +174,10 @@ public class ControlPad : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
             yield return null;
         }
 
+
         // Ensure the final values are set
         buttonAnimRect.localScale = new Vector3(targetScale, targetScale, 1f);
-        buttonAnimRect.GetComponent<Image>().color = new Color(initialColor.r, initialColor.g, initialColor.b, targetAlpha);
+        buttonAnimRect.GetComponent<Image>().color = new Color(initialColor.r, initialColor.g, initialColor.b, targetAlpha);        
     }
+    */
 }

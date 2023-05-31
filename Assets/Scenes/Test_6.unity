@@ -2042,6 +2042,22 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
+  - m_Transform: {fileID: 2076103227}
+    m_Style:
+      shape: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+      color: {r: 1, g: 0, b: 0, a: 0.5}
+      size: 0.3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    m_Visible: 1
+  - m_Transform: {fileID: 1960236326}
+    m_Style:
+      shape: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+      color: {r: 1, g: 0, b: 0, a: 0.5}
+      size: 0.3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    m_Visible: 1
 --- !u!114 &268113565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2342,6 +2358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 495915399}
   - component: {fileID: 495915400}
+  - component: {fileID: 495915401}
   m_Layer: 0
   m_Name: Ear_L_1_Child_Bot
   m_TagString: Untagged
@@ -2356,7 +2373,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 495915398}
-  m_LocalRotation: {x: -0.40440756, y: -0.3392212, z: 0.56055933, w: 0.63808835}
+  m_LocalRotation: {x: -0.40440756, y: -0.3392212, z: 0.5605594, w: 0.63808835}
   m_LocalPosition: {x: -0.51154745, y: 0.2463274, z: 0.12479043}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2380,6 +2397,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1818360609 &495915401
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495915398}
+  m_Enabled: 1
+  m_Weight: 1
+  m_RotationAtRest: {x: -7.804209, y: -63.45463, z: 87.428215}
+  m_RotationOffset: {x: -7.804209, y: -63.45463, z: 87.428215}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 2076103227}
+    weight: 1
 --- !u!4 &521696472 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8770813577173004248, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}
@@ -2405,6 +2441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 660560706}
   - component: {fileID: 660560707}
+  - component: {fileID: 660560708}
   m_Layer: 0
   m_Name: Ear_L_1_Child
   m_TagString: Untagged
@@ -2419,7 +2456,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660560705}
-  m_LocalRotation: {x: -0.11699422, y: -0.017355757, z: 0.13849345, w: 0.9832755}
+  m_LocalRotation: {x: -0.11699441, y: -0.017355675, z: 0.13849352, w: 0.98327553}
   m_LocalPosition: {x: -0.4232551, y: 0.67650986, z: 0.15837097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2443,6 +2480,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1818360609 &660560708
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660560705}
+  m_Enabled: 1
+  m_Weight: 1
+  m_RotationAtRest: {x: -13.018635, y: -3.9159, z: 16.48162}
+  m_RotationOffset: {x: -13.018635, y: -3.9159, z: 16.48162}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 2076103227}
+    weight: 1
 --- !u!4 &674821723 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3540950441301368832, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}
@@ -2761,7 +2817,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 925552922}
-  - component: {fileID: 925552923}
   - component: {fileID: 925552925}
   m_Layer: 0
   m_Name: Ear_L
@@ -2785,53 +2840,6 @@ Transform:
   m_Father: {fileID: 360795168}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &925552923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925552921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdb90b913935e644baaa86c076d788e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Weight: 1
-  m_Data:
-    m_ConstrainedObject: {fileID: 0}
-    m_SourceObjects:
-      m_Length: 0
-      m_Item0:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item1:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item2:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item3:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item4:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item5:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item6:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item7:
-        transform: {fileID: 0}
-        weight: 0
-    m_Offset: {x: 0, y: 0, z: 0}
-    m_ConstrainedAxes:
-      x: 0
-      y: 1
-      z: 0
-    m_MaintainOffset: 0
 --- !u!114 &925552925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2853,7 +2861,7 @@ MonoBehaviour:
     m_TipRotationWeight: 0.2
     m_MaxIterations: 15
     m_Tolerance: 0.0001
-    m_MaintainTargetPositionOffset: 0
+    m_MaintainTargetPositionOffset: 1
     m_MaintainTargetRotationOffset: 0
 --- !u!4 &938618504 stripped
 Transform:
@@ -2997,7 +3005,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1069426297}
-  - component: {fileID: 1069426298}
   - component: {fileID: 1069426299}
   m_Layer: 0
   m_Name: Ear_R
@@ -3021,53 +3028,6 @@ Transform:
   m_Father: {fileID: 360795168}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1069426298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1069426296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdb90b913935e644baaa86c076d788e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Weight: 1
-  m_Data:
-    m_ConstrainedObject: {fileID: 0}
-    m_SourceObjects:
-      m_Length: 0
-      m_Item0:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item1:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item2:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item3:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item4:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item5:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item6:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item7:
-        transform: {fileID: 0}
-        weight: 0
-    m_Offset: {x: 0, y: 0, z: 0}
-    m_ConstrainedAxes:
-      x: 0
-      y: 1
-      z: 0
-    m_MaintainOffset: 0
 --- !u!114 &1069426299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3089,7 +3049,7 @@ MonoBehaviour:
     m_TipRotationWeight: 0.2
     m_MaxIterations: 15
     m_Tolerance: 0.0001
-    m_MaintainTargetPositionOffset: 0
+    m_MaintainTargetPositionOffset: 1
     m_MaintainTargetRotationOffset: 0
 --- !u!1 &1107927717 stripped
 GameObject:
@@ -3464,6 +3424,7 @@ GameObject:
   - component: {fileID: 1292808915}
   - component: {fileID: 1292808917}
   - component: {fileID: 1292808916}
+  - component: {fileID: 1292808918}
   m_Layer: 0
   m_Name: EarSpringTarget_R__Bot
   m_TagString: Untagged
@@ -3526,6 +3487,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!144 &1292808918
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292808914}
+  m_ConnectedBody: {fileID: 1218172466}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_SwingAxis: {x: 0, y: 1, z: 0}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -20
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 70
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 40
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 40
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!4 &1298824456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3528269088220605599, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}
@@ -3835,6 +3842,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1389632058}
   - component: {fileID: 1389632057}
+  - component: {fileID: 1389632059}
   m_Layer: 0
   m_Name: Ear_R_1_Child
   m_TagString: Untagged
@@ -3865,7 +3873,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389632056}
-  m_LocalRotation: {x: -0.11699402, y: 0.017355984, z: -0.138493, w: 0.98327553}
+  m_LocalRotation: {x: -0.11699405, y: 0.017355965, z: -0.13849308, w: 0.98327553}
   m_LocalPosition: {x: 0.423255, y: 0.6765096, z: 0.15837085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3873,6 +3881,25 @@ Transform:
   m_Father: {fileID: 2110001558}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1818360609 &1389632059
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389632056}
+  m_Enabled: 1
+  m_Weight: 1
+  m_RotationAtRest: {x: -13.01861, y: 3.9159174, z: -16.481571}
+  m_RotationOffset: {x: -13.01861, y: 3.9159174, z: -16.481571}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 1960236326}
+    weight: 1
 --- !u!1 &1404144378
 GameObject:
   m_ObjectHideFlags: 0
@@ -4674,6 +4701,7 @@ GameObject:
   - component: {fileID: 1779959646}
   - component: {fileID: 1779959648}
   - component: {fileID: 1779959647}
+  - component: {fileID: 1779959649}
   m_Layer: 0
   m_Name: EarSpringTarget_L_Bot
   m_TagString: Untagged
@@ -4736,6 +4764,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!144 &1779959649
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779959645}
+  m_ConnectedBody: {fileID: 1349216610}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_SwingAxis: {x: 0, y: 1, z: 0}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -20
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 70
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 40
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 40
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!114 &1790751314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4791,6 +4865,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7205268138055402222, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}
   m_PrefabInstance: {fileID: 58707108}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1960236325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960236326}
+  m_Layer: 0
+  m_Name: Ear_R_Rotator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1960236326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960236325}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.36, y: 0.877, z: -0.199}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2110001558}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2035548477 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8882028754581243358, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}
@@ -4801,6 +4906,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2145554887345010480, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}
   m_PrefabInstance: {fileID: 58707108}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2076103226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2076103227}
+  m_Layer: 0
+  m_Name: Ear_L_Rotator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2076103227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076103226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.334, y: 0.877, z: -0.199}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2110001558}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2084527631 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3435220477503478093, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}
@@ -4869,8 +5005,8 @@ MonoBehaviour:
     m_TipRotationWeight: 1
     m_MaxIterations: 15
     m_Tolerance: 0.0001
-    m_MaintainTargetPositionOffset: 0
-    m_MaintainTargetRotationOffset: 0
+    m_MaintainTargetPositionOffset: 1
+    m_MaintainTargetRotationOffset: 1
 --- !u!1 &2110001557
 GameObject:
   m_ObjectHideFlags: 0
@@ -4905,9 +5041,11 @@ Transform:
   - {fileID: 1389632058}
   - {fileID: 495915399}
   - {fileID: 2128026672}
+  - {fileID: 2076103227}
+  - {fileID: 1960236326}
   m_Father: {fileID: 268113562}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 9.992, z: 0}
 --- !u!1773428102 &2110001559
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -4960,6 +5098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2128026672}
   - component: {fileID: 2128026673}
+  - component: {fileID: 2128026674}
   m_Layer: 0
   m_Name: Ear_R_1_Child_Bot
   m_TagString: Untagged
@@ -4974,7 +5113,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2128026671}
-  m_LocalRotation: {x: -0.40440768, y: 0.33922133, z: -0.56055933, w: 0.63808817}
+  m_LocalRotation: {x: -0.4044077, y: 0.3392213, z: -0.56055945, w: 0.63808817}
   m_LocalPosition: {x: 0.51154745, y: 0.2463274, z: 0.12479007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4998,6 +5137,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1818360609 &2128026674
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128026671}
+  m_Enabled: 1
+  m_Weight: 1
+  m_RotationAtRest: {x: -7.8042006, y: 63.45466, z: -87.42823}
+  m_RotationOffset: {x: -7.8042006, y: 63.45466, z: -87.42823}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 1960236326}
+    weight: 1
 --- !u!4 &2146487507 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2532393761885825738, guid: 46921bc6c3e4eda4eba23d6b47085dff, type: 3}

@@ -11,7 +11,6 @@ Material:
   m_Shader: {fileID: 4800000, guid: 97ce680e9d80f434490c60a9e102c5e9, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
-  - POI_BACKFACE
   - VIGNETTE_MASKED
   - _GLOSSYREFLECTIONS_OFF
   - _LIGHTINGMODE_TEXTURERAMP
@@ -24,7 +23,7 @@ Material:
   m_CustomRenderQueue: 2450
   stringTagMap:
     AllLockedGUIDS: 529f6e89f19d41940b2b24770441175f
-    OriginalKeywords: POI_BACKFACE VIGNETTE_MASKED _GLOSSYREFLECTIONS_OFF _LIGHTINGMODE_TEXTURERAMP
+    OriginalKeywords: VIGNETTE_MASKED _GLOSSYREFLECTIONS_OFF _LIGHTINGMODE_TEXTURERAMP
       _RIM2STYLE_POIYOMI _RIMSTYLE_POIYOMI _STOCHASTICMODE_DELIOT_HEITZ
     OriginalShader: .poiyomi/Poiyomi 8.1/Poiyomi Toon Outline
     RenderType: Opaque
@@ -738,7 +737,7 @@ Material:
     - _BackFaceDetailIntensity: 1
     - _BackFaceEmissionLimiter: 1
     - _BackFaceEmissionStrength: 0
-    - _BackFaceEnabled: 1
+    - _BackFaceEnabled: 0
     - _BackFaceHueShift: 0
     - _BackFaceHueShiftEnabled: 0
     - _BackFaceHueShiftSpeed: 0
@@ -1217,7 +1216,7 @@ Material:
     - _EnableGITDEmission3: 0
     - _EnableIridescence: 0
     - _EnableMirrorOptions: 0
-    - _EnableOutlines: 1
+    - _EnableOutlines: 0
     - _EnablePathing: 0
     - _EnableRim2Lighting: 0
     - _EnableRimLighting: 1
@@ -2437,7 +2436,7 @@ Material:
     - g_start_deliot: 0
     - g_start_hextile: 0
     - m_AudioLinkCategory: 0
-    - m_OutlineCategory: 0
+    - m_OutlineCategory: 1
     - m_end_ALDecalSpectrum: 0
     - m_end_ALVolumeColor: 0
     - m_end_Alpha: 0
@@ -2649,7 +2648,7 @@ Material:
     - m_start_OutlineStencilPassFrontOptions: 0
     - m_start_PathAudioLink: 0
     - m_start_PoiLightData: 1
-    - m_start_PoiShading: 0
+    - m_start_PoiShading: 1
     - m_start_RGBAColors: 0
     - m_start_RGBMask: 0
     - m_start_Rim2AudioLink: 0
@@ -2672,7 +2671,7 @@ Material:
     - m_start_VideoSettings: 0
     - m_start_alphaBlending: 0
     - m_start_audioLink: 0
-    - m_start_backFace: 1
+    - m_start_backFace: 0
     - m_start_backlight: 0
     - m_start_blending: 0
     - m_start_brdf: 0
@@ -2705,7 +2704,7 @@ Material:
     - m_start_rgbanormals: 0
     - m_start_rim2LightOptions: 0
     - m_start_rimLight1Options: 1
-    - m_start_rimLightOptions: 1
+    - m_start_rimLightOptions: 0
     - m_start_stylizedSpec: 0
     - m_start_subsurfaceScattering: 0
     - m_start_udimdiscardOptions: 0

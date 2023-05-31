@@ -75,26 +75,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 		[HideInInspector][ThryWideEnum(Replace, 0, Multiply, 2, Screen, 6, Linear Dodge(Add), 8, Overlay, 9, Mixed, 20)] _AlphaGlobalMaskBlendType ("Blending", Int) = 2
 		[HideInInspector] m_end_AlphaGlobalMask ("Global Mask", Float) = 0
 		[HideInInspector] m_end_Alpha ("Alpha Options", Float) = 0
-		[HideInInspector] m_start_backFace ("Back Face--{reference_property:_BackFaceEnabled,button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/color-and-normals/back-face},hover:Documentation}}", Float) = 0
-		[HideInInspector][ThryToggle(POI_BACKFACE)]_BackFaceEnabled ("Backface Enabled", Float) = 0
-		_BackFaceColor ("Color--{reference_property:_BackFaceColorThemeIndex}", Color) = (1, 1, 1, 1)
-		[HideInInspector][ThryWideEnum(Off, 0, Theme Color 0, 1, Theme Color 1, 2, Theme Color 2, 3, Theme Color 3, 4, ColorChord 0, 5, ColorChord 1, 6, ColorChord 2, 7, ColorChord 3, 8, AL Theme 0, 9, AL Theme 1, 10, AL Theme 2, 11, AL Theme 3, 12)] _BackFaceColorThemeIndex ("", Int) = 0
-		_BackFaceEmissionStrength ("Emission Strength", Range(0, 20)) = 0
-		[sRGBWarning(true)]_BackFaceTexture ("Texture--{reference_properties:[_BackFaceTexturePan, _BackFaceTextureUV]}", 2D) = "white" { }
-		[HideInInspector][Vector2]_BackFaceTexturePan ("Panning", Vector) = (0, 0, 0, 0)
-		[HideInInspector][ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3, Panosphere, 4, World Pos, 5, Local Pos, 8, Polar UV, 6, Distorted UV, 7)]_BackFaceTextureUV ("UV#", Int) = 0
-		[sRGBWarning]_BackFaceMask ("Mask--{reference_properties:[_BackFaceMaskPan, _BackFaceMaskUV, _BackFaceMaskChannel]}", 2D) = "white" { }
-		[HideInInspector][Vector2]_BackFaceMaskPan ("Panning", Vector) = (0, 0, 0, 0)
-		[HideInInspector][ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3, Panosphere, 4, World Pos, 5, Local Pos, 8, Polar UV, 6, Distorted UV, 7)]_BackFaceMaskUV ("UV#", Int) = 0
-		[HideInInspector][Enum(R, 0, G, 1, B, 2, A, 3)]_BackFaceMaskChannel ("Channel", Float) = 0
-		_BackFaceDetailIntensity ("Detail Intensity", Range(0, 5)) = 1
-		[ToggleUI]_BackFaceReplaceAlpha ("Replace Alpha", Float) = 0
-		_BackFaceEmissionLimiter ("Emission Limiter", Range(0, 1)) = 1
-		[Space(10)]
-		[ThryToggleUI(true)]_BackFaceHueShiftEnabled ("<size=13><b>  Hue Shift</b></size>", Float) = 0
-		_BackFaceHueShift ("Hue Shift--{condition_showS:(_BackFaceHueShiftEnabled==1)}", Range(0, 1)) = 0
-		_BackFaceHueShiftSpeed ("Hue Shift Speed--{condition_showS:(_BackFaceHueShiftEnabled==1)}", Float) = 0
-		[HideInInspector] m_end_backFace ("Back Face", Float) = 0
 		[HideInInspector] m_start_DecalSection ("Decals--{button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/color-and-normals/decals},hover:YouTube}}", Float) = 0
 		[sRGBWarning][ThryRGBAPacker(Decal 0 Mask, Decal 1 Mask, Decal 2 Mask, Decal 3 Mask)]_DecalMask ("Decal RGBA Mask--{reference_properties:[_DecalMaskPan, _DecalMaskUV]}", 2D) = "white" { }
 		[HideInInspector][Vector2]_DecalMaskPan ("Panning", Vector) = (0, 0, 0, 0)
@@ -580,7 +560,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 			BlendOp [_BlendOp], [_BlendOpAlpha]
 			Blend [_SrcBlend] [_DstBlend], [_SrcBlendAlpha] [_DstBlendAlpha]
 			CGPROGRAM
- #define POI_BACKFACE 
  #define VIGNETTE_MASKED 
  #define _GLOSSYREFLECTIONS_OFF 
  #define _LIGHTINGMODE_TEXTURERAMP 
@@ -774,32 +753,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 			float _UVModWorldPos1;
 			float _UVModLocalPos0;
 			float _UVModLocalPos1;
-			#ifdef POI_BACKFACE
-			float _BackFaceEnabled;
-			float _BackFaceDetailIntensity;
-			float _BackFaceEmissionStrength;
-			float2 _BackFacePanning;
-			float4 _BackFaceColor;
-			float _BackFaceColorThemeIndex;
-			float _BackFaceReplaceAlpha;
-			#if defined(PROP_BACKFACETEXTURE) || !defined(OPTIMIZER_ENABLED)
-			Texture2D _BackFaceTexture;
-			#endif
-			float4 _BackFaceTexture_ST;
-			float2 _BackFaceTexturePan;
-			float _BackFaceTextureUV;
-			#if defined(PROP_BACKFACEMASK) || !defined(OPTIMIZER_ENABLED)
-			Texture2D _BackFaceMask;
-			#endif
-			float4 _BackFaceMask_ST;
-			float2 _BackFaceMaskPan;
-			float _BackFaceMaskUV;
-			float _BackFaceMaskChannel;
-			float _BackFaceHueShiftEnabled;
-			float _BackFaceHueShift;
-			float _BackFaceHueShiftSpeed;
-			float _BackFaceEmissionLimiter;
-			#endif
 			#ifdef _LIGHTINGMODE_TEXTURERAMP
 			UNITY_DECLARE_TEX2D(_ToonRamp);
 			#endif
@@ -2042,7 +1995,7 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 					}
 				}
 				#endif
-				float3 offset = outlineNormal * (lineWidth * (1.0 /*_EnableOutlines*/) / 100) * outlineMask * distanceOffset;
+				float3 offset = outlineNormal * (lineWidth * (0.0 /*_EnableOutlines*/) / 100) * outlineMask * distanceOffset;
 				if ((1.0 /*_OutlineExpansionMode*/) == 2)
 				{
 					float3 lightDirection = normalize(_WorldSpaceLightPos0 + unity_SHAr.xyz + unity_SHAg.xyz + unity_SHAb.xyz);
@@ -2331,36 +2284,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 				float3 viewDirection = normalize(lerp(getCameraPosition().xyz, _WorldSpaceCameraPos.xyz, (1.0 /*_PanoUseBothEyes*/)) - poiMesh.worldPos.xyz) * - 1;
 				return lerp(MonoPanoProjection(viewDirection), StereoPanoProjection(viewDirection), (0.0 /*_StereoEnabled*/));
 			}
-			#ifdef POI_BACKFACE
-			void ApplyBackFaceColor(inout PoiFragData poiFragData, in PoiMesh poiMesh, inout PoiMods poiMods)
-			{
-				if (!poiMesh.isFrontFace)
-				{
-					float4 backFaceColor = float4(0.9490197,0.654902,0.2941177,1);
-					backFaceColor.rgb = poiThemeColor(poiMods, backFaceColor.rgb, (0.0 /*_BackFaceColorThemeIndex*/));
-					#if defined(PROP_BACKFACETEXTURE) || !defined(OPTIMIZER_ENABLED)
-					backFaceColor *= POI2D_SAMPLER_PAN(_BackFaceTexture, _MainTex, poiUV(poiMesh.uv[(0.0 /*_BackFaceTextureUV*/)], float4(1,1,0,0)), float4(0,0,0,0));
-					#endif
-					backFaceColor.rgb = hueShift(backFaceColor.rgb, frac((0.0 /*_BackFaceHueShift*/) + (0.0 /*_BackFaceHueShiftSpeed*/) * _Time.x) * (0.0 /*_BackFaceHueShiftEnabled*/));
-					float backFaceMask = 1;
-					#if defined(PROP_BACKFACEMASK) || !defined(OPTIMIZER_ENABLED)
-					backFaceMask *= POI2D_SAMPLER_PAN(_BackFaceMask, _MainTex, poiUV(poiMesh.uv[(0.0 /*_BackFaceMaskUV*/)], float4(1,1,0,0)), float4(0,0,0,0))[(0.0 /*_BackFaceMaskChannel*/)];
-					#endif
-					if (!(0.0 /*_BackFaceReplaceAlpha*/))
-					{
-						backFaceMask *= backFaceColor.a;
-					}
-					poiFragData.baseColor = lerp(poiFragData.baseColor, backFaceColor.rgb, backFaceMask);
-					
-					if ((0.0 /*_BackFaceReplaceAlpha*/))
-					{
-						poiFragData.alpha = backFaceColor.a;
-					}
-					poiFragData.emission += backFaceColor.rgb * (0.0 /*_BackFaceEmissionStrength*/) * backFaceMask;
-					poiMods.globalEmission = min(poiMods.globalEmission, (1.0 /*_BackFaceEmissionLimiter*/));
-				}
-			}
-			#endif
 			#if defined(GEOM_TYPE_BRANCH) || defined(GEOM_TYPE_BRANCH_DETAIL) || defined(GEOM_TYPE_FROND) || defined(DEPTH_OF_FIELD_COC_VIEW)
 			float2 decalUV(float uvNumber, float2 position, half rotation, half rotationSpeed, half2 scale, float4 scaleOffset, float depth, in PoiMesh poiMesh, in PoiCam poiCam)
 			{
@@ -3295,9 +3218,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 				poiFragData.alpha *= alphaMask;
 				#endif
 				applyAlphaOptions(poiFragData, poiMesh, poiCam, poiMods);
-				#ifdef POI_BACKFACE
-				ApplyBackFaceColor(poiFragData, poiMesh, poiMods);
-				#endif
 				#if defined(GEOM_TYPE_BRANCH) || defined(GEOM_TYPE_BRANCH_DETAIL) || defined(GEOM_TYPE_FROND) || defined(DEPTH_OF_FIELD_COC_VIEW)
 				applyDecals(poiFragData, poiMesh, poiCam, poiMods, poiLight);
 				#endif
@@ -3400,7 +3320,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 			BlendOp [_OutlineBlendOp], [_OutlineBlendOpAlpha]
 			Blend [_OutlineSrcBlend] [_OutlineDstBlend], [_OutlineSrcBlendAlpha] [_OutlineDstBlendAlpha]
 			CGPROGRAM
- #define POI_BACKFACE 
  #define VIGNETTE_MASKED 
  #define _GLOSSYREFLECTIONS_OFF 
  #define _LIGHTINGMODE_TEXTURERAMP 
@@ -4835,7 +4754,7 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 					}
 				}
 				#endif
-				float3 offset = outlineNormal * (lineWidth * (1.0 /*_EnableOutlines*/) / 100) * outlineMask * distanceOffset;
+				float3 offset = outlineNormal * (lineWidth * (0.0 /*_EnableOutlines*/) / 100) * outlineMask * distanceOffset;
 				if ((1.0 /*_OutlineExpansionMode*/) == 2)
 				{
 					float3 lightDirection = normalize(_WorldSpaceLightPos0 + unity_SHAr.xyz + unity_SHAg.xyz + unity_SHAb.xyz);
@@ -5043,7 +4962,7 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 			#ifdef POI_PASS_OUTLINE
 			void applyOutlineColor(inout PoiFragData poiFragData, in PoiMesh poiMesh, in PoiLight poiLight, in PoiMods poiMods, in PoiCam poiCam)
 			{
-				clip((1.0 /*_EnableOutlines*/) - 0.01);
+				clip((0.0 /*_EnableOutlines*/) - 0.01);
 				float OutlineMask = tex2D(_OutlineMask, TRANSFORM_TEX(poiMesh.uv[(0.0 /*_OutlineMaskUV*/)], _OutlineMask) + _Time.x * float4(0,0,0,0))[(0.0 /*_OutlineMaskChannel*/)];
 				if ((0.0 /*_OutlineVertexColorMask*/) > 0)
 				{
@@ -5825,7 +5744,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 			BlendOp [_AddBlendOp], [_AddBlendOpAlpha]
 			Blend [_AddSrcBlend] [_AddDstBlend], [_AddSrcBlendAlpha] [_AddDstBlendAlpha]
 			CGPROGRAM
- #define POI_BACKFACE 
  #define VIGNETTE_MASKED 
  #define _GLOSSYREFLECTIONS_OFF 
  #define _LIGHTINGMODE_TEXTURERAMP 
@@ -6018,32 +5936,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 			float _UVModWorldPos1;
 			float _UVModLocalPos0;
 			float _UVModLocalPos1;
-			#ifdef POI_BACKFACE
-			float _BackFaceEnabled;
-			float _BackFaceDetailIntensity;
-			float _BackFaceEmissionStrength;
-			float2 _BackFacePanning;
-			float4 _BackFaceColor;
-			float _BackFaceColorThemeIndex;
-			float _BackFaceReplaceAlpha;
-			#if defined(PROP_BACKFACETEXTURE) || !defined(OPTIMIZER_ENABLED)
-			Texture2D _BackFaceTexture;
-			#endif
-			float4 _BackFaceTexture_ST;
-			float2 _BackFaceTexturePan;
-			float _BackFaceTextureUV;
-			#if defined(PROP_BACKFACEMASK) || !defined(OPTIMIZER_ENABLED)
-			Texture2D _BackFaceMask;
-			#endif
-			float4 _BackFaceMask_ST;
-			float2 _BackFaceMaskPan;
-			float _BackFaceMaskUV;
-			float _BackFaceMaskChannel;
-			float _BackFaceHueShiftEnabled;
-			float _BackFaceHueShift;
-			float _BackFaceHueShiftSpeed;
-			float _BackFaceEmissionLimiter;
-			#endif
 			#ifdef _LIGHTINGMODE_TEXTURERAMP
 			UNITY_DECLARE_TEX2D(_ToonRamp);
 			#endif
@@ -7282,7 +7174,7 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 					}
 				}
 				#endif
-				float3 offset = outlineNormal * (lineWidth * (1.0 /*_EnableOutlines*/) / 100) * outlineMask * distanceOffset;
+				float3 offset = outlineNormal * (lineWidth * (0.0 /*_EnableOutlines*/) / 100) * outlineMask * distanceOffset;
 				if ((1.0 /*_OutlineExpansionMode*/) == 2)
 				{
 					float3 lightDirection = normalize(_WorldSpaceLightPos0 + unity_SHAr.xyz + unity_SHAg.xyz + unity_SHAb.xyz);
@@ -7571,36 +7463,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 				float3 viewDirection = normalize(lerp(getCameraPosition().xyz, _WorldSpaceCameraPos.xyz, (1.0 /*_PanoUseBothEyes*/)) - poiMesh.worldPos.xyz) * - 1;
 				return lerp(MonoPanoProjection(viewDirection), StereoPanoProjection(viewDirection), (0.0 /*_StereoEnabled*/));
 			}
-			#ifdef POI_BACKFACE
-			void ApplyBackFaceColor(inout PoiFragData poiFragData, in PoiMesh poiMesh, inout PoiMods poiMods)
-			{
-				if (!poiMesh.isFrontFace)
-				{
-					float4 backFaceColor = float4(0.9490197,0.654902,0.2941177,1);
-					backFaceColor.rgb = poiThemeColor(poiMods, backFaceColor.rgb, (0.0 /*_BackFaceColorThemeIndex*/));
-					#if defined(PROP_BACKFACETEXTURE) || !defined(OPTIMIZER_ENABLED)
-					backFaceColor *= POI2D_SAMPLER_PAN(_BackFaceTexture, _MainTex, poiUV(poiMesh.uv[(0.0 /*_BackFaceTextureUV*/)], float4(1,1,0,0)), float4(0,0,0,0));
-					#endif
-					backFaceColor.rgb = hueShift(backFaceColor.rgb, frac((0.0 /*_BackFaceHueShift*/) + (0.0 /*_BackFaceHueShiftSpeed*/) * _Time.x) * (0.0 /*_BackFaceHueShiftEnabled*/));
-					float backFaceMask = 1;
-					#if defined(PROP_BACKFACEMASK) || !defined(OPTIMIZER_ENABLED)
-					backFaceMask *= POI2D_SAMPLER_PAN(_BackFaceMask, _MainTex, poiUV(poiMesh.uv[(0.0 /*_BackFaceMaskUV*/)], float4(1,1,0,0)), float4(0,0,0,0))[(0.0 /*_BackFaceMaskChannel*/)];
-					#endif
-					if (!(0.0 /*_BackFaceReplaceAlpha*/))
-					{
-						backFaceMask *= backFaceColor.a;
-					}
-					poiFragData.baseColor = lerp(poiFragData.baseColor, backFaceColor.rgb, backFaceMask);
-					
-					if ((0.0 /*_BackFaceReplaceAlpha*/))
-					{
-						poiFragData.alpha = backFaceColor.a;
-					}
-					poiFragData.emission += backFaceColor.rgb * (0.0 /*_BackFaceEmissionStrength*/) * backFaceMask;
-					poiMods.globalEmission = min(poiMods.globalEmission, (1.0 /*_BackFaceEmissionLimiter*/));
-				}
-			}
-			#endif
 			#if defined(GEOM_TYPE_BRANCH) || defined(GEOM_TYPE_BRANCH_DETAIL) || defined(GEOM_TYPE_FROND) || defined(DEPTH_OF_FIELD_COC_VIEW)
 			float2 decalUV(float uvNumber, float2 position, half rotation, half rotationSpeed, half2 scale, float4 scaleOffset, float depth, in PoiMesh poiMesh, in PoiCam poiCam)
 			{
@@ -8535,9 +8397,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 				poiFragData.alpha *= alphaMask;
 				#endif
 				applyAlphaOptions(poiFragData, poiMesh, poiCam, poiMods);
-				#ifdef POI_BACKFACE
-				ApplyBackFaceColor(poiFragData, poiMesh, poiMods);
-				#endif
 				#if defined(GEOM_TYPE_BRANCH) || defined(GEOM_TYPE_BRANCH_DETAIL) || defined(GEOM_TYPE_FROND) || defined(DEPTH_OF_FIELD_COC_VIEW)
 				applyDecals(poiFragData, poiMesh, poiCam, poiMods, poiLight);
 				#endif
@@ -8646,7 +8505,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 			BlendOp [_BlendOp], [_BlendOpAlpha]
 			Blend [_SrcBlend] [_DstBlend], [_SrcBlendAlpha] [_DstBlendAlpha]
 			CGPROGRAM
- #define POI_BACKFACE 
  #define VIGNETTE_MASKED 
  #define _GLOSSYREFLECTIONS_OFF 
  #define _LIGHTINGMODE_TEXTURERAMP 
@@ -8757,32 +8615,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 			float _UVModWorldPos1;
 			float _UVModLocalPos0;
 			float _UVModLocalPos1;
-			#ifdef POI_BACKFACE
-			float _BackFaceEnabled;
-			float _BackFaceDetailIntensity;
-			float _BackFaceEmissionStrength;
-			float2 _BackFacePanning;
-			float4 _BackFaceColor;
-			float _BackFaceColorThemeIndex;
-			float _BackFaceReplaceAlpha;
-			#if defined(PROP_BACKFACETEXTURE) || !defined(OPTIMIZER_ENABLED)
-			Texture2D _BackFaceTexture;
-			#endif
-			float4 _BackFaceTexture_ST;
-			float2 _BackFaceTexturePan;
-			float _BackFaceTextureUV;
-			#if defined(PROP_BACKFACEMASK) || !defined(OPTIMIZER_ENABLED)
-			Texture2D _BackFaceMask;
-			#endif
-			float4 _BackFaceMask_ST;
-			float2 _BackFaceMaskPan;
-			float _BackFaceMaskUV;
-			float _BackFaceMaskChannel;
-			float _BackFaceHueShiftEnabled;
-			float _BackFaceHueShift;
-			float _BackFaceHueShiftSpeed;
-			float _BackFaceEmissionLimiter;
-			#endif
 			struct appdata
 			{
 				float4 vertex : POSITION;
@@ -9953,7 +9785,7 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 					}
 				}
 				#endif
-				float3 offset = outlineNormal * (lineWidth * (1.0 /*_EnableOutlines*/) / 100) * outlineMask * distanceOffset;
+				float3 offset = outlineNormal * (lineWidth * (0.0 /*_EnableOutlines*/) / 100) * outlineMask * distanceOffset;
 				if ((1.0 /*_OutlineExpansionMode*/) == 2)
 				{
 					float3 lightDirection = normalize(_WorldSpaceLightPos0 + unity_SHAr.xyz + unity_SHAg.xyz + unity_SHAb.xyz);
@@ -10229,36 +10061,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 				float3 viewDirection = normalize(lerp(getCameraPosition().xyz, _WorldSpaceCameraPos.xyz, (1.0 /*_PanoUseBothEyes*/)) - poiMesh.worldPos.xyz) * - 1;
 				return lerp(MonoPanoProjection(viewDirection), StereoPanoProjection(viewDirection), (0.0 /*_StereoEnabled*/));
 			}
-			#ifdef POI_BACKFACE
-			void ApplyBackFaceColor(inout PoiFragData poiFragData, in PoiMesh poiMesh, inout PoiMods poiMods)
-			{
-				if (!poiMesh.isFrontFace)
-				{
-					float4 backFaceColor = float4(0.9490197,0.654902,0.2941177,1);
-					backFaceColor.rgb = poiThemeColor(poiMods, backFaceColor.rgb, (0.0 /*_BackFaceColorThemeIndex*/));
-					#if defined(PROP_BACKFACETEXTURE) || !defined(OPTIMIZER_ENABLED)
-					backFaceColor *= POI2D_SAMPLER_PAN(_BackFaceTexture, _MainTex, poiUV(poiMesh.uv[(0.0 /*_BackFaceTextureUV*/)], float4(1,1,0,0)), float4(0,0,0,0));
-					#endif
-					backFaceColor.rgb = hueShift(backFaceColor.rgb, frac((0.0 /*_BackFaceHueShift*/) + (0.0 /*_BackFaceHueShiftSpeed*/) * _Time.x) * (0.0 /*_BackFaceHueShiftEnabled*/));
-					float backFaceMask = 1;
-					#if defined(PROP_BACKFACEMASK) || !defined(OPTIMIZER_ENABLED)
-					backFaceMask *= POI2D_SAMPLER_PAN(_BackFaceMask, _MainTex, poiUV(poiMesh.uv[(0.0 /*_BackFaceMaskUV*/)], float4(1,1,0,0)), float4(0,0,0,0))[(0.0 /*_BackFaceMaskChannel*/)];
-					#endif
-					if (!(0.0 /*_BackFaceReplaceAlpha*/))
-					{
-						backFaceMask *= backFaceColor.a;
-					}
-					poiFragData.baseColor = lerp(poiFragData.baseColor, backFaceColor.rgb, backFaceMask);
-					
-					if ((0.0 /*_BackFaceReplaceAlpha*/))
-					{
-						poiFragData.alpha = backFaceColor.a;
-					}
-					poiFragData.emission += backFaceColor.rgb * (0.0 /*_BackFaceEmissionStrength*/) * backFaceMask;
-					poiMods.globalEmission = min(poiMods.globalEmission, (1.0 /*_BackFaceEmissionLimiter*/));
-				}
-			}
-			#endif
 			float4 frag(VertexOut i, uint facing : SV_IsFrontFace) : SV_Target
 			{
 				UNITY_SETUP_INSTANCE_ID(i);
@@ -10365,9 +10167,6 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi 8.1/Poiyomi Toon Outline/529f6e89f19d4194
 				poiFragData.alpha *= alphaMask;
 				#endif
 				applyAlphaOptions(poiFragData, poiMesh, poiCam, poiMods);
-				#ifdef POI_BACKFACE
-				ApplyBackFaceColor(poiFragData, poiMesh, poiMods);
-				#endif
 				poiFragData.finalColor = poiFragData.baseColor;
 				if ((0.0 /*_IgnoreFog*/) == 0)
 				{
